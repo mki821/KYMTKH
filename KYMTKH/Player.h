@@ -25,5 +25,6 @@ public:
 private:
 	int m_hp;
 	float m_speed;
+	float m_timer = 0.0f;
 };
 

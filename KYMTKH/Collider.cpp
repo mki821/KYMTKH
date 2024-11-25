@@ -3,7 +3,7 @@
 #include "GDISelector.h"
 #include "Collider.h"
 
-Collider::Collider() : m_ID(0), m_vSize(30.0f, 30.0f), m_vOffset(0.0f, 0.0f), m_vLateUpdatedPos(0.0f, 0.0f) { }
+Collider::Collider() : m_vSize(30.0f, 30.0f), m_vOffset(0.0f, 0.0f), m_vLateUpdatedPos(0.0f, 0.0f) { }
 
 Collider::~Collider() { }
 

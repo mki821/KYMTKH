@@ -121,6 +121,12 @@
     <ClInclude Include="targetver.h">
       <Filter>Default</Filter>
     </ClInclude>
+    <ClInclude Include="JHBoss.h">
+      <Filter>Engine\0C_Objects\mki_Boss</Filter>
+    </ClInclude>
+    <ClInclude Include="CircleCollider.h">
+      <Filter>Engine\0F_Components</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="KYMTKH.rc">
@@ -198,6 +204,12 @@
     </ClCompile>
     <ClCompile Include="Boss.cpp">
       <Filter>Engine\0C_Objects</Filter>
+    </ClCompile>
+    <ClCompile Include="JHBoss.cpp">
+      <Filter>Engine\0C_Objects\mki_Boss</Filter>
+    </ClCompile>
+    <ClCompile Include="CircleCollider.cpp">
+      <Filter>Engine\0F_Components</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>
