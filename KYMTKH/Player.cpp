@@ -7,7 +7,7 @@
 #include "Projectile.h"
 #include "Player.h"
 
-Player::Player() : m_pTex(nullptr), m_speed(100.0f) {
+Player::Player() : m_pTex(nullptr), m_hp(10), m_speed(100.0f) {
 	AddComponent<Collider>();
 }
 
@@ -44,4 +44,10 @@ void Player::CreateProjectile() {
 	pProj->SetDir({ 0.0f, -1.0f });
 
 	GET_SINGLE(SceneManager)->GetCurScene()->AddObject(pProj, LAYER::PLAYER_PROJECTILE);
+}
+void Player::EnterCollision(Collider* other) {
+	--m_hp;
+
+	if (m_hp <= 0)
+		SetDead();
 }
