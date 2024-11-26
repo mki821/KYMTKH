@@ -7,8 +7,9 @@ public:
 	Projectile();
 	virtual ~Projectile();
 public:
-	void Update() override;
-	void Render(HDC hdc) override;
+	virtual void Init() override { }
+	virtual void Update() override;
+	virtual void Render(HDC hdc) override;
 public:
 	virtual void EnterCollision(Collider* other) override;
 public:
