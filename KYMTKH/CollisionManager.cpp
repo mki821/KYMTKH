@@ -3,6 +3,7 @@
 #include "Scene.h"
 #include "Object.h"
 #include "Collider.h"
+#include "CircleCollider.h"
 #include "CollisionManager.h"
 
 void CollisionManager::Update() {
@@ -56,6 +57,7 @@ void CollisionManager::CollisionLayerUpdate(LAYER _left, LAYER _right) {
 		// 충돌체 없는 경우
 		if (nullptr == pLeftCollider)
 			continue;
+
 		for (size_t j = 0; j < vecRightLayer.size(); j++) {
 			Collider* pRightCollider = vecRightLayer[j]->GetComponent<Collider>();
 
@@ -99,7 +101,7 @@ void CollisionManager::CollisionLayerUpdate(LAYER _left, LAYER _right) {
 					}
 				}
 			}
-			else // 충돌 안하네? {
+			else { // 충돌 안하네? 
 				if (iter->second) { // 근데 이전에 충돌중
 					pLeftCollider->ExitCollision(pRightCollider);
 					pRightCollider->ExitCollision(pLeftCollider);
@@ -108,15 +110,32 @@ void CollisionManager::CollisionLayerUpdate(LAYER _left, LAYER _right) {
 			}
 		}
 	}
+}
 
 bool CollisionManager::IsCollision(Collider* left, Collider* right) {
-	Vector2 vLeftPos = left->GetLatedUpatedPos();
-	Vector2 vRightPos = right->GetLatedUpatedPos();
-	Vector2 vLeftSize = left->GetSize();
-	Vector2 vRightSize = right->GetSize();
+	CircleCollider* leftC = dynamic_cast<CircleCollider*>(left);
+	CircleCollider* rightC = dynamic_cast<CircleCollider*>(right);
 
-	RECT leftRt = RECT_MAKE(vLeftPos.x, vLeftPos.y, vLeftSize.x, vLeftSize.y);
-	RECT rightRt = RECT_MAKE(vRightPos.x, vRightPos.y, vRightSize.x, vRightSize.y);
-	RECT rt;
-	return ::IntersectRect(&rt, &leftRt, &rightRt);
+	if (leftC == nullptr && rightC == nullptr) {
+		Vector2 vLeftPos = left->GetLatedUpatedPos();
+		Vector2 vRightPos = right->GetLatedUpatedPos();
+		Vector2 vLeftSize = left->GetSize();
+		Vector2 vRightSize = right->GetSize();
+
+		RECT leftRt = RECT_MAKE(vLeftPos.x, vLeftPos.y, vLeftSize.x, vLeftSize.y);
+		RECT rightRt = RECT_MAKE(vRightPos.x, vRightPos.y, vRightSize.x, vRightSize.y);
+		RECT rt;
+
+		return ::IntersectRect(&rt, &leftRt, &rightRt);
+	}
+	else if (leftC != nullptr && rightC != nullptr) {
+		Vector2 vLeftPos = left->GetLatedUpatedPos();
+		Vector2 vRightPos = right->GetLatedUpatedPos();
+		float leftRadius = left->GetSize().x / 2.0f;
+		float rightRadius = right->GetSize().x / 2.0f;
+
+		float distance = (vLeftPos - vRightPos).Length();
+
+		return distance <= (leftRadius + rightRadius);
+	}
 }

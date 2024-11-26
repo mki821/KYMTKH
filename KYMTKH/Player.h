@@ -9,6 +9,7 @@ public:
 	Player();
 	~Player();
 public:
+	void Init() override { }
 	void Update() override;
 	void Render(HDC hdc) override;
 public:
@@ -25,5 +26,6 @@ public:
 private:
 	int m_hp;
 	float m_speed;
+	float m_timer = 0.0f;
 };
 

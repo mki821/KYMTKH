@@ -8,6 +8,7 @@ public:
 	Object();
 	virtual ~Object();
 public:
+	virtual void Init() abstract;
 	virtual void Update() abstract;
 	virtual void LateUpdate();
 	virtual void Render(HDC hdc) abstract;
@@ -44,5 +45,5 @@ public:
 	const bool& GetIsDead() const { return m_isDie; }
 	void SetDead() { m_isDie = true; }
 protected:
-	bool m_isDie;
+	bool m_isDie = false;
 };

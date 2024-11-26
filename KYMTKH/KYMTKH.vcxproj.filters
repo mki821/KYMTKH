@@ -38,6 +38,12 @@
     <Filter Include="Engine\0C_Objects\mki_Boss">
       <UniqueIdentifier>{6b7e76c9-1f79-484b-97a6-5513fe269e16}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Engine\0C_Objects\mki_Boss\JH">
+      <UniqueIdentifier>{8ebe6089-6bc9-4e01-8e81-3740efea582c}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Engine\0C_Objects\mki_Projectile">
+      <UniqueIdentifier>{53588108-a4e1-4ee6-af60-53065a1c1bbf}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="BaseWindow.h">
@@ -121,6 +127,15 @@
     <ClInclude Include="targetver.h">
       <Filter>Default</Filter>
     </ClInclude>
+    <ClInclude Include="CircleCollider.h">
+      <Filter>Engine\0F_Components</Filter>
+    </ClInclude>
+    <ClInclude Include="JHBoss.h">
+      <Filter>Engine\0C_Objects\mki_Boss\JH</Filter>
+    </ClInclude>
+    <ClInclude Include="Lemniscate.h">
+      <Filter>Engine\0C_Objects\mki_Projectile</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="KYMTKH.rc">
@@ -198,6 +213,15 @@
     </ClCompile>
     <ClCompile Include="Boss.cpp">
       <Filter>Engine\0C_Objects</Filter>
+    </ClCompile>
+    <ClCompile Include="CircleCollider.cpp">
+      <Filter>Engine\0F_Components</Filter>
+    </ClCompile>
+    <ClCompile Include="JHBoss.cpp">
+      <Filter>Engine\0C_Objects\mki_Boss\JH</Filter>
+    </ClCompile>
+    <ClCompile Include="Lemniscate.cpp">
+      <Filter>Engine\0C_Objects\mki_Projectile</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

@@ -3,12 +3,12 @@
 #include "TimeManager.h"
 #include "SceneManager.h"
 #include "Scene.h"
-#include "Collider.h"
+#include "CircleCollider.h"
 #include "Projectile.h"
 #include "Player.h"
 
-Player::Player() : m_pTex(nullptr), m_hp(10), m_speed(100.0f) {
-	AddComponent<Collider>();
+Player::Player() : m_pTex(nullptr), m_hp(10), m_speed(200.0f) {
+	AddComponent<CircleCollider>();
 }
 
 Player::~Player() { }
@@ -25,12 +25,17 @@ void Player::Update() {
 	if (GET_KEY(KEY_TYPE::D))
 		++movement.x;
 
+	bool isShift = GET_KEY(KEY_TYPE::LSHIFT);
+
 	movement.Normalize();
 
-	m_vPos += movement * m_speed * fDT;
+	m_vPos += movement * (isShift ? m_speed / 2.0f : m_speed) * fDT;
 
-	if (GET_KEY(KEY_TYPE::SPACE))
+	m_timer += fDT;
+	if (m_timer >= 0.5f && GET_KEY(KEY_TYPE::SPACE)) {
+		m_timer = 0.0f;
 		CreateProjectile();
+	}
 }
 
 void Player::Render(HDC hdc) {
@@ -45,8 +50,11 @@ void Player::CreateProjectile() {
 
 	GET_SINGLE(SceneManager)->GetCurScene()->AddObject(pProj, LAYER::PLAYER_PROJECTILE);
 }
+
 void Player::EnterCollision(Collider* other) {
 	--m_hp;
+
+	cout << m_hp;
 
 	if (m_hp <= 0)
 		SetDead();

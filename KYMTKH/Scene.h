@@ -1,6 +1,6 @@
 #pragma once
 
-class Object;
+#include "Object.h"
 
 class Scene {
 public:
@@ -14,6 +14,7 @@ public:
 	virtual void Release();
 public:
 	void AddObject(Object* obj, LAYER layer) {
+		obj->Init();
 		m_vecObj[(UINT)layer].push_back(obj);
 	}
 public:
