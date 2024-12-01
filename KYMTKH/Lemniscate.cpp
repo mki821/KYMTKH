@@ -1,10 +1,10 @@
 #include "pch.h"
 #include "TimeManager.h"
 #include "EventManager.h"
-#include "JHBoss.h"
+#include "LemniscateParent.h"
 #include "Lemniscate.h"
 
-Lemniscate::Lemniscate() : Projectile() { }
+Lemniscate::Lemniscate(float startAngle) : Projectile(), m_currentAngle(startAngle), m_rotationAngle(startAngle / 4) { }
 Lemniscate::~Lemniscate() { }
 
 void Lemniscate::Init() {
@@ -12,11 +12,13 @@ void Lemniscate::Init() {
 }
 
 void Lemniscate::Update() {
-	m_currentAngle += fDT * 300.0f;
+	m_currentAngle += fDT * m_speed;
 	if (m_currentAngle >= 360.0f) m_currentAngle -= 360.0f;
+	else if (m_currentAngle < 0.0f) m_currentAngle += 360.0f;
 
-	m_rotationAngle += fDT * 50.0f;
+	m_rotationAngle += fDT * m_rotationSpeed;;
 	if (m_rotationAngle >= 360.0f) m_rotationAngle -= 360.0f;
+	else if (m_rotationAngle < 0.0f) m_rotationAngle += 360.0f;
 
 	SizeUp();
 
@@ -27,9 +29,15 @@ void Lemniscate::Update() {
 
 	float delta2 = m_rotationAngle * Deg2Rad;
 	float xp = x * cosf(delta2) - y * sinf(delta2);
-	float yp = x * sinf(delta2) + y * cosf(delta2);	
+	float yp = x * sinf(delta2) + y * cosf(delta2);
 	
 	m_vPos = m_createdPos + Vector2{ xp, yp } * 100.0f;
+
+	Vector2 offset = m_vPos - m_createdPos;
+	float delta3 = m_turnSpeed * Deg2Rad;
+	float tempX = offset.x * cosf(delta3) - offset.y * sinf(delta3);
+	float tempY = offset.x * sinf(delta3) + offset.y * cosf(delta3);
+	m_vPos = m_createdPos + Vector2{ tempX * (m_turnSpeed < 0 ? -1 : 1), tempY};
 
 	m_lifeTime -= fDT;
 	if (m_lifeTime <= 0.0f) {
@@ -44,5 +52,5 @@ void Lemniscate::SizeUp() {
 	m_sizeUpTimer += fDT;
 	if (m_sizeUpTimer > 1.0f) m_sizeUpTimer = 1.0f;
 
-	m_currentScale = std::lerp(1.0f, 5.0f, m_sizeUpTimer);
+	m_currentScale = std::lerp(1.0f, 3.5f, m_sizeUpTimer);
 }

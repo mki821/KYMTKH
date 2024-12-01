@@ -1,5 +1,6 @@
 #include "pch.h"
 #include "Core.h"
+#include "GDISelector.h"
 #include "TimeManager.h"
 #include "InputManager.h"
 #include "ResourceManager.h"
@@ -63,6 +64,10 @@ void Core::MainRender() {
 
 	GET_SINGLE(SceneManager)->Render(m_hBackDC);
 
+	GDISelector a(m_hBackDC, BRUSH_TYPE::BLACK);
+	Rectangle(m_hBackDC, 0, 0, SCREEN_WIDTH / 3, SCREEN_HEIGHT);
+	Rectangle(m_hBackDC, SCREEN_WIDTH - SCREEN_WIDTH / 3, 0, SCREEN_WIDTH, SCREEN_HEIGHT);
+
 	BitBlt(m_hDC, 0, 0, SCREEN_WIDTH, SCREEN_HEIGHT, m_hBackDC, 0, 0, SRCCOPY);
 }
 
@@ -73,6 +78,7 @@ void Core::CreateGDI() {
 	m_colorBrushs[(UINT)BRUSH_TYPE::GREEN] = (HBRUSH)CreateSolidBrush(RGB(134, 229, 134));
 	m_colorBrushs[(UINT)BRUSH_TYPE::BLUE] = (HBRUSH)CreateSolidBrush(RGB(103, 153, 255));
 	m_colorBrushs[(UINT)BRUSH_TYPE::YELLOW] = (HBRUSH)CreateSolidBrush(RGB(255, 187, 0));
+	m_colorBrushs[(UINT)BRUSH_TYPE::BLACK] = (HBRUSH)CreateSolidBrush(BLACK_BRUSH);
 
 	//RED GREEN BLUE PEN
 	m_colorPens[(UINT)PEN_TYPE::RED] = CreatePen(PS_SOLID, 1, RGB(255, 0, 0));

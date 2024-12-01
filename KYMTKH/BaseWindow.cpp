@@ -43,7 +43,7 @@ ATOM BaseWindow::MyRegisterClass() {
     wcex.hCursor = LoadCursor(nullptr, IDC_ARROW);
     wcex.hbrBackground = (HBRUSH)(COLOR_WINDOW + 1);
     wcex.lpszMenuName = nullptr;
-    wcex.lpszClassName = L"2-2 Gamep";
+    wcex.lpszClassName = L"KYMTKH";
     wcex.hIconSm = LoadIcon(wcex.hInstance, MAKEINTRESOURCE(IDI_SMALL));
 
     return RegisterClassExW(&wcex);
@@ -57,8 +57,8 @@ void BaseWindow::createWindow() {
     int Winposy = ResolutionY / 2 - SCREEN_HEIGHT / 2;
 
     m_hWnd = CreateWindowW(
-        L"2-2 Gamep",          // 윈도우 클래스 식별자
-        L"진현의 윈도우",       // 제목
+        L"KYMTKH",          // 윈도우 클래스 식별자
+        L"KYMTKH",       // 제목
         WS_SYSMENU,            // 윈도우 어떤 스타일로 만들것인가
         Winposx,               // ★ 띄울 위치의 LEFT
         Winposy,               // ★ 띄울 위치의 TOP

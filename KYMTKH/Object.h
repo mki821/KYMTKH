@@ -31,9 +31,7 @@ public:
 protected:
 	void Wait(float second, std::function<void()> func);
 private:
-	float m_waitTimer = 0.0f;
-	bool m_wait = false;
-	std::function<void()> m_waitFunc;
+	vector<std::pair<float, std::function<void()>>> m_vecWaitFuncs;
 public:
 	void SetPos(Vector2 vPos) { m_vPos = vPos; }
 	void SetSize(Vector2 vSize) { m_vSize = vSize; }
