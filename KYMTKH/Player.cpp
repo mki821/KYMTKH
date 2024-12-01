@@ -15,9 +15,14 @@ Player::~Player() { }
 
 void Player::Init() {
 	GetComponent<CircleCollider>()->SetSize(m_vSize);
+
+	Wait(1.0f, []() { cout << "1"; });
+	Wait(3.0f, []() { cout << "2"; });
 }
 
 void Player::Update() {
+	Object::Update();
+
 	Vector2 movement;
 
 	if (GET_KEY(KEY_TYPE::W))

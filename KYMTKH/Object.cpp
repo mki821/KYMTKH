@@ -15,13 +15,19 @@ Object::~Object() {
 }
 
 void Object::Update() {
-	if (m_wait) {
-		m_waitTimer -= fDT;
+	if (m_vecWaitFuncs.size() > 0) {
+		vector<std::pair<float, std::function<void()>>>::iterator iter;
 
-		if (m_waitTimer <= 0.0f) {
-			m_wait = false;
-			m_waitTimer = 0.0f;
-			m_waitFunc();
+		for (iter = m_vecWaitFuncs.begin(); iter != m_vecWaitFuncs.end(); ++iter) {
+			(*iter).first -= fDT;
+
+			if ((*iter).first <= 0.0f) {
+				(*iter).second();
+				iter = m_vecWaitFuncs.erase(iter);
+
+				if (iter == m_vecWaitFuncs.end())
+					break;
+			}
 		}
 	}
 }
@@ -41,9 +47,8 @@ void Object::ComponentRender(HDC hdc) {
 }
 
 void Object::Wait(float second, std::function<void()> func) {
-	m_wait = true;
-	m_waitTimer = second;
-	m_waitFunc = func;
+	std::pair<float, std::function<void()>> temp = { second, func };
+	m_vecWaitFuncs.push_back(temp);
 }
 
 void Object::EnterCollision(Collider* other) { }

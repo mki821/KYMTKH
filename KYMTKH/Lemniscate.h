@@ -2,7 +2,7 @@
 
 #include "Projectile.h"
 
-class JHBoss;
+class LemniscateParent;
 
 class Lemniscate : public Projectile {
 public:
@@ -14,9 +14,9 @@ public:
 private:
 	void SizeUp();
 public:
-	void SetOwner(JHBoss* owner) { m_owner = owner; }
+	void SetOwner(LemniscateParent* owner) { m_owner = owner; }
 private:
-	JHBoss* m_owner = nullptr;
+	LemniscateParent* m_owner = nullptr;
 public:
 	void SetRotationSpeed(float speed) { m_rotationSpeed = speed; }
 	void SetTurnSpeed(float speed) { m_turnSpeed = speed; }

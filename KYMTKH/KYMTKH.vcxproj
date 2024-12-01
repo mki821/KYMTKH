@@ -168,6 +168,7 @@
     <ClInclude Include="JHBoss.h" />
     <ClInclude Include="KYMTKH.h" />
     <ClInclude Include="Lemniscate.h" />
+    <ClInclude Include="LemniscateParent.h" />
     <ClInclude Include="Object.h" />
     <ClInclude Include="pch.h" />
     <ClInclude Include="Player.h" />
@@ -205,6 +206,7 @@
     <ClCompile Include="InputManager.cpp" />
     <ClCompile Include="JHBoss.cpp" />
     <ClCompile Include="Lemniscate.cpp" />
+    <ClCompile Include="LemniscateParent.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="Object.cpp" />
     <ClCompile Include="Player.cpp" />

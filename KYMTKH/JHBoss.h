@@ -2,6 +2,8 @@
 
 #include "Boss.h"
 
+class Lemniscate;
+
 class JHBoss : public Boss {
 public:
 	JHBoss();
@@ -14,10 +16,7 @@ private:
 	void One();
 	void Two();
 	void Three();
-public:
-	const bool GetScalceUp() const { return m_scaleUp; }
 private:
 	float m_timer = 0.0f;
 	int m_angleModifier = 0;
-	bool m_scaleUp = false;
 };

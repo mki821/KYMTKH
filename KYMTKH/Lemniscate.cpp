@@ -1,7 +1,7 @@
 #include "pch.h"
 #include "TimeManager.h"
 #include "EventManager.h"
-#include "JHBoss.h"
+#include "LemniscateParent.h"
 #include "Lemniscate.h"
 
 Lemniscate::Lemniscate(float startAngle) : Projectile(), m_currentAngle(startAngle), m_rotationAngle(startAngle / 4) { }

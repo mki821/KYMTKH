@@ -4,7 +4,7 @@
 #include "Scene.h"
 #include "Collider.h"
 #include "Projectile.h"
-#include "Lemniscate.h"
+#include "LemniscateParent.h"
 #include "InputManager.h"
 #include "Player.h"
 #include "JHBoss.h"
@@ -24,8 +24,6 @@ void JHBoss::Update() {
 
 		Three();
 	}
-
-	if (GET_KEY_DOWN(KEY_TYPE::P)) m_scaleUp = true;
 }
 
 void JHBoss::One() {
@@ -45,18 +43,10 @@ void JHBoss::One() {
 }
 
 void JHBoss::Two() {
-	for (int i = 0; i < 1440; i += 5) {
-		Lemniscate* pProj = new Lemniscate(i);
-		pProj->SetPos({ m_vPos.x, m_vPos.y - m_vSize.y / 2.0f });
-		pProj->SetSize({ 30.0f, 30.0f });
-		pProj->SetSpeed(200.0f);
-		pProj->SetLifeTime(15.0f);
-		pProj->SetRotationSpeed(2.0f);
-		pProj->SetTurnSpeed(10.0f);
-		pProj->SetOwner(this);
+	LemniscateParent* pLemniscate = new LemniscateParent;
+	pLemniscate->SetPos(m_vPos);
 
-		GET_SINGLE(SceneManager)->GetCurScene()->AddObject(pProj, LAYER::ENEMY_PROJECTILE);
-	}
+	GET_SINGLE(SceneManager)->GetCurScene()->AddObject(pLemniscate, LAYER::ENEMY_PROJECTILE);
 }
 
 void JHBoss::Three() {
