@@ -10,8 +10,8 @@ void SceneManager::Init() {
 	RegisterScene(L"TestScene", std::make_shared<TestScene>());
 	RegisterScene(L"Y_TestScene", std::make_shared<Y_TestScene>());
 
-	//LoadScene(L"TestScene");
-	LoadScene(L"Y_TestScene");
+	LoadScene(L"TestScene");
+	//LoadScene(L"Y_TestScene");
 }
 
 void SceneManager::Update() {

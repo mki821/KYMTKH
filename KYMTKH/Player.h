@@ -9,12 +9,13 @@ public:
 	Player();
 	~Player();
 public:
-	void Init() override { }
+	void Init() override;
 	void Update() override;
 	void Render(HDC hdc) override;
 public:
 	virtual void EnterCollision(Collider* other) override;
 private:
+	void ClampPos();
 	void CreateProjectile();
 private:
 	Texture* m_pTex;
