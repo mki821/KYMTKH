@@ -7,12 +7,13 @@ public:
 	JHBoss();
 	~JHBoss();
 public:
-	void Init() override { }
+	void Init() override;
 	virtual void Update() override;
 	virtual void Render(HDC hdc) override;
 private:
 	void One();
 	void Two();
+	void Three();
 public:
 	const bool GetScalceUp() const { return m_scaleUp; }
 private:

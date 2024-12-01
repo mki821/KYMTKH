@@ -13,6 +13,10 @@ Player::Player() : m_pTex(nullptr), m_hp(10), m_speed(200.0f) {
 
 Player::~Player() { }
 
+void Player::Init() {
+	GetComponent<CircleCollider>()->SetSize(m_vSize);
+}
+
 void Player::Update() {
 	Vector2 movement;
 
@@ -30,6 +34,7 @@ void Player::Update() {
 	movement.Normalize();
 
 	m_vPos += movement * (isShift ? m_speed / 2.0f : m_speed) * fDT;
+	ClampPos();
 
 	m_timer += fDT;
 	if (m_timer >= 0.5f && GET_KEY(KEY_TYPE::SPACE)) {
@@ -40,6 +45,19 @@ void Player::Update() {
 
 void Player::Render(HDC hdc) {
 	RECT_RENDER(hdc, m_vPos.x, m_vPos.y, m_vSize.x, m_vSize.y);
+}
+
+void Player::ClampPos() {
+	float halfSizeX = m_vSize.x / 2;
+	float minX = SCREEN_WIDTH / 3.0f + halfSizeX;
+	float maxX = SCREEN_WIDTH - SCREEN_WIDTH / 3.0f - halfSizeX;
+
+	float halfSizeY = m_vSize.y / 2;
+	float minY = halfSizeY;
+	float maxY = SCREEN_HEIGHT - halfSizeY;
+
+	m_vPos.x = std::clamp(m_vPos.x, minX, maxX);
+	m_vPos.y = std::clamp(m_vPos.y, minY, maxY);
 }
 
 void Player::CreateProjectile() {
@@ -56,6 +74,6 @@ void Player::EnterCollision(Collider* other) {
 
 	cout << m_hp;
 
-	if (m_hp <= 0)
-		SetDead();
+	//if (m_hp <= 0)
+	//	SetDead();
 }

@@ -196,9 +196,6 @@
     <ClCompile Include="Texture.cpp">
       <Filter>Engine\0E_Resources</Filter>
     </ClCompile>
-    <ClCompile Include="pch.cpp">
-      <Filter>Engine\0Z_Headers</Filter>
-    </ClCompile>
     <ClCompile Include="GDISelector.cpp">
       <Filter>Engine\0F_Moduels</Filter>
     </ClCompile>

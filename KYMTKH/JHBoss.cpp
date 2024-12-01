@@ -6,18 +6,23 @@
 #include "Projectile.h"
 #include "Lemniscate.h"
 #include "InputManager.h"
+#include "Player.h"
 #include "JHBoss.h"
 
 JHBoss::JHBoss() { }
 JHBoss::~JHBoss() { }
 
+void JHBoss::Init() {
+	Two();
+}
+
 void JHBoss::Update() {
 	m_timer += fDT;
 
-	if (m_timer >= 0.01f) {
+	if (m_timer >= 0.05f) {
 		m_timer = 0.0f;
 
-		Two();
+		Three();
 	}
 
 	if (GET_KEY_DOWN(KEY_TYPE::P)) m_scaleUp = true;
@@ -40,14 +45,23 @@ void JHBoss::One() {
 }
 
 void JHBoss::Two() {
-	Lemniscate* pProj = new Lemniscate;
-	pProj->SetPos({ m_vPos.x, m_vPos.y - m_vSize.y / 2.0f });
-	pProj->SetSize({ 30.0f, 30.0f });
-	pProj->SetSpeed(200.0f);
-	pProj->SetLifeTime(15.0f);
-	pProj->SetOwner(this);
+	for (int i = 0; i < 1440; i += 5) {
+		Lemniscate* pProj = new Lemniscate(i);
+		pProj->SetPos({ m_vPos.x, m_vPos.y - m_vSize.y / 2.0f });
+		pProj->SetSize({ 30.0f, 30.0f });
+		pProj->SetSpeed(200.0f);
+		pProj->SetLifeTime(15.0f);
+		pProj->SetRotationSpeed(2.0f);
+		pProj->SetTurnSpeed(10.0f);
+		pProj->SetOwner(this);
 
-	GET_SINGLE(SceneManager)->GetCurScene()->AddObject(pProj, LAYER::ENEMY_PROJECTILE);
+		GET_SINGLE(SceneManager)->GetCurScene()->AddObject(pProj, LAYER::ENEMY_PROJECTILE);
+	}
+}
+
+void JHBoss::Three() {
+	Vector2 playerPos = m_player->GetPos();
+	Vector2 direction = playerPos - m_vPos;
 }
 
 void JHBoss::Render(HDC hdc) {
