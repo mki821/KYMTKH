@@ -9,7 +9,7 @@ public:
 	virtual ~Object();
 public:
 	virtual void Init() abstract;
-	virtual void Update() abstract;
+	virtual void Update();
 	virtual void LateUpdate();
 	virtual void Render(HDC hdc) abstract;
 	void ComponentRender(HDC hdc);
@@ -28,6 +28,12 @@ public:
 		}
 		return component;
 	}
+protected:
+	void Wait(float second, std::function<void()> func);
+private:
+	float m_waitTimer = 0.0f;
+	bool m_wait = false;
+	std::function<void()> m_waitFunc;
 public:
 	void SetPos(Vector2 vPos) { m_vPos = vPos; }
 	void SetSize(Vector2 vSize) { m_vSize = vSize; }

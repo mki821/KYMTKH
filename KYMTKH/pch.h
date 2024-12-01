@@ -14,7 +14,7 @@
 #include<algorithm>
 #include<ctime>
 #include<math.h>
-#include <functional>
+#include<functional>
 
 // My Header
 #include "Define.h"
@@ -38,8 +38,8 @@ using std::wstring;
 #define Rad2Deg (180.0f / PI)
 #define Deg2Rad (PI / 180.0f)
 
-#define SCREEN_WIDTH  1280
-#define SCREEN_HEIGHT 720
+#define SCREEN_WIDTH  1920
+#define SCREEN_HEIGHT 1080
 
 // 디버깅용 콘솔창
 #ifdef _DEBUG
