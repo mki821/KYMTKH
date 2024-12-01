@@ -14,6 +14,18 @@ Object::~Object() {
 	m_vecComponents.clear();
 }
 
+void Object::Update() {
+	if (m_wait) {
+		m_waitTimer -= fDT;
+
+		if (m_waitTimer <= 0.0f) {
+			m_wait = false;
+			m_waitTimer = 0.0f;
+			m_waitFunc();
+		}
+	}
+}
+
 void Object::LateUpdate() {
 	for (Component* component : m_vecComponents) {
 		if (component != nullptr)
@@ -26,6 +38,12 @@ void Object::ComponentRender(HDC hdc) {
 		if (component != nullptr)
 			component->Render(hdc);
 	}
+}
+
+void Object::Wait(float second, std::function<void()> func) {
+	m_wait = true;
+	m_waitTimer = second;
+	m_waitFunc = func;
 }
 
 void Object::EnterCollision(Collider* other) { }
