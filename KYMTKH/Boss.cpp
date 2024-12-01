@@ -9,7 +9,7 @@ Boss::Boss() {
 }
 
 Boss::~Boss() { }
-void Boss::Update() { }
+void Boss::Update() { Object::Update(); }
 
 void Boss::Render(HDC hdc) {
 	if(!m_isDie) RECT_RENDER(hdc, m_vPos.x, m_vPos.y, m_vSize.x, m_vSize.y);

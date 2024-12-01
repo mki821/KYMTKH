@@ -14,6 +14,7 @@
 #include<algorithm>
 #include<ctime>
 #include<math.h>
+#include<functional>
 
 // My Header
 #include "Define.h"
