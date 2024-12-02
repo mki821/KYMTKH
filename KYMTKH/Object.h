@@ -32,6 +32,7 @@ protected:
 	void Wait(float second, std::function<void()> func);
 private:
 	vector<std::pair<float, std::function<void()>>> m_vecWaitFuncs;
+	vector<std::pair<float, std::function<void()>>> m_vecAdditionalWaitFuncs;
 public:
 	void SetPos(Vector2 vPos) { m_vPos = vPos; }
 	void SetSize(Vector2 vSize) { m_vSize = vSize; }

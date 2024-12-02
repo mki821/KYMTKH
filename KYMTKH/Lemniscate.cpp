@@ -2,6 +2,7 @@
 #include "TimeManager.h"
 #include "EventManager.h"
 #include "LemniscateParent.h"
+#include "CircleCollider.h"
 #include "Lemniscate.h"
 
 Lemniscate::Lemniscate(float startAngle) : Projectile(), m_currentAngle(startAngle), m_rotationAngle(startAngle / 4) { }
@@ -43,10 +44,10 @@ void Lemniscate::Update() {
 }
 
 void Lemniscate::SizeUp() {
-	if (m_sizeUpTimer >= 1.0f) return;
+	if (m_sizeUpTimer >= 2.0f) return;
 
 	m_sizeUpTimer += fDT;
-	if (m_sizeUpTimer > 1.0f) m_sizeUpTimer = 1.0f;
+	if (m_sizeUpTimer > 2.0f) m_sizeUpTimer = 2.0f;
 
-	m_currentScale = std::lerp(1.0f, 3.5f, m_sizeUpTimer);
+	m_currentScale = std::lerp(0.0f, 3.5f, m_sizeUpTimer / 2.0f);
 }

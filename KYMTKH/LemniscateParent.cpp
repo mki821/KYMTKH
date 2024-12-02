@@ -34,7 +34,6 @@ void LemniscateParent::Update() {
 
 	m_lifeTimer -= fDT;
 	if (m_lifeTimer <= 0.0f) {
-		cout << "Asdfasdf" << endl;
 		for (Lemniscate* lemniscate : m_vecLemniscates) {
 			GET_SINGLE(EventManager)->DeleteObject(lemniscate);
 		}

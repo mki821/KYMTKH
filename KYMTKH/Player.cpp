@@ -8,7 +8,7 @@
 #include "UIManager.h"
 #include "Player.h"
 
-Player::Player() : m_pTex(nullptr), m_hp(5), m_speed(200.0f) {
+Player::Player() : m_pTex(nullptr), m_hp(5), m_speed(300.0f) {
 	AddComponent<CircleCollider>();
 }
 
@@ -24,7 +24,7 @@ void Player::Update() {
 	Move();
 
 	m_timer += fDT;
-	if (m_timer >= 0.5f && GET_KEY(KEY_TYPE::SPACE)) {
+	if (m_timer >= 0.08f && GET_KEY(KEY_TYPE::X)) {
 		m_timer = 0.0f;
 		CreateProjectile();
 	}
@@ -45,20 +45,20 @@ void Player::Render(HDC hdc) {
 void Player::Move() {
 	Vector2 movement;
 
-	if (GET_KEY(KEY_TYPE::W))
+	if (GET_KEY(KEY_TYPE::UP))
 		--movement.y;
-	if (GET_KEY(KEY_TYPE::A))
+	if (GET_KEY(KEY_TYPE::LEFT))
 		--movement.x;
-	if (GET_KEY(KEY_TYPE::S))
+	if (GET_KEY(KEY_TYPE::DOWN))
 		++movement.y;
-	if (GET_KEY(KEY_TYPE::D))
+	if (GET_KEY(KEY_TYPE::RIGHT))
 		++movement.x;
 
 	bool isShift = GET_KEY(KEY_TYPE::LSHIFT);
 
 	movement.Normalize();
 
-	m_vPos += movement * (isShift ? m_speed / 2.0f : m_speed) * fDT;
+	m_vPos += movement * (isShift ? m_speed / 3.0f : m_speed) * fDT;
 	ClampPos();
 }
 
@@ -78,8 +78,9 @@ void Player::ClampPos() {
 void Player::CreateProjectile() {
 	Projectile* pProj = new Projectile;
 	pProj->SetPos({ m_vPos.x, m_vPos.y - m_vSize.y / 2.0f });
-	pProj->SetSize({ 30.0f, 30.0f });
+	pProj->SetSize({ 15.0f, 15.0f });
 	pProj->SetDir({ 0.0f, -1.0f });
+	pProj->SetSpeed(1300.0f);
 
 	GET_SINGLE(SceneManager)->GetCurScene()->AddObject(pProj, LAYER::PLAYER_PROJECTILE);
 }
@@ -87,10 +88,8 @@ void Player::CreateProjectile() {
 void Player::EnterCollision(Collider* other) {
 	if (m_invincibilityTimer > 0.0f) return;
 
-	wstring heartName = std::format(L"Heart_{0}", m_hp);
+	wstring heartName = std::format(L"Heart_{0}", m_hp--);
 	GET_SINGLE(UIManager)->RemoveUI(heartName);
-
-	--m_hp;
 
 	m_invincibilityTimer = 1.5f;
 	GetComponent<CircleCollider>()->SetEnable(false);

@@ -18,7 +18,7 @@ void TestScene::Init() {
 
 	Object* pPlayer = new Player;
 	pPlayer->SetPos({ SCREEN_WIDTH / 2.0f, 900.0f });
-	pPlayer->SetSize({ 15.0f, 15.0f });
+	pPlayer->SetSize({ 8.0f, 8.0f });
 	AddObject(pPlayer, LAYER::PLAYER);
 
 	Boss* pBoss = new JHBoss;
