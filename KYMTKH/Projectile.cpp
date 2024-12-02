@@ -25,6 +25,7 @@ void Projectile::Render(HDC hdc) {
 	ELLIPSE_RENDER(hdc, m_vPos.x, m_vPos.y, m_vSize.x, m_vSize.y);
 }
 
-void Projectile::EnterCollision(Collider* other) {
+void Projectile::EnterCollision(Collider* other) 
+{
 	GET_SINGLE(EventManager)->DeleteObject(this);
 }

@@ -3,8 +3,9 @@
 #include "GDISelector.h"
 #include "Collider.h"
 
-Collider::Collider() : m_vSize(30.0f, 30.0f), m_vOffset(0.0f, 0.0f), m_vLateUpdatedPos(0.0f, 0.0f) { }
+UINT Collider::m_sNextID = 0;
 
+Collider::Collider() : m_vSize(30.0f, 30.0f), m_vOffset(0.0f, 0.0f), m_vLateUpdatedPos(0.0f, 0.0f), m_ID(m_sNextID++) { }
 Collider::~Collider() { }
 
 void Collider::LateUpdate() {

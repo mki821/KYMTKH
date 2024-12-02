@@ -17,12 +17,14 @@ void JHBoss::Init() {
 }
 
 void JHBoss::Update() {
+	Boss::Update();
+
 	m_timer += fDT;
 
 	if (m_timer >= 0.05f) {
 		m_timer = 0.0f;
 
-		Three();
+		One();
 	}
 }
 
@@ -45,8 +47,37 @@ void JHBoss::One() {
 void JHBoss::Two() {
 	LemniscateParent* pLemniscate = new LemniscateParent;
 	pLemniscate->SetPos(m_vPos);
+	pLemniscate->SetTurnDirection(-1);
+	pLemniscate->SetTargetPos({ SCREEN_WIDTH / 4.0f, 1300.0f });
+	pLemniscate->SetLifeTime(15.0f);
 
 	GET_SINGLE(SceneManager)->GetCurScene()->AddObject(pLemniscate, LAYER::ENEMY_PROJECTILE);
+
+	Wait(5.5f, [=]() {
+		LemniscateParent* pLemniscate = new LemniscateParent;
+		pLemniscate->SetPos(m_vPos);
+		pLemniscate->SetTargetPos({ SCREEN_WIDTH - SCREEN_WIDTH / 4.0f, 1300.0f });
+		pLemniscate->SetLifeTime(15.0f);
+
+		GET_SINGLE(SceneManager)->GetCurScene()->AddObject(pLemniscate, LAYER::ENEMY_PROJECTILE);
+	});
+	Wait(11.0f, [=]() {
+		LemniscateParent* pLemniscate = new LemniscateParent;
+		pLemniscate->SetPos(m_vPos);
+		pLemniscate->SetTurnDirection(-1);
+		pLemniscate->SetTargetPos({ SCREEN_WIDTH / 4.0f, 1300.0f });
+		pLemniscate->SetLifeTime(15.0f);
+
+		GET_SINGLE(SceneManager)->GetCurScene()->AddObject(pLemniscate, LAYER::ENEMY_PROJECTILE);
+	});
+	Wait(16.5f, [=]() {
+		LemniscateParent* pLemniscate = new LemniscateParent;
+		pLemniscate->SetPos(m_vPos);
+		pLemniscate->SetTargetPos({ SCREEN_WIDTH - SCREEN_WIDTH / 4.0f, 1300.0f });
+		pLemniscate->SetLifeTime(15.0f);
+
+		GET_SINGLE(SceneManager)->GetCurScene()->AddObject(pLemniscate, LAYER::ENEMY_PROJECTILE);
+	});
 }
 
 void JHBoss::Three() {

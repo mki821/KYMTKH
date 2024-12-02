@@ -15,6 +15,7 @@
 #include<ctime>
 #include<math.h>
 #include<functional>
+#include<format>
 
 // My Header
 #include "Define.h"
