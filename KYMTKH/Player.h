@@ -15,6 +15,7 @@ public:
 public:
 	virtual void EnterCollision(Collider* other) override;
 private:
+	void Move();
 	void ClampPos();
 	void CreateProjectile();
 private:
@@ -28,5 +29,6 @@ private:
 	int m_hp;
 	float m_speed;
 	float m_timer = 0.0f;
+	float m_invincibilityTimer = 0.0f;
 };
 

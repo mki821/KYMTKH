@@ -30,23 +30,19 @@ void Lemniscate::Update() {
 	float delta2 = m_rotationAngle * Deg2Rad;
 	float xp = x * cosf(delta2) - y * sinf(delta2);
 	float yp = x * sinf(delta2) + y * cosf(delta2);
-	
-	m_vPos = m_createdPos + Vector2{ xp, yp } * 100.0f;
 
-	Vector2 offset = m_vPos - m_createdPos;
+	Vector2 ownerPos = m_owner->GetPos();
+	
+	m_vPos = ownerPos + Vector2{ xp, yp } * 100.0f;
+
+	Vector2 offset = m_vPos - ownerPos;
 	float delta3 = m_turnSpeed * Deg2Rad;
 	float tempX = offset.x * cosf(delta3) - offset.y * sinf(delta3);
 	float tempY = offset.x * sinf(delta3) + offset.y * cosf(delta3);
-	m_vPos = m_createdPos + Vector2{ tempX * (m_turnSpeed < 0 ? -1 : 1), tempY};
-
-	m_lifeTime -= fDT;
-	if (m_lifeTime <= 0.0f) {
-		GET_SINGLE(EventManager)->DeleteObject(this);
-	}
+	m_vPos = ownerPos + Vector2{ tempX * (m_turnSpeed < 0 ? -1 : 1), tempY};
 }
 
 void Lemniscate::SizeUp() {
-	if (!m_owner->GetScalceUp()) return;
 	if (m_sizeUpTimer >= 1.0f) return;
 
 	m_sizeUpTimer += fDT;

@@ -50,6 +50,9 @@
     <Filter Include="Engine\YTH\Object">
       <UniqueIdentifier>{1cb8bc12-aac2-494d-856b-2dd8efa6a090}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Engine\0G_UI">
+      <UniqueIdentifier>{f0ddf18b-5406-43cd-9e2f-48e824e4d635}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="BaseWindow.h">
@@ -148,6 +151,18 @@
     <ClInclude Include="Y_TestScene.h">
       <Filter>Engine\YTH</Filter>
     </ClInclude>
+    <ClInclude Include="LemniscateParent.h">
+      <Filter>Engine\0C_Objects\mki_Projectile</Filter>
+    </ClInclude>
+    <ClInclude Include="UIManager.h">
+      <Filter>Engine\0B_Managers</Filter>
+    </ClInclude>
+    <ClInclude Include="UI.h">
+      <Filter>Engine\0G_UI</Filter>
+    </ClInclude>
+    <ClInclude Include="Image.h">
+      <Filter>Engine\0G_UI</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="KYMTKH.rc">
@@ -238,5 +253,20 @@
     <ClCompile Include="Y_TestScene.cpp">
       <Filter>Engine\YTH</Filter>
     </ClCompile>
+    <ClCompile Include="LemniscateParent.cpp">
+      <Filter>Engine\0C_Objects\mki_Projectile</Filter>
+    </ClCompile>
+    <ClCompile Include="UIManager.cpp">
+      <Filter>Engine\0B_Managers</Filter>
+    </ClCompile>
+    <ClCompile Include="UI.cpp">
+      <Filter>Engine\0G_UI</Filter>
+    </ClCompile>
+    <ClCompile Include="Image.cpp">
+      <Filter>Engine\0G_UI</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="ClassDiagram.cd" />
   </ItemGroup>
 </Project>

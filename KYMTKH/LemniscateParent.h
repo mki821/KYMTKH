@@ -10,9 +10,15 @@ public:
 	void Update() override;
 	void Render(HDC hdc) override;
 public:
-	const bool GetScalceUp() const { return m_scaleUp; }
+	void SetTargetPos(Vector2 targetPos) { m_targetPos = targetPos; }
+	void SetTurnDirection(int direction) { m_turnDirection = direction; }
+	void SetLifeTime(float lifeTime) { m_lifeTimer = lifeTime; }
 private:
-	bool m_scaleUp;
+	int m_turnDirection = 1;
+	float m_timer = 0.0f;
+	float m_lifeTimer = 0.0f;
+	Vector2 m_createdPos;
+	Vector2 m_targetPos;
 private:
 	vector<Lemniscate*> m_vecLemniscates;
 };

@@ -5,9 +5,10 @@
 #include "Scene.h"
 #include "CircleCollider.h"
 #include "Projectile.h"
+#include "UIManager.h"
 #include "Player.h"
 
-Player::Player() : m_pTex(nullptr), m_hp(10), m_speed(200.0f) {
+Player::Player() : m_pTex(nullptr), m_hp(5), m_speed(200.0f) {
 	AddComponent<CircleCollider>();
 }
 
@@ -15,14 +16,33 @@ Player::~Player() { }
 
 void Player::Init() {
 	GetComponent<CircleCollider>()->SetSize(m_vSize);
-
-	Wait(1.0f, []() { cout << "1"; });
-	Wait(3.0f, []() { cout << "2"; });
 }
 
 void Player::Update() {
 	Object::Update();
 
+	Move();
+
+	m_timer += fDT;
+	if (m_timer >= 0.5f && GET_KEY(KEY_TYPE::SPACE)) {
+		m_timer = 0.0f;
+		CreateProjectile();
+	}
+
+	if (m_invincibilityTimer > 0.0f) {
+		m_invincibilityTimer -= fDT;
+
+		if (m_invincibilityTimer <= 0.0f) {
+			GetComponent<CircleCollider>()->SetEnable(true);
+		}
+	}
+}
+
+void Player::Render(HDC hdc) {
+	RECT_RENDER(hdc, m_vPos.x, m_vPos.y, m_vSize.x, m_vSize.y);
+}
+
+void Player::Move() {
 	Vector2 movement;
 
 	if (GET_KEY(KEY_TYPE::W))
@@ -40,16 +60,6 @@ void Player::Update() {
 
 	m_vPos += movement * (isShift ? m_speed / 2.0f : m_speed) * fDT;
 	ClampPos();
-
-	m_timer += fDT;
-	if (m_timer >= 0.5f && GET_KEY(KEY_TYPE::SPACE)) {
-		m_timer = 0.0f;
-		CreateProjectile();
-	}
-}
-
-void Player::Render(HDC hdc) {
-	RECT_RENDER(hdc, m_vPos.x, m_vPos.y, m_vSize.x, m_vSize.y);
 }
 
 void Player::ClampPos() {
@@ -75,10 +85,18 @@ void Player::CreateProjectile() {
 }
 
 void Player::EnterCollision(Collider* other) {
+	if (m_invincibilityTimer > 0.0f) return;
+
+	wstring heartName = std::format(L"Heart_{0}", m_hp);
+	GET_SINGLE(UIManager)->RemoveUI(heartName);
+
 	--m_hp;
+
+	m_invincibilityTimer = 1.5f;
+	GetComponent<CircleCollider>()->SetEnable(false);
 
 	cout << m_hp;
 
-	//if (m_hp <= 0)
-	//	SetDead();
+	if (m_hp <= 0)
+		SetDead();
 }

@@ -5,5 +5,6 @@
 class TestScene : public Scene {
 public:
 	void Init() override;
+	void Release() override;
 };
 

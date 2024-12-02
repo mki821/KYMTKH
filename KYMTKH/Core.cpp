@@ -6,6 +6,7 @@
 #include "ResourceManager.h"
 #include "SceneManager.h"
 #include "CollisionManager.h"
+#include "UIManager.h"
 #include "EventManager.h"
 
 bool Core::Init(HWND _hWnd) {
@@ -56,6 +57,7 @@ void Core::MainUpdate() {
 	GET_SINGLE(InputManager)->Update();
 	GET_SINGLE(SceneManager)->Update();
 	GET_SINGLE(CollisionManager)->Update();
+	GET_SINGLE(UIManager)->Update();
 }
 
 void Core::MainRender() {
@@ -63,10 +65,7 @@ void Core::MainRender() {
 	PatBlt(m_hBackDC, 0, 0, SCREEN_WIDTH, SCREEN_HEIGHT, WHITENESS);
 
 	GET_SINGLE(SceneManager)->Render(m_hBackDC);
-
-	GDISelector a(m_hBackDC, BRUSH_TYPE::BLACK);
-	Rectangle(m_hBackDC, 0, 0, SCREEN_WIDTH / 3, SCREEN_HEIGHT);
-	Rectangle(m_hBackDC, SCREEN_WIDTH - SCREEN_WIDTH / 3, 0, SCREEN_WIDTH, SCREEN_HEIGHT);
+	GET_SINGLE(UIManager)->Render(m_hBackDC);
 
 	BitBlt(m_hDC, 0, 0, SCREEN_WIDTH, SCREEN_HEIGHT, m_hBackDC, 0, 0, SRCCOPY);
 }
