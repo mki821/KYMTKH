@@ -50,6 +50,12 @@
     <Filter Include="Engine\YTH\Object">
       <UniqueIdentifier>{1cb8bc12-aac2-494d-856b-2dd8efa6a090}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Engine\YTH\Object\Projectile">
+      <UniqueIdentifier>{8b005de3-1fab-4843-98a5-9659ad4b4d7f}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Engine\YTH\Object\Manager">
+      <UniqueIdentifier>{fcdd7e0e-8418-4ca4-bb7a-5504aa276016}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="BaseWindow.h">
@@ -148,6 +154,19 @@
     <ClInclude Include="Y_TestScene.h">
       <Filter>Engine\YTH</Filter>
     </ClInclude>
+    <ClInclude Include="LemniscateParent.h" />
+    <ClInclude Include="StopAndChaseProj.h">
+      <Filter>Engine\YTH\Object\Projectile</Filter>
+    </ClInclude>
+    <ClInclude Include="StopAndRandomMoveProj.h">
+      <Filter>Engine\YTH\Object\Projectile</Filter>
+    </ClInclude>
+    <ClInclude Include="RandomMoveProj.h">
+      <Filter>Engine\YTH\Object\Projectile</Filter>
+    </ClInclude>
+    <ClInclude Include="RandomMoveProjManager.h">
+      <Filter>Engine\YTH\Object\Manager</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="KYMTKH.rc">
@@ -237,6 +256,19 @@
     </ClCompile>
     <ClCompile Include="Y_TestScene.cpp">
       <Filter>Engine\YTH</Filter>
+    </ClCompile>
+    <ClCompile Include="LemniscateParent.cpp" />
+    <ClCompile Include="StopAndChaseProj.cpp">
+      <Filter>Engine\YTH\Object\Projectile</Filter>
+    </ClCompile>
+    <ClCompile Include="StopAndRandomMoveProj.cpp">
+      <Filter>Engine\YTH\Object\Projectile</Filter>
+    </ClCompile>
+    <ClCompile Include="RandomMoveProj.cpp">
+      <Filter>Engine\YTH\Object\Projectile</Filter>
+    </ClCompile>
+    <ClCompile Include="RandomMoveProjManager.cpp">
+      <Filter>Engine\YTH\Object\Manager</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>
