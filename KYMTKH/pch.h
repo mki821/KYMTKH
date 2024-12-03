@@ -40,8 +40,12 @@ using std::wstring;
 #define Rad2Deg (180.0f / PI)
 #define Deg2Rad (PI / 180.0f)
 
-#define SCREEN_WIDTH  1920
-#define SCREEN_HEIGHT 1080
+#define SCREEN_WIDTH  1600
+#define SCREEN_HEIGHT 900
+
+#define GAME_LEFT SCREEN_WIDTH / 4.0f
+#define GAME_RIGHT SCREEN_WIDTH / 3.0f * 2.0f
+#define GAME_CENTER (GAME_RIGHT - GAME_LEFT) / 2.0f + GAME_LEFT
 
 // 디버깅용 콘솔창
 #ifdef _DEBUG

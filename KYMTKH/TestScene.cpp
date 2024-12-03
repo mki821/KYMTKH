@@ -17,12 +17,12 @@ void TestScene::Init() {
 	}
 
 	Object* pPlayer = new Player;
-	pPlayer->SetPos({ SCREEN_WIDTH / 2.0f, 900.0f });
+	pPlayer->SetPos({ GAME_CENTER, 850.0f });
 	pPlayer->SetSize({ 8.0f, 8.0f });
 	AddObject(pPlayer, LAYER::PLAYER);
 
 	Boss* pBoss = new JHBoss;
-	pBoss->SetPos({ SCREEN_WIDTH / 2.0f, 200.0f });
+	pBoss->SetPos({ GAME_CENTER, 200.0f });
 	pBoss->SetSize({ 30.0f, 30.0f });
 	pBoss->GetComponent<Collider>()->SetSize(pBoss->GetSize());
 	AddObject(pBoss, LAYER::ENEMY);
