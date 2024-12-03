@@ -1,26 +1,22 @@
 #pragma once
 #include "Projectile.h"
-class FirstBoss;
-class StopAndChaseProj :
+class StopAndRandomMoveProj :
     public Projectile
 {
-public:
-    StopAndChaseProj();
-    ~StopAndChaseProj();
+public: 
+    StopAndRandomMoveProj();
+    ~StopAndRandomMoveProj();
 public:
     void Init() override;
     void Update() override;
 public:
-    void SetOwner(FirstBoss* owner) { m_owner = owner; }
     void SetDirChangeTime(float time) { m_dirChangeTime = time; }
     void SetChangeSpeed(float speed) { m_changeSpeed = speed; }
 private:
+    bool m_changeMove = false;
+    float m_timer = 0;
+
     float m_dirChangeTime = 0;
     float m_changeSpeed = 0;
-
-    const Object* m_player = nullptr;
-    FirstBoss* m_owner = nullptr;
-    bool m_chasePlayer = false;
-    float m_timer = 0;
 };
 
