@@ -14,11 +14,30 @@ JHBoss::JHBoss() { }
 JHBoss::~JHBoss() { }
 
 void JHBoss::Init() {
-	SecondPattern();
+	m_eCurPattern = Pattern::Third; 
+	ThirdPattern();
+	//FirstPattern();
+	//Wait(55.0f, [this]() {
+	//	m_eCurPattern = Pattern::Second; 
+
+	//	Wait(5.0f, [this]() {
+	//		float delay = 5.0f;
+	//		for (int i = 1; i <= 3; ++i) {
+	//			Wait(delay * i, [this]() {
+	//				SecondPattern();
+	//			});
+	//		}
+	//	});
+	//});
 }
 
 void JHBoss::Update() {
 	Boss::Update();
+
+	switch (m_eCurPattern) {
+		case Pattern::First: FirstPatternUpdate(); break;
+		case Pattern::Third: ThirdPatternUpdate(); break;
+	}
 }
 
 void JHBoss::Render(HDC hdc) {
@@ -29,7 +48,9 @@ void JHBoss::Render(HDC hdc) {
 
 void JHBoss::FirstPattern() {
 	Two();
+}
 
+void JHBoss::FirstPatternUpdate() {
 	m_timer += fDT;
 	if (m_timer >= 0.05f) {
 		m_timer = 0.0f;
@@ -64,58 +85,27 @@ void JHBoss::One() {
 }
 
 void JHBoss::Two() {
-	LemniscateParent* pLemniscate = new LemniscateParent;
-	pLemniscate->SetPos(m_vPos);
-	pLemniscate->SetTurnDirection(-1);
-	pLemniscate->SetTargetPos({ SCREEN_WIDTH / 4.0f, 1300.0f });
-	pLemniscate->SetLifeTime(15.0f);
+	float delay = 7.5f;
+	for (int i = 0; i < 6; i += 2) {
+		Wait(delay * i, [=]() {
+			LemniscateParent* pLemniscate = new LemniscateParent;
+			pLemniscate->SetPos(m_vPos);
+			pLemniscate->SetTurnDirection(-1);
+			pLemniscate->SetTargetPos({ SCREEN_WIDTH / 4.0f, 1300.0f });
+			pLemniscate->SetLifeTime(15.0f);
 
-	GET_SINGLE(SceneManager)->GetCurScene()->AddObject(pLemniscate, LAYER::ENEMY_PROJECTILE);
+			GET_SINGLE(SceneManager)->GetCurScene()->AddObject(pLemniscate, LAYER::ENEMY_PROJECTILE);
+		});
 
-	float delay = 8.0f;
+		Wait(delay * (i + 1), [=]() {
+			LemniscateParent* pLemniscate = new LemniscateParent;
+			pLemniscate->SetPos(m_vPos);
+			pLemniscate->SetTargetPos({ SCREEN_WIDTH - SCREEN_WIDTH / 4.0f, 1300.0f });
+			pLemniscate->SetLifeTime(15.0f);
 
-	Wait(delay, [=]() {
-		LemniscateParent* pLemniscate = new LemniscateParent;
-		pLemniscate->SetPos(m_vPos);
-		pLemniscate->SetTargetPos({ SCREEN_WIDTH - SCREEN_WIDTH / 4.0f, 1300.0f });
-		pLemniscate->SetLifeTime(15.0f);
-
-		GET_SINGLE(SceneManager)->GetCurScene()->AddObject(pLemniscate, LAYER::ENEMY_PROJECTILE);
-	});
-	Wait(delay * 2.0f, [=]() {
-		LemniscateParent* pLemniscate = new LemniscateParent;
-		pLemniscate->SetPos(m_vPos);
-		pLemniscate->SetTurnDirection(-1);
-		pLemniscate->SetTargetPos({ SCREEN_WIDTH / 4.0f, 1300.0f });
-		pLemniscate->SetLifeTime(15.0f);
-
-		GET_SINGLE(SceneManager)->GetCurScene()->AddObject(pLemniscate, LAYER::ENEMY_PROJECTILE);
-	});
-	Wait(delay * 3.0f, [=]() {
-		LemniscateParent* pLemniscate = new LemniscateParent;
-		pLemniscate->SetPos(m_vPos);
-		pLemniscate->SetTargetPos({ SCREEN_WIDTH - SCREEN_WIDTH / 4.0f, 1300.0f });
-		pLemniscate->SetLifeTime(15.0f);
-
-		GET_SINGLE(SceneManager)->GetCurScene()->AddObject(pLemniscate, LAYER::ENEMY_PROJECTILE);
-	});
-	Wait(delay * 4.0f, [=]() {
-		LemniscateParent* pLemniscate = new LemniscateParent;
-		pLemniscate->SetPos(m_vPos);
-		pLemniscate->SetTurnDirection(-1);
-		pLemniscate->SetTargetPos({ SCREEN_WIDTH / 4.0f, 1300.0f });
-		pLemniscate->SetLifeTime(15.0f);
-
-		GET_SINGLE(SceneManager)->GetCurScene()->AddObject(pLemniscate, LAYER::ENEMY_PROJECTILE);
-	});
-	Wait(delay * 5.0f, [=]() {
-		LemniscateParent* pLemniscate = new LemniscateParent;
-		pLemniscate->SetPos(m_vPos);
-		pLemniscate->SetTargetPos({ SCREEN_WIDTH - SCREEN_WIDTH / 4.0f, 1300.0f });
-		pLemniscate->SetLifeTime(15.0f);
-
-		GET_SINGLE(SceneManager)->GetCurScene()->AddObject(pLemniscate, LAYER::ENEMY_PROJECTILE);
-	});
+			GET_SINGLE(SceneManager)->GetCurScene()->AddObject(pLemniscate, LAYER::ENEMY_PROJECTILE);
+		});
+	}
 }
 
 void JHBoss::Three() {
@@ -257,11 +247,9 @@ void JHBoss::SecondPattern() {
 	});
 
 	Wait(1.1f, [=]() {
-		std::random_device rd;
 		std::mt19937 mt(rd());
 		std::uniform_int_distribution<int> x(SCREEN_WIDTH / 3.0f, SCREEN_WIDTH - SCREEN_WIDTH / 3.0f);
-		std::uniform_int_distribution<int> y(0, SCREEN_HEIGHT / 2.0f);
-
+		std::uniform_int_distribution<int> y(0, SCREEN_HEIGHT / 3.5f);
 		Vector2 spawnPos = { x(mt), y(mt)};
 
 		for (int i = 0; i < 360; i += 5) {
@@ -278,10 +266,9 @@ void JHBoss::SecondPattern() {
 		}
 	});
 	Wait(1.3f, [=]() {
-		std::random_device rd;
 		std::mt19937 mt(rd());
 		std::uniform_int_distribution<int> x(SCREEN_WIDTH / 3.0f, SCREEN_WIDTH - SCREEN_WIDTH / 3.0f);
-		std::uniform_int_distribution<int> y(0, SCREEN_HEIGHT / 2.0f);
+		std::uniform_int_distribution<int> y(0, SCREEN_HEIGHT / 3.5f);
 
 		Vector2 spawnPos = { x(mt), y(mt) };
 
@@ -298,6 +285,45 @@ void JHBoss::SecondPattern() {
 			GET_SINGLE(SceneManager)->GetCurScene()->AddObject(pProj, LAYER::ENEMY_PROJECTILE);
 		}
 	});
+}
+
+#pragma endregion
+#pragma region ThirdPattern
+
+void JHBoss::ThirdPattern() {
+	Move({ 750.0f, 250.0f }, 3.5f);
+	Wait(4.5f, [this]() {
+		Move({ 1170.0f, 280.0f }, 3.5f);
+		Wait(4.5f, [this]() {
+			Move({ 960.0f, 100.0f }, 3.5f);
+		});
+	});
+}
+
+void JHBoss::ThirdPatternUpdate() {
+	m_timer += fDT;
+	if (m_timer >= 0.08f) {
+		m_timer = 0.0f;
+
+		Four();
+	}
+}
+
+void JHBoss::Four() {
+	std::mt19937 mt(rd());
+	std::uniform_real_distribution<float> randomize(-40.0f, 40.0f);
+	for (int i = 45; i < 360; i += 36) {
+		Projectile* pProj = new Projectile;
+		pProj->SetPos({ m_vPos.x, m_vPos.y });
+		pProj->SetSize({ 10.0f, 10.0f });
+		pProj->SetSpeed(150.0f);
+		pProj->SetDir(i + randomize(mt));
+		pProj->SetLifeTime(8.0f);
+
+		pProj->GetComponent<CircleCollider>()->SetSize({ 8.0f, 8.0f });
+
+		GET_SINGLE(SceneManager)->GetCurScene()->AddObject(pProj, LAYER::ENEMY_PROJECTILE);
+	}
 }
 
 #pragma endregion

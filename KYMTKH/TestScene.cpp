@@ -24,7 +24,6 @@ void TestScene::Init() {
 	Boss* pBoss = new JHBoss;
 	pBoss->SetPos({ SCREEN_WIDTH / 2.0f, 200.0f });
 	pBoss->SetSize({ 30.0f, 30.0f });
-	pBoss->SetPlayer(dynamic_cast<Player*>(pPlayer));
 	pBoss->GetComponent<Collider>()->SetSize(pBoss->GetSize());
 	AddObject(pBoss, LAYER::ENEMY);
 

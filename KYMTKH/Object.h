@@ -12,7 +12,7 @@ public:
 	virtual void Update();
 	virtual void LateUpdate();
 	virtual void Render(HDC hdc) abstract;
-	void ComponentRender(HDC hdc);
+	virtual void ComponentRender(HDC hdc);
 public:
 	template<typename T> void AddComponent() {
 		T* component = new T;

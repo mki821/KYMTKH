@@ -19,8 +19,6 @@ void LemniscateParent::Init() {
 		pProj->SetOwner(this);
 
 		m_vecLemniscates.push_back(pProj);
-
-		GET_SINGLE(SceneManager)->GetCurScene()->AddObject(pProj, LAYER::ENEMY_PROJECTILE);
 	}
 }
 
@@ -39,6 +37,30 @@ void LemniscateParent::Update() {
 		}
 		GET_SINGLE(EventManager)->DeleteObject(this);
 	}
+
+	for (Lemniscate* lemniscate : m_vecLemniscates) {
+		lemniscate->Update();
+	}
 }
 
-void LemniscateParent::Render(HDC hdc) { }
+void LemniscateParent::LateUpdate() {
+	Object::LateUpdate();
+
+	for (Lemniscate* lemniscate : m_vecLemniscates) {
+		lemniscate->LateUpdate();
+	}
+}
+
+void LemniscateParent::Render(HDC hdc) {
+	for (Lemniscate* lemniscate : m_vecLemniscates) {
+		lemniscate->Render(hdc);
+	}
+}
+
+void LemniscateParent::ComponentRender(HDC hdc) {
+	Object::ComponentRender(hdc);
+
+	for (Lemniscate* lemniscate : m_vecLemniscates) {
+		lemniscate->ComponentRender(hdc);
+	}
+}
