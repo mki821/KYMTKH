@@ -26,6 +26,6 @@ private:
 	float m_rotationAngle = 0.0f;
 	float m_rotationSpeed = 2.0f;
 	float m_turnSpeed = 100.0f;
-	float m_currentScale = 1.0f;
+	float m_currentScale = 0.0f;
 	Vector2 m_createdPos;
 };

@@ -16,6 +16,7 @@
 #include<math.h>
 #include<functional>
 #include<format>
+#include<random>
 
 // My Header
 #include "Define.h"

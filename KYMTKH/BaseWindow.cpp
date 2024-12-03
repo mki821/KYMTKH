@@ -50,15 +50,12 @@ ATOM BaseWindow::MyRegisterClass() {
 }
 
 void BaseWindow::createWindow() {
-    int ResolutionX = GetSystemMetrics(SM_CXSCREEN);
-    int ResolutionY = GetSystemMetrics(SM_CYSCREEN);
-
-    int Winposx = ResolutionX / 2 - SCREEN_WIDTH / 2;
-    int Winposy = ResolutionY / 2 - SCREEN_HEIGHT / 2;
+    int Winposx = (GetSystemMetrics(SM_CXSCREEN) - SCREEN_WIDTH) / 2;
+    int Winposy = (GetSystemMetrics(SM_CYSCREEN) - SCREEN_HEIGHT) / 2;
 
     m_hWnd = CreateWindowW(
-        L"KYMTKH",          // 윈도우 클래스 식별자
-        L"KYMTKH",       // 제목
+        L"KYMTKH",             // 윈도우 클래스 식별자
+        L"KYMTKH",             // 제목
         WS_SYSMENU,            // 윈도우 어떤 스타일로 만들것인가
         Winposx,               // ★ 띄울 위치의 LEFT
         Winposy,               // ★ 띄울 위치의 TOP
@@ -71,12 +68,10 @@ void BaseWindow::createWindow() {
 
 
     // 윈도우 사이즈 조정(타이틀, 메뉴 계산하지 않도록)
-    RECT rt = { Winposx , Winposy,
-                 Winposx + SCREEN_WIDTH,
-                 Winposy + SCREEN_HEIGHT };
+    RECT rt = { Winposx , Winposy, Winposx + SCREEN_WIDTH, Winposy + SCREEN_HEIGHT };
+
     AdjustWindowRect(&rt, WS_OVERLAPPEDWINDOW, false);
-    MoveWindow(m_hWnd, Winposx, Winposy,
-        rt.right - rt.left, rt.bottom - rt.top, false);
+    MoveWindow(m_hWnd, Winposx, Winposy, rt.right - rt.left, rt.bottom - rt.top, false);
 }
 
 void BaseWindow::showWindow(int _CmdShow) {
