@@ -164,6 +164,7 @@
     <ClInclude Include="FirstBoss.h" />
     <ClInclude Include="framework.h" />
     <ClInclude Include="GDISelector.h" />
+    <ClInclude Include="Image.h" />
     <ClInclude Include="InputManager.h" />
     <ClInclude Include="JHBoss.h" />
     <ClInclude Include="KYMTKH.h" />
@@ -186,6 +187,8 @@
     <ClInclude Include="TestScene.h" />
     <ClInclude Include="Texture.h" />
     <ClInclude Include="TimeManager.h" />
+    <ClInclude Include="UI.h" />
+    <ClInclude Include="UIManager.h" />
     <ClInclude Include="Vector2.h" />
     <ClInclude Include="Y_TestScene.h" />
   </ItemGroup>
@@ -207,6 +210,7 @@
     <ClCompile Include="EventManager.cpp" />
     <ClCompile Include="FirstBoss.cpp" />
     <ClCompile Include="GDISelector.cpp" />
+    <ClCompile Include="Image.cpp" />
     <ClCompile Include="InputManager.cpp" />
     <ClCompile Include="JHBoss.cpp" />
     <ClCompile Include="Lemniscate.cpp" />
@@ -226,7 +230,12 @@
     <ClCompile Include="TestScene.cpp" />
     <ClCompile Include="Texture.cpp" />
     <ClCompile Include="TimeManager.cpp" />
+    <ClCompile Include="UI.cpp" />
+    <ClCompile Include="UIManager.cpp" />
     <ClCompile Include="Y_TestScene.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="ClassDiagram.cd" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

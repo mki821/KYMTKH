@@ -30,6 +30,13 @@ void Object::Update() {
 			}
 		}
 	}
+
+	if (m_vecAdditionalWaitFuncs.size() > 0) {
+		for (int i = 0; i < m_vecAdditionalWaitFuncs.size(); ++i) {
+			m_vecWaitFuncs.push_back(m_vecAdditionalWaitFuncs[i]);
+		}
+		m_vecAdditionalWaitFuncs.clear();
+	}
 }
 
 void Object::LateUpdate() {
@@ -48,7 +55,7 @@ void Object::ComponentRender(HDC hdc) {
 
 void Object::Wait(float second, std::function<void()> func) {
 	std::pair<float, std::function<void()>> temp = { second, func };
-	m_vecWaitFuncs.push_back(temp);
+	m_vecAdditionalWaitFuncs.push_back(temp);
 }
 
 void Object::EnterCollision(Collider* other) { }

@@ -5,12 +5,14 @@
 #include "Projectile.h"
 
 Projectile::Projectile() : m_speed(500.0f) {
-	m_vSize = { 50.0f, 50.0f };
-
 	AddComponent<CircleCollider>();
 }
 
 Projectile::~Projectile() { }
+
+void Projectile::Init() {
+	GetComponent<CircleCollider>()->SetSize(m_vSize);
+}
 
 void Projectile::Update() {
 	m_vPos += m_vDir * m_speed * fDT;
@@ -25,6 +27,7 @@ void Projectile::Render(HDC hdc) {
 	ELLIPSE_RENDER(hdc, m_vPos.x, m_vPos.y, m_vSize.x, m_vSize.y);
 }
 
-void Projectile::EnterCollision(Collider* other) {
+void Projectile::EnterCollision(Collider* other) 
+{
 	GET_SINGLE(EventManager)->DeleteObject(this);
 }
