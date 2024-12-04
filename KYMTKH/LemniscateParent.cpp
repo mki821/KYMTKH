@@ -12,11 +12,13 @@ void LemniscateParent::Init() {
 	for (int i = 0; i < 1440; i += 5) {
 		Lemniscate* pProj = new Lemniscate(i);
 		pProj->SetPos({ m_vPos.x, m_vPos.y - m_vSize.y / 2.0f });
-		pProj->SetSize({ 30.0f, 30.0f });
+		pProj->SetSize({ 20.0f, 20.0f });
 		pProj->SetSpeed(200.0f);
 		pProj->SetRotationSpeed(2.0f);
 		pProj->SetTurnSpeed(10.0f * m_turnDirection);
 		pProj->SetOwner(this);
+
+		pProj->Init();
 
 		m_vecLemniscates.push_back(pProj);
 	}

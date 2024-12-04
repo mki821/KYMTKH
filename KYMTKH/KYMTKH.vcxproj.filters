@@ -163,6 +163,10 @@
     <ClInclude Include="Image.h">
       <Filter>Engine\0G_UI</Filter>
     </ClInclude>
+    <ClInclude Include="RandomMoveProj.h" />
+    <ClInclude Include="RandomMoveProjManager.h" />
+    <ClInclude Include="StopAndChaseProj.h" />
+    <ClInclude Include="StopAndRandomMoveProj.h" />
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="KYMTKH.rc">
@@ -265,8 +269,9 @@
     <ClCompile Include="Image.cpp">
       <Filter>Engine\0G_UI</Filter>
     </ClCompile>
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="ClassDiagram.cd" />
+    <ClCompile Include="RandomMoveProj.cpp" />
+    <ClCompile Include="RandomMoveProjManager.cpp" />
+    <ClCompile Include="StopAndChaseProj.cpp" />
+    <ClCompile Include="StopAndRandomMoveProj.cpp" />
   </ItemGroup>
 </Project>
