@@ -54,7 +54,6 @@ void JHBoss::FirstPatternUpdate() {
 	m_timer += fDT;
 	if (m_timer >= 0.05f) {
 		m_timer = 0.0f;
-
 		One();
 	}
 

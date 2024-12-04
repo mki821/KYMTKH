@@ -11,10 +11,10 @@ void RandomMoveProjManager::Spawn(int count)
 {
 	for (int i = 0; i < count; i++) {
 		RandomMoveProj* pProj = new RandomMoveProj;
-		pProj->SetChangeSpeed(200);
+		pProj->SetChangeSpeed(120);
 		pProj->SetPos({  m_owner->GetPos().x, m_owner->GetPos().y - m_owner->GetSize().y / 2.0f});
 		pProj->SetSize({ 20.0f, 20.0f });
-		pProj->SetSpeed(rand() % 150 + 100);
+		pProj->SetSpeed(rand() % 200 + 100);
 		GET_SINGLE(SceneManager)->GetCurScene()->AddObject(pProj, LAYER::ENEMY_PROJECTILE);
 		m_projVec.push_back(pProj);
 	}
