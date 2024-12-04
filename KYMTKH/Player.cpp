@@ -64,7 +64,7 @@ void Player::Move() {
 
 void Player::ClampPos() {
 	float halfSizeX = m_vSize.x / 2;
-	float minX = SCREEN_WIDTH / 3.0f + halfSizeX;
+	float minX = SCREEN_WIDTH / 4.0f + halfSizeX;
 	float maxX = SCREEN_WIDTH - SCREEN_WIDTH / 3.0f - halfSizeX;
 
 	float halfSizeY = m_vSize.y / 2;
@@ -76,13 +76,24 @@ void Player::ClampPos() {
 }
 
 void Player::CreateProjectile() {
-	Projectile* pProj = new Projectile;
-	pProj->SetPos({ m_vPos.x, m_vPos.y - m_vSize.y / 2.0f });
-	pProj->SetSize({ 15.0f, 15.0f });
-	pProj->SetDir({ 0.0f, -1.0f });
-	pProj->SetSpeed(1300.0f);
+	{
+		Projectile* pProj = new Projectile;
+		pProj->SetPos({ m_vPos.x - m_vSize.x - 2.0f, m_vPos.y - m_vSize.y / 2.0f });
+		pProj->SetSize({ 15.0f, 15.0f });
+		pProj->SetDir({ 0.0f, -1.0f });
+		pProj->SetSpeed(1300.0f);
 
-	GET_SINGLE(SceneManager)->GetCurScene()->AddObject(pProj, LAYER::PLAYER_PROJECTILE);
+		GET_SINGLE(SceneManager)->GetCurScene()->AddObject(pProj, LAYER::PLAYER_PROJECTILE);
+	}
+	{
+		Projectile* pProj = new Projectile;
+		pProj->SetPos({ m_vPos.x + m_vSize.x + 2.0f, m_vPos.y - m_vSize.y / 2.0f });
+		pProj->SetSize({ 15.0f, 15.0f });
+		pProj->SetDir({ 0.0f, -1.0f });
+		pProj->SetSpeed(1300.0f);
+
+		GET_SINGLE(SceneManager)->GetCurScene()->AddObject(pProj, LAYER::PLAYER_PROJECTILE);
+	}
 }
 
 void Player::EnterCollision(Collider* other) {
