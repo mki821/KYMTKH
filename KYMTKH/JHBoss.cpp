@@ -10,7 +10,7 @@
 #include "Player.h"
 #include "JHBoss.h"
 
-JHBoss::JHBoss() { m_hp = 1000; }
+JHBoss::JHBoss() { m_hp = 800; }
 JHBoss::~JHBoss() { }
 
 void JHBoss::Init() {
@@ -21,7 +21,7 @@ void JHBoss::Init() {
 void JHBoss::Update() {
 	Boss::Update();
 	
-	if (m_eCurPattern == Pattern::First && m_hp <= 650) {
+	if (m_eCurPattern == Pattern::First && m_hp <= 500) {
 		m_eCurPattern = Pattern::Second;
 
 		Wait(5.0f, [this]() {
@@ -33,7 +33,7 @@ void JHBoss::Update() {
 			}
 		});
 	}
-	else if (m_eCurPattern == Pattern::Second && m_hp <= 300) {
+	else if (m_eCurPattern == Pattern::Second && m_hp <= 150) {
 		m_eCurPattern = Pattern::Third;
 		ThirdPattern();
 
@@ -49,7 +49,7 @@ void JHBoss::Update() {
 }
 
 void JHBoss::Render(HDC hdc) {
-
+	Boss::Render(hdc);
 }
 
 #pragma region FirstPattern
@@ -96,7 +96,9 @@ void JHBoss::One() {
 }
 
 void JHBoss::Two() {
+	m_turnDirection *= -1;
 	float targetPosX = m_turnDirection == 1 ? SCREEN_WIDTH - SCREEN_WIDTH / 10.0f : SCREEN_WIDTH / 10.0f;
+
 	LemniscateParent* pLemniscate = new LemniscateParent;
 	pLemniscate->SetPos(m_vPos);
 	pLemniscate->SetTurnDirection(m_turnDirection);
