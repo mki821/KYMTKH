@@ -105,8 +105,6 @@ void Player::EnterCollision(Collider* other) {
 	m_invincibilityTimer = 1.5f;
 	GetComponent<CircleCollider>()->SetEnable(false);
 
-	cout << m_hp;
-
 	if (m_hp <= 0)
 		SetDead();
 }

@@ -12,6 +12,8 @@ Object::~Object() {
 			delete component;
 	}
 	m_vecComponents.clear();
+	m_vecWaitFuncs.clear();
+	m_vecAdditionalWaitFuncs.clear();
 }
 
 void Object::Update() {

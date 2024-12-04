@@ -1,6 +1,8 @@
 #include "pch.h"
 #include "CircleCollider.h"
 #include "TImeManager.h"
+#include "UIManager.h"
+#include "FillImage.h"
 #include "Boss.h"
 
 Boss::Boss() {
@@ -10,6 +12,7 @@ Boss::Boss() {
 }
 
 Boss::~Boss() { }
+
 void Boss::Update() {
 	Object::Update();
 
@@ -29,11 +32,18 @@ void Boss::Update() {
 }
 
 void Boss::Render(HDC hdc) {
-	if(!m_isDie) RECT_RENDER(hdc, m_vPos.x, m_vPos.y, m_vSize.x, m_vSize.y);
+	if (!m_isDie) {
+		RECT_RENDER(hdc, m_vPos.x, m_vPos.y, m_vSize.x, m_vSize.y);
+		ELLIPSE_RENDER(hdc, m_vPos.x, SCREEN_HEIGHT, 7.0f, 7.0f);
+	}
 }
 
 void Boss::EnterCollision(Collider* other) {
 	--m_hp;
+
+	FillImage* healthbar = dynamic_cast<FillImage*>(GET_SINGLE(UIManager)->GetUI(L"BossHealth"));
+	if(healthbar != nullptr)
+		healthbar->SetFillAmount(m_hp / 800.0f);
 
 	if (m_hp <= 0)
 		SetDead();

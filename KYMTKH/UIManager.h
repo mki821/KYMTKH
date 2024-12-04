@@ -17,7 +17,7 @@ public:
 		delete m_mapUI.at(name);
 		m_mapUI.erase(name);
 	}
-	const UI* GetUI(const wstring& name) const { return m_mapUI.at(name); }
+	UI* GetUI(const wstring& name) const { return m_mapUI.find(name) != m_mapUI.end() ? m_mapUI.at(name) : nullptr; }
 private:
 	std::map<wstring, UI*> m_mapUI;
 };
