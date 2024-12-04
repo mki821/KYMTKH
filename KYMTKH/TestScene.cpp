@@ -21,7 +21,7 @@ void TestScene::Init() {
 	bossHealth->SetPos({ 1082.0f, 100.0f });
 	bossHealth->SetSize({ 500.0f, 30.0f });
 
-	//GET_SINGLE(UIManager)->AddUI(L"BossHealth", bossHealth);
+	GET_SINGLE(UIManager)->AddUI(L"BossHealth", bossHealth);
 
 	Object* pPlayer = new Player;
 	pPlayer->SetPos({ GAME_CENTER, 850.0f });
