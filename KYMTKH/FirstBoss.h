@@ -6,6 +6,7 @@ enum class Pattern {
 	Second, 
 	Third,
 	Fourth,
+	Fifth,
 	Dead
 };
 
@@ -22,6 +23,8 @@ public:
 	virtual void Render(HDC hdc) override;
 public:
 	void ChangePattern();
+	Vector2 GetRandomPos();
+	Vector2 GetBossRoundPos(int range);
 private:
 	void FirstPattern();
 	void FirstPatternUpdate();
@@ -30,6 +33,7 @@ private:
 	void ThirdPatternUpdate();
 	void FourthPatternUpdate();
 	void FourthPattern();
+	void FifthPatternUpdate();
 private:
 	void One();
 	void Two();
@@ -44,6 +48,7 @@ private:
 	void SpreadShot(int count, Vector2 dir, float speed);
 	void RandomMoveShot(int count);
 	void FiveShot();
+	void CircleRandomShot(int count, Vector2 pos);
 public:
 	const Object* GetPlayer() const { return m_player; }
 private:
@@ -59,4 +64,5 @@ private:
 	bool m_firstPattern = true;;
 	bool m_stop = false;
 };
+
 
