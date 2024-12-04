@@ -291,11 +291,11 @@ void JHBoss::SecondPattern() {
 #pragma region ThirdPattern
 
 void JHBoss::ThirdPattern() {
-	Move({ 750.0f, 250.0f }, 3.5f);
-	Wait(4.5f, [this]() {
-		Move({ 1170.0f, 280.0f }, 3.5f);
-		Wait(4.5f, [this]() {
-			Move({ 960.0f, 100.0f }, 3.5f);
+	Move({ GAME_LEFT + 80.0f, 250.0f }, 5.0f);
+	Wait(6.0f, [this]() {
+		Move({ GAME_RIGHT - 80.0f, 280.0f }, 8.0f);
+		Wait(9.0f, [this]() {
+			Move({ GAME_CENTER, 100.0f }, 3.5f);
 		});
 	});
 }
@@ -311,8 +311,8 @@ void JHBoss::ThirdPatternUpdate() {
 
 void JHBoss::Four() {
 	std::mt19937 mt(rd());
-	std::uniform_real_distribution<float> randomize(-40.0f, 40.0f);
-	for (int i = 45; i < 360; i += 36) {
+	std::uniform_real_distribution<float> randomize(-44.0f, 44.0f);
+	for (int i = 45; i < 360; i += 15) {
 		Projectile* pProj = new Projectile;
 		pProj->SetPos({ m_vPos.x, m_vPos.y });
 		pProj->SetSize({ 10.0f, 10.0f });
