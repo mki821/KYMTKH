@@ -10,29 +10,37 @@
 #include "Player.h"
 #include "JHBoss.h"
 
-JHBoss::JHBoss() { }
+JHBoss::JHBoss() { m_hp = 1000; }
 JHBoss::~JHBoss() { }
 
 void JHBoss::Init() {
-	m_eCurPattern = Pattern::Third; 
-	ThirdPattern();
-	//FirstPattern();
-	//Wait(55.0f, [this]() {
-	//	m_eCurPattern = Pattern::Second; 
-
-	//	Wait(5.0f, [this]() {
-	//		float delay = 5.0f;
-	//		for (int i = 1; i <= 3; ++i) {
-	//			Wait(delay * i, [this]() {
-	//				SecondPattern();
-	//			});
-	//		}
-	//	});
-	//});
+	m_timer2 = 6.5f;
+	m_eCurPattern = Pattern::First;
 }
 
 void JHBoss::Update() {
 	Boss::Update();
+	
+	if (m_eCurPattern == Pattern::First && m_hp <= 650) {
+		m_eCurPattern = Pattern::Second;
+
+		Wait(5.0f, [this]() {
+			float delay = 5.0f;
+			for (int i = 1; i <= 3; ++i) {
+				Wait(delay * i, [this]() {
+					SecondPattern();
+				});
+			}
+		});
+	}
+	else if (m_eCurPattern == Pattern::Second && m_hp <= 300) {
+		m_eCurPattern = Pattern::Third;
+		ThirdPattern();
+
+		Wait(20.0f, [this]() {
+			m_eCurPattern = Pattern::Second;
+		});
+	}
 
 	switch (m_eCurPattern) {
 		case Pattern::First: FirstPatternUpdate(); break;
@@ -46,10 +54,6 @@ void JHBoss::Render(HDC hdc) {
 
 #pragma region FirstPattern
 
-void JHBoss::FirstPattern() {
-	Two();
-}
-
 void JHBoss::FirstPatternUpdate() {
 	m_timer += fDT;
 	if (m_timer >= 0.05f) {
@@ -57,8 +61,15 @@ void JHBoss::FirstPatternUpdate() {
 		One();
 	}
 
+	m_timer2 += fDT;
+	if (m_timer2 >= 7.5) {
+		m_timer2 = 0.0f;
+
+		Two();
+	}
+
 	m_timer3 += fDT;
-	if (m_timer3 >= 0.35f) {
+	if (m_timer3 >= 0.48f) {
 		m_timer3 = 0.0f;
 
 		Three();
@@ -84,27 +95,14 @@ void JHBoss::One() {
 }
 
 void JHBoss::Two() {
-	float delay = 7.5f;
-	for (int i = 0; i < 6; i += 2) {
-		Wait(delay * i, [=]() {
-			LemniscateParent* pLemniscate = new LemniscateParent;
-			pLemniscate->SetPos(m_vPos);
-			pLemniscate->SetTurnDirection(-1);
-			pLemniscate->SetTargetPos({ SCREEN_WIDTH / 4.0f, 1300.0f });
-			pLemniscate->SetLifeTime(15.0f);
+	float targetPosX = m_turnDirection == 1 ? SCREEN_WIDTH - SCREEN_WIDTH / 10.0f : SCREEN_WIDTH / 10.0f;
+	LemniscateParent* pLemniscate = new LemniscateParent;
+	pLemniscate->SetPos(m_vPos);
+	pLemniscate->SetTurnDirection(m_turnDirection);
+	pLemniscate->SetTargetPos({ targetPosX, SCREEN_HEIGHT * 1.3f });
+	pLemniscate->SetLifeTime(15.0f);
 
-			GET_SINGLE(SceneManager)->GetCurScene()->AddObject(pLemniscate, LAYER::ENEMY_PROJECTILE);
-		});
-
-		Wait(delay * (i + 1), [=]() {
-			LemniscateParent* pLemniscate = new LemniscateParent;
-			pLemniscate->SetPos(m_vPos);
-			pLemniscate->SetTargetPos({ SCREEN_WIDTH - SCREEN_WIDTH / 4.0f, 1300.0f });
-			pLemniscate->SetLifeTime(15.0f);
-
-			GET_SINGLE(SceneManager)->GetCurScene()->AddObject(pLemniscate, LAYER::ENEMY_PROJECTILE);
-		});
-	}
+	GET_SINGLE(SceneManager)->GetCurScene()->AddObject(pLemniscate, LAYER::ENEMY_PROJECTILE);
 }
 
 void JHBoss::Three() {
@@ -128,11 +126,11 @@ void JHBoss::Three() {
 void JHBoss::SecondPattern() {
 	Vector2 firstPos = { m_vPos.x, m_vPos.y - m_vSize.y / 2.0f };
 	Wait(0.4f, [=]() {
-		for (int i = 0; i < 360; i += 5) {
+		for (int i = 0; i < 360; i += 6) {
 			Projectile* pProj = new Projectile;
 			pProj->SetPos(firstPos);
 			pProj->SetSize({ 15.0f, 15.0f });
-			pProj->SetSpeed(300.0f);
+			pProj->SetSpeed(200.0f);
 			pProj->SetDir(i);
 			pProj->SetLifeTime(15.0f);
 
@@ -142,11 +140,11 @@ void JHBoss::SecondPattern() {
 		}
 	});
 	Wait(0.6f, [=]() {
-		for (int i = 0; i < 360; i += 5) {
+		for (int i = 0; i < 360; i += 6) {
 			Projectile* pProj = new Projectile;
 			pProj->SetPos(firstPos);
 			pProj->SetSize({ 15.0f, 15.0f });
-			pProj->SetSpeed(250.0f);
+			pProj->SetSpeed(150.0f);
 			pProj->SetDir(i);
 			pProj->SetLifeTime(15.0f);
 
@@ -158,11 +156,11 @@ void JHBoss::SecondPattern() {
 
 	Vector2 secondPos = { SCREEN_WIDTH / 2.0f, 0.0f };
 	Wait(0.7f, [=]() {
-		for (int i = 0; i < 360; i += 5) {
+		for (int i = 0; i < 360; i += 6) {
 			Projectile* pProj = new Projectile;
 			pProj->SetPos(secondPos);
 			pProj->SetSize({ 15.0f, 15.0f });
-			pProj->SetSpeed(300.0f);
+			pProj->SetSpeed(200.0f);
 			pProj->SetDir(i);
 			pProj->SetLifeTime(15.0f);
 
@@ -172,11 +170,11 @@ void JHBoss::SecondPattern() {
 		}
 	});
 	Wait(0.9f, [=]() {
-		for (int i = 0; i < 360; i += 5) {
+		for (int i = 0; i < 360; i += 6) {
 			Projectile* pProj = new Projectile;
 			pProj->SetPos(secondPos);
 			pProj->SetSize({ 15.0f, 15.0f });
-			pProj->SetSpeed(250.0f);
+			pProj->SetSpeed(150.0f);
 			pProj->SetDir(i);
 			pProj->SetLifeTime(15.0f);
 
@@ -189,11 +187,11 @@ void JHBoss::SecondPattern() {
 	Vector2 thirdPos = { SCREEN_WIDTH / 3.0f, 150.0f };
 	Vector2 fourthPos = { SCREEN_WIDTH - SCREEN_WIDTH / 3.0f, 150.0f };
 	Wait(1.0f, [=]() {
-		for (int i = 0; i < 360; i += 5) {
+		for (int i = 0; i < 360; i += 6) {
 			Projectile* pProj = new Projectile;
 			pProj->SetPos(thirdPos);
 			pProj->SetSize({ 15.0f, 15.0f });
-			pProj->SetSpeed(300.0f);
+			pProj->SetSpeed(200.0f);
 			pProj->SetDir(i);
 			pProj->SetLifeTime(15.0f);
 
@@ -203,11 +201,11 @@ void JHBoss::SecondPattern() {
 		}
 	});
 	Wait(1.0f, [=]() {
-		for (int i = 0; i < 360; i += 5) {
+		for (int i = 0; i < 360; i += 6) {
 			Projectile* pProj = new Projectile;
 			pProj->SetPos(fourthPos);
 			pProj->SetSize({ 15.0f, 15.0f });
-			pProj->SetSpeed(300.0f);
+			pProj->SetSpeed(200.0f);
 			pProj->SetDir(i);
 			pProj->SetLifeTime(15.0f);
 
@@ -217,11 +215,11 @@ void JHBoss::SecondPattern() {
 		}
 	});
 	Wait(1.2f, [=]() {
-		for (int i = 0; i < 360; i += 5) {
+		for (int i = 0; i < 360; i += 6) {
 			Projectile* pProj = new Projectile;
 			pProj->SetPos(thirdPos);
 			pProj->SetSize({ 15.0f, 15.0f });
-			pProj->SetSpeed(250.0f);
+			pProj->SetSpeed(150.0f);
 			pProj->SetDir(i);
 			pProj->SetLifeTime(15.0f);
 
@@ -231,11 +229,11 @@ void JHBoss::SecondPattern() {
 		}
 	});
 	Wait(1.2f, [=]() {
-		for (int i = 0; i < 360; i += 5) {
+		for (int i = 0; i < 360; i += 6) {
 			Projectile* pProj = new Projectile;
 			pProj->SetPos(fourthPos);
 			pProj->SetSize({ 15.0f, 15.0f });
-			pProj->SetSpeed(250.0f);
+			pProj->SetSpeed(150.0f);
 			pProj->SetDir(i);
 			pProj->SetLifeTime(15.0f);
 
@@ -245,17 +243,17 @@ void JHBoss::SecondPattern() {
 		}
 	});
 
-	Wait(1.1f, [=]() {
+	Wait(1.3f, [=]() {
 		std::mt19937 mt(rd());
 		std::uniform_int_distribution<int> x(SCREEN_WIDTH / 3.0f, SCREEN_WIDTH - SCREEN_WIDTH / 3.0f);
 		std::uniform_int_distribution<int> y(0, SCREEN_HEIGHT / 3.5f);
 		Vector2 spawnPos = { x(mt), y(mt)};
 
-		for (int i = 0; i < 360; i += 5) {
+		for (int i = 0; i < 360; i += 12) {
 			Projectile* pProj = new Projectile;
 			pProj->SetPos(spawnPos);
 			pProj->SetSize({ 15.0f, 15.0f });
-			pProj->SetSpeed(300.0f);
+			pProj->SetSpeed(200.0f);
 			pProj->SetDir(i);
 			pProj->SetLifeTime(15.0f);
 
@@ -264,18 +262,18 @@ void JHBoss::SecondPattern() {
 			GET_SINGLE(SceneManager)->GetCurScene()->AddObject(pProj, LAYER::ENEMY_PROJECTILE);
 		}
 	});
-	Wait(1.3f, [=]() {
+	Wait(1.5f, [=]() {
 		std::mt19937 mt(rd());
 		std::uniform_int_distribution<int> x(SCREEN_WIDTH / 3.0f, SCREEN_WIDTH - SCREEN_WIDTH / 3.0f);
 		std::uniform_int_distribution<int> y(0, SCREEN_HEIGHT / 3.5f);
 
 		Vector2 spawnPos = { x(mt), y(mt) };
 
-		for (int i = 0; i < 360; i += 5) {
+		for (int i = 0; i < 360; i += 12) {
 			Projectile* pProj = new Projectile;
 			pProj->SetPos(spawnPos);
 			pProj->SetSize({ 15.0f, 15.0f });
-			pProj->SetSpeed(300.0f);
+			pProj->SetSpeed(200.0f);
 			pProj->SetDir(i);
 			pProj->SetLifeTime(15.0f);
 

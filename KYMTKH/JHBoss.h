@@ -17,7 +17,6 @@ public:
 	virtual void Update() override;
 	virtual void Render(HDC hdc) override;
 private:
-	void FirstPattern();
 	void FirstPatternUpdate();
 	void SecondPattern();
 	void ThirdPattern();
@@ -30,8 +29,10 @@ private:
 private:
 	Pattern m_eCurPattern = Pattern::First;
 	float m_timer = 0.0f;
+	float m_timer2 = 0.0f;
 	float m_timer3 = 0.0f;
 	int m_angleModifier = 0;
+	int m_turnDirection = -1;
 private:
 	std::random_device rd;
 };

@@ -9,6 +9,8 @@ Lemniscate::Lemniscate(float startAngle) : Projectile(), m_currentAngle(startAng
 Lemniscate::~Lemniscate() { }
 
 void Lemniscate::Init() {
+	Projectile::Init();
+
 	m_createdPos = m_vPos;
 }
 

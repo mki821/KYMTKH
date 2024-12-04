@@ -274,7 +274,4 @@
     <ClCompile Include="StopAndChaseProj.cpp" />
     <ClCompile Include="StopAndRandomMoveProj.cpp" />
   </ItemGroup>
-  <ItemGroup>
-    <None Include="ClassDiagram.cd" />
-  </ItemGroup>
 </Project>
