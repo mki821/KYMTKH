@@ -39,5 +39,7 @@ void TestScene::Init() {
 }
 
 void TestScene::Release() {
+	Scene::Release();
+
 	GET_SINGLE(UIManager)->Clear();
 }
