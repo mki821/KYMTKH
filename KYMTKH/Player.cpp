@@ -6,9 +6,10 @@
 #include "CircleCollider.h"
 #include "Projectile.h"
 #include "UIManager.h"
+#include "ResourceManager.h"
 #include "Player.h"
 
-Player::Player() : m_pTex(nullptr), m_hp(5), m_speed(300.0f) {
+Player::Player() : m_hp(5), m_speed(300.0f) {
 	AddComponent<CircleCollider>();
 }
 
@@ -16,6 +17,8 @@ Player::~Player() { }
 
 void Player::Init() {
 	GetComponent<CircleCollider>()->SetSize(m_vSize);
+
+	m_pProjectile = GET_RES(L"Projectile_15x15", L"Texture\\Projectile\\Projectile_15x15.bmp");
 }
 
 void Player::Update() {
@@ -82,6 +85,7 @@ void Player::CreateProjectile() {
 		pProj->SetSize({ 15.0f, 15.0f });
 		pProj->SetDir({ 0.0f, -1.0f });
 		pProj->SetSpeed(1300.0f);
+		pProj->SetTexture(m_pProjectile);
 
 		GET_SINGLE(SceneManager)->GetCurScene()->AddObject(pProj, LAYER::PLAYER_PROJECTILE);
 	}
@@ -91,6 +95,7 @@ void Player::CreateProjectile() {
 		pProj->SetSize({ 15.0f, 15.0f });
 		pProj->SetDir({ 0.0f, -1.0f });
 		pProj->SetSpeed(1300.0f);
+		pProj->SetTexture(m_pProjectile);
 
 		GET_SINGLE(SceneManager)->GetCurScene()->AddObject(pProj, LAYER::PLAYER_PROJECTILE);
 	}

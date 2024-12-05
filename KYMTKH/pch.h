@@ -27,7 +27,7 @@
 #pragma comment(lib, "winmm.lib")
 #pragma comment(lib, "msimg32.lib") // transparent 등 blt에 사용
 
-#pragma comment(lib, "fmod_vc.lib") 
+#pragma comment(lib, "fmod_vc.lib")
 #pragma comment(lib, "fmodL_vc.lib")
 
 // 각종 using

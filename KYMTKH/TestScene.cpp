@@ -6,6 +6,7 @@
 #include "JHBoss.h"
 #include "CollisionManager.h"
 #include "Collider.h"
+#include "ResourceManager.h"
 #include "TestScene.h"
 
 void TestScene::Init() {
@@ -39,5 +40,7 @@ void TestScene::Init() {
 }
 
 void TestScene::Release() {
+	Scene::Release();
+
 	GET_SINGLE(UIManager)->Clear();
 }

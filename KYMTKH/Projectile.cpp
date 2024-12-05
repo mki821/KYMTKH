@@ -2,6 +2,7 @@
 #include "TimeManager.h"
 #include "CircleCollider.h"
 #include "EventManager.h"
+#include "Texture.h"
 #include "Projectile.h"
 
 Projectile::Projectile() : m_speed(500.0f) {
@@ -24,7 +25,11 @@ void Projectile::Update() {
 }
 
 void Projectile::Render(HDC hdc) {
-	ELLIPSE_RENDER(hdc, m_vPos.x, m_vPos.y, m_vSize.x, m_vSize.y);
+	if (m_pTex != nullptr) {
+		Vector2 renderPos = { m_vPos.x - m_vSize.x / 2, m_vPos.y - m_vSize.y / 2 };
+		TransparentBlt(hdc, renderPos.x, renderPos.y, m_vSize.x, m_vSize.y, m_pTex->GetDC(), 0, 0, m_vSize.x, m_vSize.y, RGB(255, 0, 255));
+	}
+	else ELLIPSE_RENDER(hdc, m_vPos.x, m_vPos.y, m_vSize.x, m_vSize.y);
 }
 
 void Projectile::EnterCollision(Collider* other) 
