@@ -279,5 +279,11 @@
     <ClCompile Include="FillImage.cpp">
       <Filter>Engine\0G_UI</Filter>
     </ClCompile>
+    <ClCompile Include="pch.cpp">
+      <Filter>Engine\0Z_Headers</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="ClassDiagram.cd" />
   </ItemGroup>
 </Project>

@@ -19,7 +19,7 @@ private:
 	void ClampPos();
 	void CreateProjectile();
 private:
-	Texture* m_pTex;
+	Texture* m_pTex = nullptr;
 public:
 	void SetHp(int hp) { m_hp = hp; }
 	const int& GetHp() const { return m_hp; }
@@ -30,5 +30,7 @@ private:
 	float m_speed;
 	float m_timer = 0.0f;
 	float m_invincibilityTimer = 0.0f;
+private:
+	Texture* m_pProjectile = nullptr;
 };
 

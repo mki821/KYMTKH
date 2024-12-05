@@ -28,7 +28,7 @@ FirstBoss::~FirstBoss()
 void FirstBoss::Init()
 {
 	m_originPos = GetPos();
-	m_curPattern = Pattern::Fifth;
+	m_curPattern = Pattern::First;
 	//FirstPattern();
 }
 
