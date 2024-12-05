@@ -2,6 +2,8 @@
 
 #include "Object.h"
 
+class Texture;
+
 class Projectile : public Object {
 public:
 	Projectile();
@@ -26,5 +28,9 @@ protected:
 	float m_speed;
 	float m_lifeTime = 2.0f;
 	Vector2 m_vDir;
+public:
+	void SetTexture(Texture* texture) { m_pTex = texture; }
+protected:
+	Texture* m_pTex = nullptr;
 };
 

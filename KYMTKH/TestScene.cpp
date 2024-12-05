@@ -6,6 +6,7 @@
 #include "JHBoss.h"
 #include "CollisionManager.h"
 #include "Collider.h"
+#include "ResourceManager.h"
 #include "TestScene.h"
 
 void TestScene::Init() {

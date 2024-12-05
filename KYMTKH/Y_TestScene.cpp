@@ -25,8 +25,8 @@ void Y_TestScene::Init()
 	GET_SINGLE(UIManager)->AddUI(L"BossHealth", bossHealth);
 
 	Object* pPlayer = new Player;
-	pPlayer->SetPos({ SCREEN_WIDTH / 2.0f, 500.0f });
-	pPlayer->SetSize({ 15.0f, 15.0f });
+	pPlayer->SetPos({ GAME_CENTER, 850.0f });
+	pPlayer->SetSize({ 8.0f, 8.0f });
 	AddObject(pPlayer, LAYER::PLAYER);
 	SetPlayer(pPlayer);
 
@@ -36,6 +36,6 @@ void Y_TestScene::Init()
 	pBoss->GetComponent<Collider>()->SetSize(pBoss->GetSize());
 	AddObject(pBoss, LAYER::ENEMY);
 
-	GET_SINGLE(CollisionManager)->CheckLayer(LAYER::PLAYER, LAYER::ENEMY_PROJECTILE);
+	//GET_SINGLE(CollisionManager)->CheckLayer(LAYER::PLAYER, LAYER::ENEMY_PROJECTILE);
 	GET_SINGLE(CollisionManager)->CheckLayer(LAYER::ENEMY, LAYER::PLAYER_PROJECTILE);
 }
