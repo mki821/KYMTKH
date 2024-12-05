@@ -10,6 +10,9 @@
 #include "TestScene.h"
 
 void TestScene::Init() {
+	LOAD_RES(L"Projectile_15x15", L"Texture\\Projectile\\Projectile_15x15.bmp");
+	LOAD_RES(L"Projectile_10x10", L"Texture\\Projectile\\Projectile_10x10.bmp");
+
 	for (int i = 1; i <= 5; ++i) {
 		Image* heart = new Image;
 		heart->SetPos({ GAME_RIGHT + 70.0f, SCREEN_HEIGHT - 60.0f * i });

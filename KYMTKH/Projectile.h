@@ -31,6 +31,8 @@ protected:
 public:
 	void SetTexture(Texture* texture) { m_pTex = texture; }
 protected:
+	HDC m_rotateDC = NULL;
+	HBITMAP m_rotateBitmap = NULL;
 	Texture* m_pTex = nullptr;
 };
 

@@ -6,6 +6,7 @@ enum class Pattern {
 	First, Second, Third
 };
 
+class Texture;
 class Lemniscate;
 
 class JHBoss : public Boss {
@@ -35,4 +36,7 @@ private:
 	int m_turnDirection = -1;
 private:
 	std::random_device rd;
+private:
+	Texture* m_pProjectile15 = nullptr;
+	Texture* m_pProjectile10 = nullptr;
 };

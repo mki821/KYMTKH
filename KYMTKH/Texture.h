@@ -9,6 +9,7 @@ public:
 public:
 	void Load(const wstring& path);
 	const HDC& GetDC() const { return m_hDC; }
+	const BITMAP& GetBitmap() const { return m_bitInfo; }
 	const LONG& GetWidth() const { return m_bitInfo.bmWidth; }
 	const LONG& GetHeight() const { return m_bitInfo.bmHeight; }
 private:

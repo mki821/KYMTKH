@@ -13,7 +13,8 @@ public:						      \
 #define fDT GET_SINGLE(TimeManager)->GetDT()
 
 #define GET_RESPATH GET_SINGLE(ResourceManager)->GetResPath()
-#define GET_RES(name, path) GET_SINGLE(ResourceManager)->TextureLoad(name, path);
+#define LOAD_RES(name, path) GET_SINGLE(ResourceManager)->TextureLoad(name, path);
+#define GET_RES(name) GET_SINGLE(ResourceManager)->TextureFind(name);
 
 #define KEY_CHECK(key, state) InputManager::GetInst()->GetKey(key) == state
 #define GET_KEY_NONE(key) KEY_CHECK(key, KEY_STATE::NONE)
