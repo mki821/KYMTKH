@@ -61,7 +61,7 @@ void FirstBoss::Render(HDC hdc)
 
 void FirstBoss::ChangePattern()
 {
-	Move(m_originPos);
+	Move(m_originPos, 1.f);
 	m_changePatternCount = 0;
 	m_firstPattern = true;
 	m_curPattern = static_cast<Pattern>(static_cast<int>(m_curPattern) + 1);

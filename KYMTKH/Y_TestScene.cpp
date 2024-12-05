@@ -4,6 +4,7 @@
 #include "Collider.h"
 #include "Y_TestScene.h"
 #include"FirstBoss.h"
+#include "SecondBoss.h"
 
 void Y_TestScene::Init()
 {
@@ -13,7 +14,7 @@ void Y_TestScene::Init()
 	AddObject(pPlayer, LAYER::PLAYER);
 	SetPlayer(pPlayer);
 
-	Object* pBoss = new FirstBoss;
+	Object* pBoss = new SecondBoss;
 	pBoss->SetPos({ SCREEN_WIDTH / 2.0f, 200.0f });
 	pBoss->SetSize({ 30.0f, 30.0f });
 	pBoss->GetComponent<Collider>()->SetSize(pBoss->GetSize());
