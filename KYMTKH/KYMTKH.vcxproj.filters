@@ -53,9 +53,6 @@
     <Filter Include="Engine\0G_UI">
       <UniqueIdentifier>{f0ddf18b-5406-43cd-9e2f-48e824e4d635}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Engine\YTH\Object\Projectile">
-      <UniqueIdentifier>{c1a0dfc6-625b-4a04-8128-4708434ab999}</UniqueIdentifier>
-    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="BaseWindow.h">
@@ -166,29 +163,18 @@
     <ClInclude Include="Image.h">
       <Filter>Engine\0G_UI</Filter>
     </ClInclude>
+    <ClInclude Include="RandomMoveProj.h" />
+    <ClInclude Include="RandomMoveProjManager.h" />
+    <ClInclude Include="StopAndChaseProj.h" />
+    <ClInclude Include="StopAndRandomMoveProj.h" />
     <ClInclude Include="FillImage.h">
       <Filter>Engine\0G_UI</Filter>
     </ClInclude>
-    <ClInclude Include="DownProj.h">
-      <Filter>Engine\YTH\Object\Projectile</Filter>
+    <ClInclude Include="SelectScene.h">
+      <Filter>Engine\0D_Scenes</Filter>
     </ClInclude>
-    <ClInclude Include="RandomMoveProj.h">
-      <Filter>Engine\YTH\Object\Projectile</Filter>
-    </ClInclude>
-    <ClInclude Include="RandomMoveProjManager.h">
-      <Filter>Engine\YTH\Object\Projectile</Filter>
-    </ClInclude>
-    <ClInclude Include="ReturnProj.h">
-      <Filter>Engine\YTH\Object\Projectile</Filter>
-    </ClInclude>
-    <ClInclude Include="SecondBoss.h">
-      <Filter>Engine\YTH\Object\Projectile</Filter>
-    </ClInclude>
-    <ClInclude Include="StopAndChaseProj.h">
-      <Filter>Engine\YTH\Object\Projectile</Filter>
-    </ClInclude>
-    <ClInclude Include="StopAndRandomMoveProj.h">
-      <Filter>Engine\YTH\Object\Projectile</Filter>
+    <ClInclude Include="RenderManager.h">
+      <Filter>Engine\0B_Managers</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -292,32 +278,21 @@
     <ClCompile Include="Image.cpp">
       <Filter>Engine\0G_UI</Filter>
     </ClCompile>
+    <ClCompile Include="RandomMoveProj.cpp" />
+    <ClCompile Include="RandomMoveProjManager.cpp" />
+    <ClCompile Include="StopAndChaseProj.cpp" />
+    <ClCompile Include="StopAndRandomMoveProj.cpp" />
     <ClCompile Include="FillImage.cpp">
       <Filter>Engine\0G_UI</Filter>
     </ClCompile>
     <ClCompile Include="pch.cpp">
       <Filter>Engine\0Z_Headers</Filter>
     </ClCompile>
-    <ClCompile Include="DownProj.cpp">
-      <Filter>Engine\YTH\Object\Projectile</Filter>
+    <ClCompile Include="SelectScene.cpp">
+      <Filter>Engine\0D_Scenes</Filter>
     </ClCompile>
-    <ClCompile Include="RandomMoveProj.cpp">
-      <Filter>Engine\YTH\Object\Projectile</Filter>
-    </ClCompile>
-    <ClCompile Include="RandomMoveProjManager.cpp">
-      <Filter>Engine\YTH\Object\Projectile</Filter>
-    </ClCompile>
-    <ClCompile Include="ReturnProj.cpp">
-      <Filter>Engine\YTH\Object\Projectile</Filter>
-    </ClCompile>
-    <ClCompile Include="SecondBoss.cpp">
-      <Filter>Engine\YTH\Object\Projectile</Filter>
-    </ClCompile>
-    <ClCompile Include="StopAndChaseProj.cpp">
-      <Filter>Engine\YTH\Object\Projectile</Filter>
-    </ClCompile>
-    <ClCompile Include="StopAndRandomMoveProj.cpp">
-      <Filter>Engine\YTH\Object\Projectile</Filter>
+    <ClCompile Include="RenderManager.cpp">
+      <Filter>Engine\0B_Managers</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
