@@ -335,6 +335,7 @@ void JHBoss::Four() {
 		pProj->SetSpeed(150.0f);
 		pProj->SetDir(i + randomize(mt));
 		pProj->SetLifeTime(8.0f);
+		pProj->SetTexture(m_pProjectile10);
 
 		pProj->GetComponent<CircleCollider>()->SetSize({ 8.0f, 8.0f });
 

@@ -3,13 +3,17 @@
 #include "CircleCollider.h"
 #include "EventManager.h"
 #include "Texture.h"
+#include "RenderManager.h"
 #include "Projectile.h"
 
 Projectile::Projectile() : m_speed(500.0f) {
 	AddComponent<CircleCollider>();
+
+    m_hBrush = CreateSolidBrush(RGB(255, 0, 255));
 }
 
 Projectile::~Projectile() {
+    DeleteObject(m_hBrush);
     DeleteObject(m_rotateBitmap);
     DeleteDC(m_rotateDC);
 }
@@ -29,8 +33,6 @@ void Projectile::Update() {
 
 void Projectile::Render(HDC hdc) {
 	if (m_pTex != nullptr) {
-        POINT vertices[4];
-
         float delta = atan2(m_vDir.y, m_vDir.x);
         delta -= PI / 2.0f;
 
@@ -42,62 +44,31 @@ void Projectile::Render(HDC hdc) {
         int halfWidth = bm.bmWidth / 2;
         int halfHeight = bm.bmHeight / 2;
 
-        vertices[0].x = (LONG)((-halfWidth * cosA + (-halfHeight) * sinA));
-        vertices[0].y = (LONG)((-halfWidth * sinA - (-halfHeight) * cosA));
-        vertices[1].x = (LONG)((halfWidth * cosA + (-halfHeight) * sinA));
-        vertices[1].y = (LONG)((halfWidth * sinA - (-halfHeight) * cosA));
-        vertices[2].x = (LONG)((-halfWidth * cosA + (halfHeight)*sinA));
-        vertices[2].y = (LONG)((-halfWidth * sinA - (halfHeight)*cosA));
-        vertices[3].x = (LONG)((halfWidth * cosA + (halfHeight)*sinA));
-        vertices[3].y = (LONG)((halfWidth * sinA - (halfHeight)*cosA));
+        POINT vertices[3];
+        vertices[0].x = cosA * -halfWidth - sinA * halfHeight + halfWidth;
+        vertices[0].y = sinA * -halfWidth + cosA * halfHeight + halfHeight;
 
-        long maxX = vertices[0].x, minX = vertices[0].x;
-        long maxY = vertices[0].y, minY = vertices[0].y;
+        vertices[1].x = cosA * halfWidth - sinA * halfHeight + halfWidth;
+        vertices[1].y = sinA * halfWidth + cosA * halfHeight + halfHeight;
 
-        for (int i = 0; i < 4; i++) {
-            if (vertices[i].x > maxX)
-                maxX = vertices[i].x;
-            if (vertices[i].y > maxY)
-                maxY = vertices[i].y;
-            if (vertices[i].x < minX)
-                minX = vertices[i].x;
-            if (vertices[i].y < minY)
-                minY = vertices[i].y;
-        }
+        vertices[2].x = cosA * -halfWidth - sinA * -halfHeight + halfWidth;
+        vertices[2].y = sinA * -halfWidth + cosA * -halfHeight + halfHeight;
 
-        m_rotateDC = CreateCompatibleDC(m_pTex->GetDC());
-        m_rotateBitmap = CreateCompatibleBitmap(m_pTex->GetDC(), maxX - minX, maxY - minY);
-        SelectObject(m_rotateDC, m_rotateBitmap);
+        FillRect(m_rotateDC, &m_rt, m_hBrush);
 
-        RECT rect = { 0, 0, maxX - minX, maxY - minY };
-        HBRUSH hBrush = CreateSolidBrush(RGB(255, 0, 255));
-        FillRect(m_rotateDC, &rect, hBrush);
-        DeleteObject(hBrush);
+		Vector2 renderPos = { m_vPos.x - GAME_LEFT - m_vSize.x / 2, m_vPos.y - m_vSize.y / 2 };
 
-        POINT verticesSubset[3] = { vertices[0], vertices[1], vertices[2] };
+        vertices[0].x += renderPos.x;
+        vertices[0].y += renderPos.y;
 
-        for (int i = 0; i < 4; ++i) {
-            if (minX < 0) {
-                vertices[i].x -= minX;
-                if (vertices[i].x > maxX)
-                    maxX = vertices[i].x;
-            }
-            if (minY < 0) {
-                vertices[i].y -= minY;
-                if (vertices[i].y > maxY)
-                    maxY = vertices[i].y;
-            }
+        vertices[1].x += renderPos.x;
+        vertices[1].y += renderPos.y;
 
-            if (i != 3) verticesSubset[i] = vertices[i];
-        }
+        vertices[2].x += renderPos.x;
+        vertices[2].y += renderPos.y;
 
-        if (minX < 0) minX = 0;
-        if (minY < 0) minY = 0;
-
-		Vector2 renderPos = { m_vPos.x - m_vSize.x / 2, m_vPos.y - m_vSize.y / 2 };
-        PlgBlt( m_rotateDC, verticesSubset, m_pTex->GetDC(), 0, 0, bm.bmWidth, bm.bmHeight, NULL, 0, 0);
-        TransparentBlt( hdc, (int)(renderPos.x), (int)(renderPos.y), (int)m_vSize.x, (int)m_vSize.y, 
-            m_rotateDC, minX, minY,  maxX - minX, maxY - minY, RGB(255, 0, 255));
+        PlgBlt(GET_SINGLE(RenderManager)->GetDC(), vertices, m_pTex->GetDC(), 0, 0, bm.bmWidth, bm.bmHeight, NULL, 0, 0);
+        //TransparentBlt(GET_SINGLE(RenderManager)->GetDC(), renderPos.x, renderPos.y, m_vSize.x, m_vSize.y, m_rotateDC, 0, 0, bm.bmWidth, bm.bmHeight, RGB(255, 0, 255));
 	}
 	else ELLIPSE_RENDER(hdc, m_vPos.x, m_vPos.y, m_vSize.x, m_vSize.y);
 }
@@ -105,4 +76,14 @@ void Projectile::Render(HDC hdc) {
 void Projectile::EnterCollision(Collider* other) 
 {
 	GET_SINGLE(EventManager)->DeleteObject(this);
-} 
+}
+void Projectile::SetTexture(Texture* texture) {
+    m_pTex = texture;
+
+    m_rotateDC = CreateCompatibleDC(m_pTex->GetDC());
+    m_rotateBitmap = CreateCompatibleBitmap(m_pTex->GetDC(), m_pTex->GetWidth(), m_pTex->GetHeight());
+    SelectObject(m_rotateDC, m_rotateBitmap);
+
+    BITMAP bm = m_pTex->GetBitmap();
+    m_rt = { 0, 0, bm.bmWidth, bm.bmHeight };
+}

@@ -1,5 +1,6 @@
 #include "pch.h"
 #include "Scene.h"
+#include "SelectScene.h"
 #include "TestScene.h"
 #include "SceneManager.h"
 #include "Y_TestScene.h"
@@ -7,11 +8,11 @@
 void SceneManager::Init() {
 	m_pCurrentScene = nullptr;
 
+	RegisterScene(L"SelectScene", std::make_shared<SelectScene>());
 	RegisterScene(L"TestScene", std::make_shared<TestScene>());
 	RegisterScene(L"Y_TestScene", std::make_shared<Y_TestScene>());
 
-	LoadScene(L"TestScene");
-	//LoadScene(L"Y_TestScene");
+	LoadScene(L"SelectScene");
 }
 
 void SceneManager::Update() {

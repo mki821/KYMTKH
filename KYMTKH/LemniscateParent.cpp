@@ -4,9 +4,12 @@
 #include "Scene.h"
 #include "Lemniscate.h"
 #include "EventManager.h"
+#include "ResourceManager.h"
 #include "LemniscateParent.h"
 
 void LemniscateParent::Init() {
+	Texture* m_pProjectile20 = GET_RES(L"Projectile_20x20");
+
 	m_createdPos = m_vPos;
 
 	for (int i = 0; i < 1440; i += 5) {
@@ -17,6 +20,7 @@ void LemniscateParent::Init() {
 		pProj->SetRotationSpeed(2.0f);
 		pProj->SetTurnSpeed(10.0f * m_turnDirection);
 		pProj->SetOwner(this);
+		pProj->SetTexture(m_pProjectile20);
 
 		pProj->Init();
 

@@ -170,6 +170,12 @@
     <ClInclude Include="FillImage.h">
       <Filter>Engine\0G_UI</Filter>
     </ClInclude>
+    <ClInclude Include="SelectScene.h">
+      <Filter>Engine\0D_Scenes</Filter>
+    </ClInclude>
+    <ClInclude Include="RenderManager.h">
+      <Filter>Engine\0B_Managers</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="KYMTKH.rc">
@@ -281,6 +287,12 @@
     </ClCompile>
     <ClCompile Include="pch.cpp">
       <Filter>Engine\0Z_Headers</Filter>
+    </ClCompile>
+    <ClCompile Include="SelectScene.cpp">
+      <Filter>Engine\0D_Scenes</Filter>
+    </ClCompile>
+    <ClCompile Include="RenderManager.cpp">
+      <Filter>Engine\0B_Managers</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

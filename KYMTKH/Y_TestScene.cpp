@@ -36,6 +36,6 @@ void Y_TestScene::Init()
 	pBoss->GetComponent<Collider>()->SetSize(pBoss->GetSize());
 	AddObject(pBoss, LAYER::ENEMY);
 
-	//GET_SINGLE(CollisionManager)->CheckLayer(LAYER::PLAYER, LAYER::ENEMY_PROJECTILE);
+	GET_SINGLE(CollisionManager)->CheckLayer(LAYER::PLAYER, LAYER::ENEMY_PROJECTILE);
 	GET_SINGLE(CollisionManager)->CheckLayer(LAYER::ENEMY, LAYER::PLAYER_PROJECTILE);
 }

@@ -10,6 +10,7 @@
 #include "TestScene.h"
 
 void TestScene::Init() {
+	LOAD_RES(L"Projectile_20x20", L"Texture\\Projectile\\Projectile_20x20.bmp");
 	LOAD_RES(L"Projectile_15x15", L"Texture\\Projectile\\Projectile_15x15.bmp");
 	LOAD_RES(L"Projectile_10x10", L"Texture\\Projectile\\Projectile_10x10.bmp");
 
