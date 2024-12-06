@@ -31,12 +31,13 @@ private:
 private:
 	void One();
 	void Two();
+	void Three();
 private:
 	void CircleRotateShot(int baseAngle);
 	void FiveCircleRotateShot(int baseAngle);
 	void CircleRandomShot(int count);
 	void DownShot(int count);
-	void CircleReturnShot(int count);
+	void CircleReturnShot(int count, float exitTime);
 	void RandomMoveShot(int count);
 public:
 	const Object* GetPlayer() const { return m_player; }
@@ -54,6 +55,8 @@ private:
 private:
 	int m_firstPattenAngle = 0;
 	bool m_turn = true;
-	bool m_firstPattern = true;;
+	bool m_firstPattern = true;
+	bool m_startPattern = false;
+	float m_waitTime = 0;
 };
 

@@ -62,8 +62,9 @@ private:
 private:
 	Pattern m_curPattern = Pattern::First;
 	int m_changePatternCount = 0;
-	bool m_firstPattern = true;;
+	bool m_firstPattern = true;
 	bool m_stop = false;
+	float m_waitTime = 0;
 };
 
 

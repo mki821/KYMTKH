@@ -30,27 +30,43 @@ SecondBoss::~SecondBoss()
 void SecondBoss::Init()
 {
 	m_originPos = GetPos();
-	m_curPattern = Pattern::Fourth;
+	m_curPattern = Pattern::First;
+	m_hp = 400;
 }
 
 void SecondBoss::Update()
 {
 	Boss::Update();
-
-
-	if (GET_KEY_DOWN(KEY_TYPE::Q)) {
-		//ChangePattern();
+	if (m_curPattern == Pattern::First && m_hp <= 300) {
+		ChangePattern();
+	}
+	else if (m_curPattern == Pattern::Second && m_hp <= 200) {
+		ChangePattern();
+	}
+	else if (m_curPattern == Pattern::Third && m_hp <= 100) {
+		ChangePattern();
+	}
+	else if (m_curPattern == Pattern::Fourth && m_hp <= 0) {
+		ChangePattern();
 	}
 
-	switch (m_curPattern) {
-	case Pattern::First: FirstPatternUpdate(); break;
-	case Pattern::Second: SecondPatternUpdate();
-		break;
-	case Pattern::Third: ThirdPatternUpdate();
-		break;
+	if (GET_KEY_DOWN(KEY_TYPE::Q)) {
+		ChangePattern();
+	}
+
+	if (m_waitTime <= 0) {
+		switch (m_curPattern) {
+		case Pattern::First: FirstPatternUpdate(); break;
+		case Pattern::Second: SecondPatternUpdate();
+			break;
+		case Pattern::Third: ThirdPatternUpdate();
+			break;
 		case Pattern::Fourth: FourthPatternUpdate();
-		/*case Pattern::Fifth: FifthPatternUpdate();
-			break;*/
+			break;
+		}
+	}
+	else {
+		m_waitTime -= fDT;
 	}
 }
 
@@ -63,7 +79,9 @@ void SecondBoss::ChangePattern()
 	Move(m_originPos, 1.f);
 	m_changePatternCount = 0;
 	m_firstPattern = true;
+	m_startPattern = false;
 	m_curPattern = static_cast<Pattern>(static_cast<int>(m_curPattern) + 1);
+	m_waitTime = 3;
 	if (m_curPattern == Pattern::Dead) {
 		//Á×´Â°Å
 	}
@@ -108,7 +126,7 @@ void SecondBoss::FirstPatternUpdate()
 void SecondBoss::SecondPatternUpdate()
 {
 	m_timer += fDT;
-	if (m_timer >= 0.09f) {
+	if (m_timer >= 0.1f) {
 		m_timer = 0.0f;
 		FiveCircleRotateShot((m_firstPattenAngle += 3) % 360);
 		if (m_firstPattenAngle >= 360) {
@@ -121,7 +139,11 @@ void SecondBoss::SecondPatternUpdate()
 void SecondBoss::ThirdPatternUpdate()
 {
 	m_timer += fDT;
-	if (m_timer >= 4.1f) {
+	if (!m_startPattern) {
+		Two();
+		m_startPattern = true;
+	}
+	if (m_timer >= 4.f) {
 		m_timer = 0.0f;
 		Two();
 	}
@@ -130,9 +152,13 @@ void SecondBoss::ThirdPatternUpdate()
 void SecondBoss::FourthPatternUpdate()
 {
 	m_timer += fDT;
-	if (m_timer >= 5.f) {
+	if (!m_startPattern) {
+		Three();
+		m_startPattern = true;
+	}
+	if (m_timer >= 9.f) {
 		m_timer = 0.0f;
-		CircleReturnShot(50);
+		Three();
 	}
 }
 
@@ -148,21 +174,28 @@ void SecondBoss::One()
 
 void SecondBoss::Two()
 {
-	DownShot(10);
-	Wait(0.15f, std::bind(&SecondBoss::DownShot, this, 12));
-	Wait(0.3f, std::bind(&SecondBoss::DownShot, this, 12));
-	Wait(0.45f, std::bind(&SecondBoss::DownShot, this, 12));
-	Wait(0.6f, std::bind(&SecondBoss::DownShot, this, 12));
-	Wait(0.75f, std::bind(&SecondBoss::DownShot, this, 12));
-	Wait(0.9f, std::bind(&SecondBoss::DownShot, this, 12));
-	Wait(1.05f, std::bind(&SecondBoss::DownShot, this, 12));
-	Wait(1.2f, std::bind(&SecondBoss::DownShot, this, 12));
-	Wait(1.35f, std::bind(&SecondBoss::DownShot, this, 12));
-	Wait(1.5f, std::bind(&SecondBoss::DownShot, this, 12));
-	Wait(1.65f, std::bind(&SecondBoss::DownShot, this, 12));
-	Wait(1.8f, std::bind(&SecondBoss::DownShot, this, 12));
-	Wait(1.95f, std::bind(&SecondBoss::DownShot, this, 12));
-	Wait(2.f, std::bind(&SecondBoss::Move, this,GetRandomPos(), 2.f));
+	DownShot(15);
+	Wait(0.15f, std::bind(&SecondBoss::DownShot, this, 15));
+	Wait(0.3f, std::bind(&SecondBoss::DownShot, this, 15));
+	Wait(0.45f, std::bind(&SecondBoss::DownShot, this, 15));
+	Wait(0.6f, std::bind(&SecondBoss::DownShot, this, 15));
+	Wait(0.75f, std::bind(&SecondBoss::DownShot, this, 15));
+	Wait(0.9f, std::bind(&SecondBoss::DownShot, this, 15));
+	Wait(1.05f, std::bind(&SecondBoss::DownShot, this, 15));
+	Wait(1.2f, std::bind(&SecondBoss::DownShot, this, 15));
+	Wait(1.35f, std::bind(&SecondBoss::DownShot, this, 15));
+	Wait(1.5f, std::bind(&SecondBoss::DownShot, this, 15));
+	Wait(1.65f, std::bind(&SecondBoss::DownShot, this, 15));
+	Wait(1.8f, std::bind(&SecondBoss::DownShot, this, 15));
+	Wait(1.95f, std::bind(&SecondBoss::DownShot, this, 15));
+	Wait(2.f, std::bind(&SecondBoss::Move, this, GetRandomPos(), 1.5f));
+}
+
+void SecondBoss::Three()
+{
+	CircleReturnShot(50, 1.4f);
+	Wait(0.5f, std::bind(&SecondBoss::Move, this, GetRandomPos(), 1.f));
+	Wait(1.5f, std::bind(&SecondBoss::CircleReturnShot, this, 50, 1.f));
 }
 
 void SecondBoss::CircleRotateShot(int baseAngle)
@@ -191,14 +224,14 @@ void SecondBoss::FiveCircleRotateShot(int baseAngle)
 	float angleStep = 360.0f / numBullets;
 
 	for (int i = 0; i < numBullets; ++i) {
-		for (int j = 0; j < 7; j++) {
+		for (int j = 0; j < 6; j++) {
 			float angle = baseAngle + i * angleStep + j * 13;
 			float rad = angle * Deg2Rad;
 
 			Projectile* pProj = new Projectile;
 			pProj->SetPos({ m_vPos.x, m_vPos.y - m_vSize.y / 2.0f });
 			pProj->SetSize({ 8.f, 16.f });
-			pProj->SetSpeed(300);
+			pProj->SetSpeed(260);
 			pProj->SetDir({ cos(rad) * (m_turn ? 1 : -1), sin(rad) });
 			pProj->SetLifeTime(5.0f);
 
@@ -251,21 +284,21 @@ void SecondBoss::DownShot(int count)
 	}
 }
 
-void SecondBoss::CircleReturnShot(int count)
+void SecondBoss::CircleReturnShot(int count, float exitTime)
 {
 	int numBullets = count;
 	float angleStep = 360.0f / numBullets;
-	float speed = 300;
+	float speed = 370;
 	float changeTime = 1.f;
 
 	for (int j = 0; j < 7; j++) {
 		for (int i = 0; i < 360; i += angleStep) {
 			float rad = i * Deg2Rad;
 			ReturnProj* pProj = new ReturnProj;
-			pProj->SetChangeTime(changeTime + j* 0.2f);
+			pProj->SetChangeTime(changeTime);
 			pProj->SetTarget(m_vPos);
-			pProj->SetChangeSpeed(400);
-			pProj->SetExitTime(0.6f);
+			pProj->SetChangeSpeed(300);
+			pProj->SetExitTime(exitTime - j * 0.1f);
 
 			pProj->SetPos({ m_vPos.x, m_vPos.y - m_vSize.y / 2.0f });
 			pProj->SetSize({ 20.0f, 20.0f });
