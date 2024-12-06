@@ -13,5 +13,10 @@ public:
 private:
     float m_changeTime = 0;
     bool m_isChange = false;
+    float m_baseAngle = 270;
+    float m_angleRange = 60;
+    float m_changeAngle = 0;
+    float m_angle = 0;
+    float m_timer = 0;
 };
 
