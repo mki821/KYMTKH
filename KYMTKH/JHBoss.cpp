@@ -7,10 +7,15 @@
 #include "Projectile.h"
 #include "LemniscateParent.h"
 #include "InputManager.h"
-#include "Player.h"
+#include "ResourceManager.h"
 #include "JHBoss.h"
 
-JHBoss::JHBoss() { m_hp = 800; }
+JHBoss::JHBoss() {  
+	m_hp = 800; 
+
+	m_pProjectile15 = GET_RES(L"Projectile_15x15");
+	m_pProjectile10 = GET_RES(L"Projectile_10x10");
+}
 JHBoss::~JHBoss() { }
 
 void JHBoss::Init() {
@@ -56,7 +61,7 @@ void JHBoss::Render(HDC hdc) {
 
 void JHBoss::FirstPatternUpdate() {
 	m_timer += fDT;
-	if (m_timer >= 0.05f) {
+	if (m_timer >= 0.03f) {
 		m_timer = 0.0f;
 		One();
 	}
@@ -77,7 +82,7 @@ void JHBoss::FirstPatternUpdate() {
 }
 
 void JHBoss::One() {
-	m_angleModifier += 7;
+	m_angleModifier += 77;
 	int tempModifier = m_angleModifier;
 
 	for (int i = 0; i < 360; i += 60) {
@@ -87,6 +92,7 @@ void JHBoss::One() {
 		pProj->SetSpeed(200.0f);
 		pProj->SetDir(i + tempModifier);
 		pProj->SetLifeTime(5.0f);
+		pProj->SetTexture(m_pProjectile10);
 
 		pProj->GetComponent<CircleCollider>()->SetSize({ 8.0f, 8.0f });
 
@@ -115,6 +121,7 @@ void JHBoss::Three() {
 		pProj->SetSpeed(100.0f);
 		pProj->SetDir(i);
 		pProj->SetLifeTime(15.0f);
+		pProj->SetTexture(m_pProjectile15);
 
 		pProj->GetComponent<CircleCollider>()->SetSize({ 13.0f, 13.0f });
 
@@ -135,6 +142,7 @@ void JHBoss::SecondPattern() {
 			pProj->SetSpeed(200.0f);
 			pProj->SetDir(i);
 			pProj->SetLifeTime(15.0f);
+			pProj->SetTexture(m_pProjectile15);
 
 			pProj->GetComponent<CircleCollider>()->SetSize({ 13.0f, 13.0f });
 
@@ -149,6 +157,7 @@ void JHBoss::SecondPattern() {
 			pProj->SetSpeed(150.0f);
 			pProj->SetDir(i);
 			pProj->SetLifeTime(15.0f);
+			pProj->SetTexture(m_pProjectile15);
 
 			pProj->GetComponent<CircleCollider>()->SetSize({ 13.0f, 13.0f });
 
@@ -165,6 +174,7 @@ void JHBoss::SecondPattern() {
 			pProj->SetSpeed(200.0f);
 			pProj->SetDir(i);
 			pProj->SetLifeTime(15.0f);
+			pProj->SetTexture(m_pProjectile15);
 
 			pProj->GetComponent<CircleCollider>()->SetSize({ 13.0f, 13.0f });
 
@@ -179,6 +189,7 @@ void JHBoss::SecondPattern() {
 			pProj->SetSpeed(150.0f);
 			pProj->SetDir(i);
 			pProj->SetLifeTime(15.0f);
+			pProj->SetTexture(m_pProjectile15);
 
 			pProj->GetComponent<CircleCollider>()->SetSize({ 13.0f, 13.0f });
 
@@ -196,6 +207,7 @@ void JHBoss::SecondPattern() {
 			pProj->SetSpeed(200.0f);
 			pProj->SetDir(i);
 			pProj->SetLifeTime(15.0f);
+			pProj->SetTexture(m_pProjectile15);
 
 			pProj->GetComponent<CircleCollider>()->SetSize({ 13.0f, 13.0f });
 
@@ -210,6 +222,7 @@ void JHBoss::SecondPattern() {
 			pProj->SetSpeed(200.0f);
 			pProj->SetDir(i);
 			pProj->SetLifeTime(15.0f);
+			pProj->SetTexture(m_pProjectile15);
 
 			pProj->GetComponent<CircleCollider>()->SetSize({ 13.0f, 13.0f });
 
@@ -224,6 +237,7 @@ void JHBoss::SecondPattern() {
 			pProj->SetSpeed(150.0f);
 			pProj->SetDir(i);
 			pProj->SetLifeTime(15.0f);
+			pProj->SetTexture(m_pProjectile15);
 
 			pProj->GetComponent<CircleCollider>()->SetSize({ 13.0f, 13.0f });
 
@@ -238,6 +252,7 @@ void JHBoss::SecondPattern() {
 			pProj->SetSpeed(150.0f);
 			pProj->SetDir(i);
 			pProj->SetLifeTime(15.0f);
+			pProj->SetTexture(m_pProjectile15);
 
 			pProj->GetComponent<CircleCollider>()->SetSize({ 13.0f, 13.0f });
 
@@ -258,6 +273,7 @@ void JHBoss::SecondPattern() {
 			pProj->SetSpeed(200.0f);
 			pProj->SetDir(i);
 			pProj->SetLifeTime(15.0f);
+			pProj->SetTexture(m_pProjectile15);
 
 			pProj->GetComponent<CircleCollider>()->SetSize({ 13.0f, 13.0f });
 
@@ -278,6 +294,7 @@ void JHBoss::SecondPattern() {
 			pProj->SetSpeed(200.0f);
 			pProj->SetDir(i);
 			pProj->SetLifeTime(15.0f);
+			pProj->SetTexture(m_pProjectile15);
 
 			pProj->GetComponent<CircleCollider>()->SetSize({ 13.0f, 13.0f });
 
@@ -318,6 +335,7 @@ void JHBoss::Four() {
 		pProj->SetSpeed(150.0f);
 		pProj->SetDir(i + randomize(mt));
 		pProj->SetLifeTime(8.0f);
+		pProj->SetTexture(m_pProjectile10);
 
 		pProj->GetComponent<CircleCollider>()->SetSize({ 8.0f, 8.0f });
 

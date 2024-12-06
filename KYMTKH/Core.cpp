@@ -4,6 +4,7 @@
 #include "TimeManager.h"
 #include "InputManager.h"
 #include "ResourceManager.h"
+#include "RenderManager.h"
 #include "SceneManager.h"
 #include "CollisionManager.h"
 #include "UIManager.h"
@@ -27,6 +28,7 @@ bool Core::Init(HWND _hWnd) {
 	GET_SINGLE(TimeManager)->Init();
 	GET_SINGLE(InputManager)->Init();
 	GET_SINGLE(ResourceManager)->Init();
+	GET_SINGLE(RenderManager)->Init();
 	GET_SINGLE(SceneManager)->Init();
 
 	return true;
@@ -64,7 +66,9 @@ void Core::MainRender() {
 
 	PatBlt(m_hBackDC, 0, 0, SCREEN_WIDTH, SCREEN_HEIGHT, WHITENESS);
 
+	GET_SINGLE(RenderManager)->BeforeRender();
 	GET_SINGLE(SceneManager)->Render(m_hBackDC);
+	GET_SINGLE(RenderManager)->Render(m_hBackDC);
 	GET_SINGLE(UIManager)->Render(m_hBackDC);
 
 	BitBlt(m_hDC, 0, 0, SCREEN_WIDTH, SCREEN_HEIGHT, m_hBackDC, 0, 0, SRCCOPY);

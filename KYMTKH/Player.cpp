@@ -18,7 +18,7 @@ Player::~Player() { }
 void Player::Init() {
 	GetComponent<CircleCollider>()->SetSize(m_vSize);
 
-	m_pProjectile = GET_RES(L"Projectile_15x15", L"Texture\\Projectile\\Projectile_15x15.bmp");
+	m_pProjectile = GET_RES(L"Projectile_15x15");
 }
 
 void Player::Update() {
