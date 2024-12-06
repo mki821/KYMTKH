@@ -25,7 +25,7 @@ void JHBoss::Init() {
 
 void JHBoss::Update() {
 	Boss::Update();
-	
+
 	if (m_eCurPattern == Pattern::First && m_hp <= 500) {
 		m_eCurPattern = Pattern::Second;
 

@@ -7,6 +7,7 @@
 #include "FillImage.h"
 #include "FirstBoss.h"
 #include "Y_TestScene.h"
+#include "SecondBoss.h"
 
 void Y_TestScene::Init()
 {
