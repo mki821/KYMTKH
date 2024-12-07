@@ -3,6 +3,7 @@
 
 
 class RandomMoveProj;
+class Texture;
 class FirstBoss :
     public Boss
 {
@@ -65,6 +66,8 @@ private:
 	bool m_firstPattern = true;
 	bool m_stop = false;
 	float m_waitTime = 0;
+private:
+	Texture* m_blueTexture = nullptr;
 };
 
 
