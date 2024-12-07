@@ -10,6 +10,8 @@
 #include "SecondBoss.h"
 #include "ResourceManager.h"
 #include "EventManager.h"
+#include "Background.h"
+#include "Boss.h"
 
 void Y_TestScene::Init()
 {
@@ -21,6 +23,9 @@ void Y_TestScene::Init()
 	LOAD_RES(L"RedProjectile_20x20", L"Texture\\Projectile\\RedProjectile_20x20.bmp");
 	LOAD_RES(L"WhiteDiamod_10x18", L"Texture\\Projectile\\WhiteDiamod_10x18.bmp");
 	LOAD_RES(L"WhiteProjectile_20x20", L"Texture\\Projectile\\WhiteProjectile_20x20.bmp");
+
+	LOAD_RES(L"FirstBoss", L"Texture\\Boss\\FirstBoss.bmp");
+	LOAD_RES(L"FirstBossBackGround", L"Texture\\Background\\FirstBossBackGround.bmp");
 	for (int i = 1; i <= 5; ++i) {
 		Image* heart = new Image;
 		heart->SetPos({ GAME_RIGHT + 70.0f, SCREEN_HEIGHT - 60.0f * i });
@@ -35,16 +40,21 @@ void Y_TestScene::Init()
 
 	GET_SINGLE(UIManager)->AddUI(L"BossHealth", bossHealth);
 
+	Background* pBackground = new Background;
+	pBackground->SetTexture(GET_RES(L"FirstBossBackGround"));
+	AddObject(pBackground, LAYER::BACKGROUND);
+
 	Object* pPlayer = new Player;
 	pPlayer->SetPos({ GAME_CENTER, 850.0f });
 	pPlayer->SetSize({ 8.0f, 8.0f });
 	AddObject(pPlayer, LAYER::PLAYER);
 	SetPlayer(pPlayer);
 
-	Object* pBoss = new FirstBoss;
-	pBoss->SetPos({ SCREEN_WIDTH / 2.0f, 200.0f });
-	pBoss->SetSize({ 30.0f, 30.0f });
+	Boss* pBoss = new FirstBoss;
+	pBoss->SetPos({ GAME_CENTER, 200.0f });
+	pBoss->SetSize({ 45.0f, 45.0f });
 	pBoss->GetComponent<Collider>()->SetSize(pBoss->GetSize());
+	pBoss->SetTexture(GET_RES(L"FirstBoss"));
 	AddObject(pBoss, LAYER::ENEMY);
 
 	GET_SINGLE(CollisionManager)->CheckLayer(LAYER::PLAYER, LAYER::ENEMY_PROJECTILE);

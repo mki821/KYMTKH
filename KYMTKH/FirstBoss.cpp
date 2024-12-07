@@ -40,7 +40,7 @@ FirstBoss::~FirstBoss()
 void FirstBoss::Init()
 {
 	m_originPos = GetPos();
-	m_hp = 600;
+	m_hp = 800;
 	m_curPattern = Pattern::First;
 	//FirstPattern();
 }
@@ -51,16 +51,16 @@ void FirstBoss::Update()
 {
 	Boss::Update();
 
-	if (m_curPattern == Pattern::First && m_hp <= 500) {
+	if (m_curPattern == Pattern::First && m_hp <= 640) {
 		ChangePattern();
 	}
-	else if (m_curPattern == Pattern::Second && m_hp <= 400) {
+	else if (m_curPattern == Pattern::Second && m_hp <= 480) {
 		ChangePattern();
 	}
-	else if (m_curPattern == Pattern::Third && m_hp <= 300) {
+	else if (m_curPattern == Pattern::Third && m_hp <= 320) {
 		ChangePattern();
 	}
-	else if (m_curPattern == Pattern::Fourth && m_hp <= 200) {
+	else if (m_curPattern == Pattern::Fourth && m_hp <= 160) {
 		ChangePattern();
 	}
 	else if (m_curPattern == Pattern::Fifth && m_hp <= 0) {
@@ -91,6 +91,7 @@ void FirstBoss::Update()
 
 void FirstBoss::Render(HDC hdc)
 {
+	Boss::Render(hdc);
 }
 
 void FirstBoss::ChangePattern()
