@@ -10,6 +10,7 @@
 #include "SecondBoss.h"
 #include "ResourceManager.h"
 #include "EventManager.h"
+#include "Background.h"
 
 void SecondBossScene::Init()
 {
@@ -22,6 +23,13 @@ void SecondBossScene::Init()
 	LOAD_RES(L"RedDia_10x18", L"Texture\\Projectile\\RedDia_10x18.bmp");
 	LOAD_RES(L"RedShuriken_10x18", L"Texture\\Projectile\\RedShuriken_10x18.bmp");
 	LOAD_RES(L"WhiteDiamod_10x18", L"Texture\\Projectile\\WhiteDiamod_10x18.bmp");
+
+	LOAD_RES(L"SecondBoss", L"Texture\\Boss\\SecondBoss.bmp");
+	LOAD_RES(L"SecondBossBackGround", L"Texture\\Background\\SecondBossBackGround.bmp");
+
+	Background* pBackground = new Background;
+	pBackground->SetTexture(GET_RES(L"SecondBossBackGround"));
+	AddObject(pBackground, LAYER::BACKGROUND);
 	for (int i = 1; i <= 5; ++i) {
 		Image* heart = new Image;
 		heart->SetPos({ GAME_RIGHT + 70.0f, SCREEN_HEIGHT - 60.0f * i });
@@ -42,10 +50,11 @@ void SecondBossScene::Init()
 	AddObject(pPlayer, LAYER::PLAYER);
 	SetPlayer(pPlayer);
 
-	Object* pBoss = new SecondBoss;
-	pBoss->SetPos({ SCREEN_WIDTH / 2.0f, 200.0f });
-	pBoss->SetSize({ 30.0f, 30.0f });
+	Boss* pBoss = new SecondBoss;
+	pBoss->SetPos({ GAME_CENTER, 200.0f });
+	pBoss->SetSize({ 45.0f, 45.0f });
 	pBoss->GetComponent<Collider>()->SetSize(pBoss->GetSize());
+	pBoss->SetTexture(GET_RES(L"SecondBoss"));
 	AddObject(pBoss, LAYER::ENEMY);
 
 	GET_SINGLE(CollisionManager)->CheckLayer(LAYER::PLAYER, LAYER::ENEMY_PROJECTILE);
