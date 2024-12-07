@@ -69,6 +69,7 @@ void ResourceManager::LoadSound(const wstring& _key, const wstring& _path, bool 
 
 void ResourceManager::Play(const wstring& _key) {
 	tSoundInfo* ptSound = FindSound(_key);
+	cout << ptSound << endl;
 	if (!ptSound)
 		return;
 	m_pSoundSystem->update(); // play할때 update를 주기적으로 호출해야 사운드가 정지되지 않음.

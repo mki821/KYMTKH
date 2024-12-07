@@ -21,8 +21,12 @@ enum class BRUSH_TYPE {
 };
 
 enum class EVENT_TYPE {
-	CREATE_OBJECT,
 	DELETE_OBJECT,
+	DELETE_UI,
 	SCENE_CHANGE,
 	END,
+};
+
+enum class RENDER_TYPE {
+	BitBlt, TransparentBlt, StretchBlt
 };

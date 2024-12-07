@@ -163,6 +163,7 @@
     <ClInclude Include="Background.h" />
     <ClInclude Include="BaseWindow.h" />
     <ClInclude Include="Boss.h" />
+    <ClInclude Include="Button.h" />
     <ClInclude Include="CircleCollider.h" />
     <ClInclude Include="Collider.h" />
     <ClInclude Include="CollisionManager.h" />
@@ -220,6 +221,7 @@
     <ClCompile Include="Background.cpp" />
     <ClCompile Include="BaseWindow.cpp" />
     <ClCompile Include="Boss.cpp" />
+    <ClCompile Include="Button.cpp" />
     <ClCompile Include="CircleCollider.cpp" />
     <ClCompile Include="Collider.cpp" />
     <ClCompile Include="CollisionManager.cpp" />

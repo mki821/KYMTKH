@@ -9,7 +9,7 @@ Lemniscate::Lemniscate(float startAngle) : Projectile(), m_currentAngle(startAng
 Lemniscate::~Lemniscate() { }
 
 void Lemniscate::Init() {
-	Projectile::Init();
+	GetComponent<CircleCollider>()->SetSize(m_vSize);
 
 	m_createdPos = m_vPos;
 }

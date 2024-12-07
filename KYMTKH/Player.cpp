@@ -39,10 +39,19 @@ void Player::Update() {
 			GetComponent<CircleCollider>()->SetEnable(true);
 		}
 	}
+
+	if(GET_KEY_DOWN(KEY_TYPE::ESC))
+		GET_SINGLE(SceneManager)->LoadScene(L"SelectScene");
 }
 
 void Player::Render(HDC hdc) {
 	RECT_RENDER(hdc, m_vPos.x, m_vPos.y, m_vSize.x, m_vSize.y);
+}
+
+void Player::SetDead() {
+	Object::SetDead();
+
+	GET_SINGLE(ResourceManager)->Play(L"GameOver");
 }
 
 void Player::Move() {

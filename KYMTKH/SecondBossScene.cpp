@@ -27,12 +27,15 @@ void SecondBossScene::Init()
 	LOAD_RES(L"SecondBoss", L"Texture\\Boss\\SecondBoss.bmp");
 	LOAD_RES(L"SecondBossBackGround", L"Texture\\Background\\SecondBossBackGround.bmp");
 
+	GET_SINGLE(ResourceManager)->Play(L"ThirdBGM");
+
 	Background* pBackground = new Background;
 	pBackground->SetTexture(GET_RES(L"SecondBossBackGround"));
 	AddObject(pBackground, LAYER::BACKGROUND);
 	for (int i = 1; i <= 5; ++i) {
 		Image* heart = new Image;
 		heart->SetPos({ GAME_RIGHT + 70.0f, SCREEN_HEIGHT - 60.0f * i });
+		heart->SetTexture(GET_RES(L"Heart"), RENDER_TYPE::TransparentBlt);
 
 		wstring name = std::format(L"Heart_{0}", i);
 		GET_SINGLE(UIManager)->AddUI(name, heart);
@@ -41,6 +44,7 @@ void SecondBossScene::Init()
 	FillImage* bossHealth = new FillImage;
 	bossHealth->SetPos({ 1082.0f, 100.0f });
 	bossHealth->SetSize({ 500.0f, 30.0f });
+	bossHealth->SetTexture(GET_RES(L"BossHealthBar"), RENDER_TYPE::TransparentBlt);
 
 	GET_SINGLE(UIManager)->AddUI(L"BossHealth", bossHealth);
 

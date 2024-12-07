@@ -8,6 +8,8 @@
 #include "LemniscateParent.h"
 
 void LemniscateParent::Init() {
+	GET_SINGLE(ResourceManager)->Play(L"Fire");
+
 	Texture* m_pProjectile20 = GET_RES(L"Projectile_20x35");
 
 	m_createdPos = m_vPos;
