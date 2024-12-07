@@ -28,9 +28,9 @@ void JHBoss::Update() {
 	Boss::Update();
 
 	if (m_eCurPattern == Pattern::First && m_hp <= 500) {
-		m_eCurPattern = Pattern::Second;
-
 		GET_SINGLE(SceneManager)->GetCurScene()->DeleteEnemyProjectiles();
+
+		m_eCurPattern = Pattern::Second;
 
 		Wait(1.0f, [this]() {
 			float delay = 5.0f;
@@ -42,6 +42,8 @@ void JHBoss::Update() {
 		});
 	}
 	else if (m_eCurPattern == Pattern::Second && m_hp <= 150) {
+		GET_SINGLE(SceneManager)->GetCurScene()->DeleteEnemyProjectiles();
+
 		m_eCurPattern = Pattern::Third;
 		ThirdPattern();
 

@@ -1,5 +1,4 @@
 #include "pch.h"
-#include "SecondBoss.h"
 #include "TimeManager.h"
 #include "SceneManager.h"
 #include "Scene.h"
@@ -11,10 +10,10 @@
 #include "StopAndChaseProj.h"
 #include "StopAndRandomMoveProj.h"
 #include "RandomMoveProj.h"
-#include "InputManager.h"
 #include "RandomMoveProjManager.h"
 #include "DownProj.h"
 #include "ReturnProj.h"
+#include "SecondBoss.h"
 
 SecondBoss::SecondBoss()
 {
@@ -174,20 +173,20 @@ void SecondBoss::One()
 
 void SecondBoss::Two()
 {
-	DownShot(15);
-	Wait(0.15f, std::bind(&SecondBoss::DownShot, this, 15));
-	Wait(0.3f, std::bind(&SecondBoss::DownShot, this, 15));
-	Wait(0.45f, std::bind(&SecondBoss::DownShot, this, 15));
-	Wait(0.6f, std::bind(&SecondBoss::DownShot, this, 15));
-	Wait(0.75f, std::bind(&SecondBoss::DownShot, this, 15));
-	Wait(0.9f, std::bind(&SecondBoss::DownShot, this, 15));
-	Wait(1.05f, std::bind(&SecondBoss::DownShot, this, 15));
-	Wait(1.2f, std::bind(&SecondBoss::DownShot, this, 15));
-	Wait(1.35f, std::bind(&SecondBoss::DownShot, this, 15));
-	Wait(1.5f, std::bind(&SecondBoss::DownShot, this, 15));
-	Wait(1.65f, std::bind(&SecondBoss::DownShot, this, 15));
-	Wait(1.8f, std::bind(&SecondBoss::DownShot, this, 15));
-	Wait(1.95f, std::bind(&SecondBoss::DownShot, this, 15));
+	//DownShot(15);
+	//Wait(0.15f, std::bind(&SecondBoss::DownShot, this, 15));
+	//Wait(0.3f, std::bind(&SecondBoss::DownShot, this, 15));
+	//Wait(0.45f, std::bind(&SecondBoss::DownShot, this, 15));
+	//Wait(0.6f, std::bind(&SecondBoss::DownShot, this, 15));
+	//Wait(0.75f, std::bind(&SecondBoss::DownShot, this, 15));
+	//Wait(0.9f, std::bind(&SecondBoss::DownShot, this, 15));
+	//Wait(1.05f, std::bind(&SecondBoss::DownShot, this, 15));
+	//Wait(1.2f, std::bind(&SecondBoss::DownShot, this, 15));
+	//Wait(1.35f, std::bind(&SecondBoss::DownShot, this, 15));
+	//Wait(1.5f, std::bind(&SecondBoss::DownShot, this, 15));
+	//Wait(1.65f, std::bind(&SecondBoss::DownShot, this, 15));
+	//Wait(1.8f, std::bind(&SecondBoss::DownShot, this, 15));
+	//Wait(1.95f, std::bind(&SecondBoss::DownShot, this, 15));
 	Wait(2.f, std::bind(&SecondBoss::Move, this, GetRandomPos(), 1.5f));
 }
 
@@ -268,7 +267,6 @@ void SecondBoss::DownShot(int count)
 	std::uniform_real_distribution<float> dist(0.0f, 360.0f);
 
 	for (int i = 0; i < count; ++i) {
-
 		float randomAngle = dist(eng);
 		float rad = randomAngle * Deg2Rad;
 
