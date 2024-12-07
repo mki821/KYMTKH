@@ -18,7 +18,16 @@
 
 FirstBoss::FirstBoss()
 {
-	m_blueTexture = GET_RES(L"BlueProjectile_25x25");
+	BlueDiamond_10x18 = GET_RES(L"BlueDiamond_10x18");
+	BlueProjectile1_25x25 = GET_RES(L"BlueProjectile1_25x25");
+	BlueProjectile2_25x25 = GET_RES(L"BlueProjectile2_25x25");
+	WhiteDiamod_10x18 = GET_RES(L"WhiteDiamod_10x18");
+	WhiteProjectile_20x20 = GET_RES(L"WhiteProjectile_20x20");
+
+	RandomProjTexture_20x20[0] = GET_RES(L"BlueProjectile_20x20");
+	RandomProjTexture_20x20[1] = GET_RES(L"GreenProjectile_20x20");
+	RandomProjTexture_20x20[2] = GET_RES(L"RedProjectile_20x20");
+
 	auto curScene = GET_SINGLE(SceneManager)->GetCurScene();
 	auto yTestScene = std::dynamic_pointer_cast<Y_TestScene>(curScene);
 	m_player = yTestScene->GetPlayer();
@@ -30,7 +39,6 @@ FirstBoss::~FirstBoss()
 
 void FirstBoss::Init()
 {
-	cout << m_blueTexture;
 	m_originPos = GetPos();
 	m_hp = 600;
 	m_curPattern = Pattern::First;
@@ -284,7 +292,7 @@ void FirstBoss::StopAndRandomMoveShot(float time, float speed)
 		for (int i = 0; i < 360; i += 25) {
 			float rad = i * Deg2Rad;
 			StopAndRandomMoveProj* pProj = new StopAndRandomMoveProj;
-			pProj->SetTexture(m_blueTexture);
+			pProj->SetTexture(BlueDiamond_10x18);
 			pProj->SetDirChangeTime(time);
 			pProj->SetChangeSpeed(150);
 
@@ -304,7 +312,7 @@ void FirstBoss::StopAndChaseShot(int shotDeg) // 9
 	for (int i = 0; i < 360; i += shotDeg) {
 		float rad = i * Deg2Rad;
 		StopAndChaseProj* pProj = new StopAndChaseProj;
-		pProj->SetTexture(m_blueTexture);
+		pProj->SetTexture(WhiteDiamod_10x18);
 		//StopAndChaseProj에만 있는 세팅
 		pProj->SetOwner(this);
 		pProj->SetDirChangeTime(0.8f);
@@ -324,7 +332,7 @@ void FirstBoss::CircleShot(int shotDeg, float speed)
 	for (int i = 0; i < 360; i += shotDeg) {
 		float rad = i * Deg2Rad;
 		Projectile* pProj = new Projectile;
-		pProj->SetTexture(m_blueTexture);
+		pProj->SetTexture(BlueProjectile1_25x25);
 
 		pProj->SetPos({ m_vPos.x, m_vPos.y - m_vSize.y / 2.0f });
 		pProj->SetSize({ 25.0f, 25.0f });
@@ -348,7 +356,7 @@ void FirstBoss::SpreadShot(int count, Vector2 dir, float speed)
 		float rotatedY = dir.x * sin(rad) + dir.y * cos(rad);
 
 		Projectile* pProj = new Projectile;
-		pProj->SetTexture(m_blueTexture);
+		pProj->SetTexture(BlueDiamond_10x18);
 		pProj->SetPos({ m_vPos.x, m_vPos.y - m_vSize.y / 2.0f });
 		pProj->SetSize({ 10.0f, 18.0f });
 		pProj->SetSpeed(speed);
@@ -361,6 +369,10 @@ void FirstBoss::SpreadShot(int count, Vector2 dir, float speed)
 void FirstBoss::RandomMoveShot(int count)
 {
 	RandomMoveProjManager* manager = new RandomMoveProjManager;
+	manager->SetTexture(RandomProjTexture_20x20[0], 0);
+	manager->SetTexture(RandomProjTexture_20x20[1], 1);
+	manager->SetTexture(RandomProjTexture_20x20[2], 2);
+	manager->SetWhiteTexture(WhiteProjectile_20x20);
 	manager->SetOwner(this);
 	manager->Spawn(count);
 	Wait(3.f, std::bind(&RandomMoveProjManager::Stop, manager));
@@ -383,7 +395,7 @@ void FirstBoss::FiveShot()
 			float rad = angle * Deg2Rad;
 
 			Projectile* pProj = new Projectile;
-			pProj->SetTexture(m_blueTexture);
+			pProj->SetTexture(BlueProjectile1_25x25);
 			pProj->SetPos({ m_vPos.x, m_vPos.y - m_vSize.y / 2.0f });
 			pProj->SetSize({ 25.0f, 25.0f });
 			pProj->SetSpeed(400 - j * 15);
@@ -407,7 +419,7 @@ void FirstBoss::CircleRandomShot(int count, Vector2 pos)
 		float rad = randomAngle * Deg2Rad;
 
 		Projectile* pProj = new Projectile;
-		pProj->SetTexture(m_blueTexture);
+		pProj->SetTexture(BlueDiamond_10x18);
 		pProj->SetPos({ pos.x, pos.y });
 		pProj->SetSize({ 10.0f, 18.0f });
 		pProj->SetSpeed(200);
