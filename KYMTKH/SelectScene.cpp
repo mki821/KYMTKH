@@ -39,10 +39,10 @@ void SelectScene::Update() {
 			m_targetSceneIndex = min(m_currentSceneIndex + 1, m_vecSceneNames.size() - 1);
 			m_isChangingIndex = true;
 		}
-	}
 
-	if (GET_KEY_DOWN(KEY_TYPE::SPACE)) {
-		GET_SINGLE(SceneManager)->LoadScene(m_vecSceneNames[m_currentSceneIndex]);
+		if (GET_KEY_DOWN(KEY_TYPE::SPACE)) {
+			GET_SINGLE(SceneManager)->LoadScene(m_vecSceneNames[m_currentSceneIndex]);
+		}
 	}
 
 	for (int i = 0; i < m_vecSceneImages.size(); ++i) {

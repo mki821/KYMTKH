@@ -160,6 +160,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClInclude Include="Background.h" />
     <ClInclude Include="BaseWindow.h" />
     <ClInclude Include="Boss.h" />
     <ClInclude Include="CircleCollider.h" />
@@ -212,6 +213,7 @@
     <Image Include="small.ico" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="Background.cpp" />
     <ClCompile Include="BaseWindow.cpp" />
     <ClCompile Include="Boss.cpp" />
     <ClCompile Include="CircleCollider.cpp" />

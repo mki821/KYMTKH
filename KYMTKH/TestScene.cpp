@@ -2,6 +2,7 @@
 #include "UIManager.h"
 #include "Image.h"
 #include "FillImage.h"
+#include "Background.h"
 #include "Player.h"
 #include "JHBoss.h"
 #include "CollisionManager.h"
@@ -10,9 +11,11 @@
 #include "TestScene.h"
 
 void TestScene::Init() {
-	LOAD_RES(L"Projectile_20x20", L"Texture\\Projectile\\Projectile_20x20.bmp");
+	LOAD_RES(L"Projectile_20x35", L"Texture\\Projectile\\Projectile_20x35.bmp");
 	LOAD_RES(L"Projectile_15x15", L"Texture\\Projectile\\Projectile_15x15.bmp");
 	LOAD_RES(L"Projectile_10x10", L"Texture\\Projectile\\Projectile_10x10.bmp");
+	LOAD_RES(L"JHBoss", L"Texture\\Boss\\JHBoss.bmp");
+	LOAD_RES(L"JHBackground", L"Texture\\Background\\JHBackground.bmp");
 
 	for (int i = 1; i <= 5; ++i) {
 		Image* heart = new Image;
@@ -28,6 +31,10 @@ void TestScene::Init() {
 
 	GET_SINGLE(UIManager)->AddUI(L"BossHealth", bossHealth);
 
+	Background* pBackground = new Background;
+	pBackground->SetTexture(GET_RES(L"JHBackground"));
+	AddObject(pBackground, LAYER::BACKGROUND);
+
 	Object* pPlayer = new Player;
 	pPlayer->SetPos({ GAME_CENTER, 850.0f });
 	pPlayer->SetSize({ 8.0f, 8.0f });
@@ -37,6 +44,7 @@ void TestScene::Init() {
 	pBoss->SetPos({ GAME_CENTER, 200.0f });
 	pBoss->SetSize({ 45.0f, 45.0f });
 	pBoss->GetComponent<Collider>()->SetSize(pBoss->GetSize());
+	pBoss->SetTexture(GET_RES(L"JHBoss"));
 	AddObject(pBoss, LAYER::ENEMY);
 
 	GET_SINGLE(CollisionManager)->CheckLayer(LAYER::PLAYER, LAYER::ENEMY_PROJECTILE);

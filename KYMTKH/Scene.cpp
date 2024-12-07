@@ -1,6 +1,7 @@
 #include "pch.h"
 #include "Object.h"
 #include "CollisionManager.h"
+#include "EventManager.h"
 #include "Scene.h"
 
 Scene::~Scene() {
@@ -48,4 +49,11 @@ void Scene::Release() {
 		m_vecObj[i].clear();
 	}
 	GET_SINGLE(CollisionManager)->CheckReset();
+}
+
+void Scene::DeleteEnemyProjectiles() {
+	for (int j = 0; j < m_vecObj[(UINT)LAYER::ENEMY_PROJECTILE].size(); ++j) {
+		if (!m_vecObj[(UINT)LAYER::ENEMY_PROJECTILE][j]->GetIsDead())
+			GET_SINGLE(EventManager)->DeleteObject(m_vecObj[(UINT)LAYER::ENEMY_PROJECTILE][j]);
+	}
 }

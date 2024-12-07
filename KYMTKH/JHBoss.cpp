@@ -30,9 +30,11 @@ void JHBoss::Update() {
 	if (m_eCurPattern == Pattern::First && m_hp <= 500) {
 		m_eCurPattern = Pattern::Second;
 
-		Wait(5.0f, [this]() {
+		GET_SINGLE(SceneManager)->GetCurScene()->DeleteEnemyProjectiles();
+
+		Wait(1.0f, [this]() {
 			float delay = 5.0f;
-			for (int i = 1; i <= 3; ++i) {
+			for (int i = 0; i < 3; ++i) {
 				Wait(delay * i, [this]() {
 					SecondPattern();
 				});
@@ -140,7 +142,7 @@ void JHBoss::SecondPattern() {
 			Projectile* pProj = new Projectile;
 			pProj->SetPos(firstPos);
 			pProj->SetSize({ 15.0f, 15.0f });
-			pProj->SetSpeed(200.0f);
+			pProj->SetSpeed(250.0f);
 			pProj->SetDir(i);
 			pProj->SetLifeTime(15.0f);
 			pProj->SetTexture(m_pProjectile15);
@@ -155,7 +157,7 @@ void JHBoss::SecondPattern() {
 			Projectile* pProj = new Projectile;
 			pProj->SetPos(firstPos);
 			pProj->SetSize({ 15.0f, 15.0f });
-			pProj->SetSpeed(150.0f);
+			pProj->SetSpeed(200.0f);
 			pProj->SetDir(i);
 			pProj->SetLifeTime(15.0f);
 			pProj->SetTexture(m_pProjectile15);
@@ -329,7 +331,7 @@ void JHBoss::ThirdPatternUpdate() {
 void JHBoss::Four() {
 	std::mt19937 mt(rd());
 	std::uniform_real_distribution<float> randomize(-44.0f, 44.0f);
-	for (int i = 45; i < 360; i += 15) {
+	for (int i = 45; i < 360; i += 20) {
 		Projectile* pProj = new Projectile;
 		pProj->SetPos({ m_vPos.x, m_vPos.y });
 		pProj->SetSize({ 10.0f, 10.0f });
