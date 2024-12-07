@@ -8,9 +8,12 @@
 #include "FirstBoss.h"
 #include "Y_TestScene.h"
 #include "SecondBoss.h"
+#include "ResourceManager.h"
+#include "EventManager.h"
 
 void Y_TestScene::Init()
 {
+	LOAD_RES(L"BlueProjectile_25x25", L"Texture\\Projectile\\BlueProjectile_25x25.bmp");
 	for (int i = 1; i <= 5; ++i) {
 		Image* heart = new Image;
 		heart->SetPos({ GAME_RIGHT + 70.0f, SCREEN_HEIGHT - 60.0f * i });
