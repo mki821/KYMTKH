@@ -44,28 +44,28 @@ void SecondBoss::Init()
 {
 	m_originPos = GetPos();
 	m_curPattern = Pattern::First;
-	m_hp = 400;
+	m_hp = 800;
 }
 
 void SecondBoss::Update()
 {
 	Boss::Update();
-	if (m_curPattern == Pattern::First && m_hp <= 300) {
+	if (m_curPattern == Pattern::First && m_hp <= 600) {
 		ChangePattern();
 	}
-	else if (m_curPattern == Pattern::Second && m_hp <= 200) {
+	else if (m_curPattern == Pattern::Second && m_hp <= 400) {
 		ChangePattern();
 	}
-	else if (m_curPattern == Pattern::Third && m_hp <= 100) {
+	else if (m_curPattern == Pattern::Third && m_hp <= 200) {
 		ChangePattern();
 	}
 	else if (m_curPattern == Pattern::Fourth && m_hp <= 0) {
 		ChangePattern();
 	}
 
-	if (GET_KEY_DOWN(KEY_TYPE::Q)) {
+	/*if (GET_KEY_DOWN(KEY_TYPE::Q)) {
 		ChangePattern();
-	}
+	}*/
 
 	if (m_waitTime <= 0) {
 		switch (m_curPattern) {
@@ -85,6 +85,7 @@ void SecondBoss::Update()
 
 void SecondBoss::Render(HDC hdc)
 {
+	Boss::Render(hdc);
 }
 
 void SecondBoss::ChangePattern()
@@ -102,7 +103,7 @@ void SecondBoss::ChangePattern()
 
 Vector2 SecondBoss::GetRandomPos()
 {
-	int y = rand() % 190 + 15;
+	int y = rand() % 190 + 30;
 	int min = GAME_RIGHT - GAME_LEFT - 10;
 	int x = rand() % min + GAME_LEFT + 10;
 	return { x, y };
@@ -206,9 +207,9 @@ void SecondBoss::Two()
 
 void SecondBoss::Three()
 {
-	CircleReturnShot(35, 1.4f, 0);
-	Wait(0.5f, std::bind(&SecondBoss::Move, this, GetRandomPos(), 1.f));
-	Wait(1.5f, std::bind(&SecondBoss::CircleReturnShot, this, 35, 1.f, 1));
+	CircleReturnShot(28, 1.4f, 0);
+	Wait(1.f, std::bind(&SecondBoss::CircleReturnShot, this, 28, 1.f, 1));
+	Wait(5.5f, std::bind(&SecondBoss::Move, this, GetRandomPos(), 1.f));
 }
 
 void SecondBoss::CircleRotateShot(int baseAngle)

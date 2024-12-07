@@ -34,7 +34,7 @@ void ReturnProj::Update() {
 		m_currentAngle += m_rotationSpeed * fDT; // 각도 증가
 		m_vPos.x = m_target.x + cos(m_currentAngle) * m_radius;
 		m_vPos.y = m_target.y + sin(m_currentAngle) * m_radius;
-		if (m_radius >= 60) {
+		if (m_radius >= 80) {
 			m_radius -= fDT * 100;
 		}
 		else {
