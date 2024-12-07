@@ -3,7 +3,7 @@
 #include "UI.h"
 
 enum class RENDER_TYPE {
-	BitBlt, TransparentBlt
+	BitBlt, TransparentBlt, StretchBlt
 };
 
 class Texture;

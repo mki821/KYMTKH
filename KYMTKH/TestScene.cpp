@@ -11,6 +11,8 @@
 #include "TestScene.h"
 
 void TestScene::Init() {
+	LOAD_RES(L"Heart", L"Texture\\UI\\Heart.bmp");
+	LOAD_RES(L"BossHealthBar", L"Texture\\UI\\BossHealthBar.bmp");
 	LOAD_RES(L"Projectile_20x35", L"Texture\\Projectile\\Projectile_20x35.bmp");
 	LOAD_RES(L"Projectile_15x15", L"Texture\\Projectile\\Projectile_15x15.bmp");
 	LOAD_RES(L"Projectile_10x10", L"Texture\\Projectile\\Projectile_10x10.bmp");
@@ -20,6 +22,7 @@ void TestScene::Init() {
 	for (int i = 1; i <= 5; ++i) {
 		Image* heart = new Image;
 		heart->SetPos({ GAME_RIGHT + 70.0f, SCREEN_HEIGHT - 60.0f * i });
+		heart->SetTexture(GET_RES(L"Heart"), RENDER_TYPE::TransparentBlt);
 
 		wstring name = std::format(L"Heart_{0}", i);
 		GET_SINGLE(UIManager)->AddUI(name, heart);
@@ -28,6 +31,7 @@ void TestScene::Init() {
 	FillImage* bossHealth = new FillImage;
 	bossHealth->SetPos({ 1082.0f, 100.0f });
 	bossHealth->SetSize({ 500.0f, 30.0f });
+	bossHealth->SetTexture(GET_RES(L"BossHealthBar"), RENDER_TYPE::TransparentBlt);
 
 	GET_SINGLE(UIManager)->AddUI(L"BossHealth", bossHealth);
 

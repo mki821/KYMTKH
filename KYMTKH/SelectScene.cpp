@@ -2,7 +2,9 @@
 #include "InputManager.h"
 #include "SceneManager.h"
 #include "TimeManager.h"
+#include "ResourceManager.h"
 #include "Image.h"
+#include "Background.h"
 #include "SelectScene.h"
 
 SelectScene::SelectScene() {
@@ -10,6 +12,12 @@ SelectScene::SelectScene() {
 }
 
 void SelectScene::Init() {
+	LOAD_RES(L"SelectBackground", L"Texture\\Background\\SelectBackground.bmp");
+
+	Background* bg = new Background;
+	bg->SetTexture(GET_RES(L"SelectBackground"));
+	AddObject(bg, LAYER::BACKGROUND);
+
 	for (int i = 0; i < m_vecSceneNames.size(); ++i) {
 		Image* img = new Image;
 
@@ -53,11 +61,13 @@ void SelectScene::Update() {
 }
 
 void SelectScene::Render(HDC hdc) {
+	Scene::Render(hdc);
 	for (int i = 0; i < m_vecSceneImages.size(); ++i) {
 		m_vecSceneImages[i]->Render(hdc);
 	}
 }
 
 void SelectScene::Release() {
+	Scene::Release();
 	m_vecSceneImages.clear();
 }
