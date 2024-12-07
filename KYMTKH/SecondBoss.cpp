@@ -15,12 +15,25 @@
 #include "RandomMoveProjManager.h"
 #include "DownProj.h"
 #include "ReturnProj.h"
+#include "ResourceManager.h"
+#include "EventManager.h"
+#include "SecondBossScene.h"
 
 SecondBoss::SecondBoss()
 {
 	auto curScene = GET_SINGLE(SceneManager)->GetCurScene();
-	auto yTestScene = std::dynamic_pointer_cast<Y_TestScene>(curScene);
-	m_player = yTestScene->GetPlayer();
+	auto secondBossScene = std::dynamic_pointer_cast<SecondBossScene>(curScene);
+	m_player = secondBossScene->GetPlayer();
+
+	m_RandomTex[0] = GET_RES(L"RedDia_10x18");
+	m_RandomTex[1] = GET_RES(L"OrrangeDia_10x18");
+	m_RandomTex[2] = GET_RES(L"GreenDia_10x18");
+	m_RandomTex[3] = GET_RES(L"BluepleDia_10x18");
+	m_RandomTex[4] = GET_RES(L"BlueDiamond_10x18");
+	m_RandomTex[5] = GET_RES(L"PurpleDia_10x18");
+
+	m_ShurikanTex[0] = GET_RES(L"BlueShuriken_10x18");
+	m_ShurikanTex[1] = GET_RES(L"RedShuriken_10x18");
 }
 
 SecondBoss::~SecondBoss()
@@ -143,7 +156,7 @@ void SecondBoss::ThirdPatternUpdate()
 		Two();
 		m_startPattern = true;
 	}
-	if (m_timer >= 4.f) {
+	if (m_timer >= 4.3f) {
 		m_timer = 0.0f;
 		Two();
 	}
@@ -174,28 +187,28 @@ void SecondBoss::One()
 
 void SecondBoss::Two()
 {
-	DownShot(15);
-	Wait(0.15f, std::bind(&SecondBoss::DownShot, this, 15));
-	Wait(0.3f, std::bind(&SecondBoss::DownShot, this, 15));
-	Wait(0.45f, std::bind(&SecondBoss::DownShot, this, 15));
-	Wait(0.6f, std::bind(&SecondBoss::DownShot, this, 15));
-	Wait(0.75f, std::bind(&SecondBoss::DownShot, this, 15));
-	Wait(0.9f, std::bind(&SecondBoss::DownShot, this, 15));
-	Wait(1.05f, std::bind(&SecondBoss::DownShot, this, 15));
-	Wait(1.2f, std::bind(&SecondBoss::DownShot, this, 15));
-	Wait(1.35f, std::bind(&SecondBoss::DownShot, this, 15));
-	Wait(1.5f, std::bind(&SecondBoss::DownShot, this, 15));
-	Wait(1.65f, std::bind(&SecondBoss::DownShot, this, 15));
-	Wait(1.8f, std::bind(&SecondBoss::DownShot, this, 15));
-	Wait(1.95f, std::bind(&SecondBoss::DownShot, this, 15));
+	DownShot(8);
+	Wait(0.15f, std::bind(&SecondBoss::DownShot, this, 8));
+	Wait(0.3f, std::bind(&SecondBoss::DownShot, this, 8));
+	Wait(0.45f, std::bind(&SecondBoss::DownShot, this, 8));
+	Wait(0.6f, std::bind(&SecondBoss::DownShot, this, 8));
+	Wait(0.75f, std::bind(&SecondBoss::DownShot, this, 8));
+	Wait(0.9f, std::bind(&SecondBoss::DownShot, this, 8));
+	Wait(1.05f, std::bind(&SecondBoss::DownShot, this, 8));
+	Wait(1.2f, std::bind(&SecondBoss::DownShot, this, 8));
+	Wait(1.35f, std::bind(&SecondBoss::DownShot, this, 8));
+	Wait(1.5f, std::bind(&SecondBoss::DownShot, this, 8));
+	Wait(1.65f, std::bind(&SecondBoss::DownShot, this, 8));
+	Wait(1.8f, std::bind(&SecondBoss::DownShot, this, 8));
+	Wait(1.95f, std::bind(&SecondBoss::DownShot, this, 8));
 	Wait(2.f, std::bind(&SecondBoss::Move, this, GetRandomPos(), 1.5f));
 }
 
 void SecondBoss::Three()
 {
-	CircleReturnShot(50, 1.4f);
+	CircleReturnShot(35, 1.4f, 0);
 	Wait(0.5f, std::bind(&SecondBoss::Move, this, GetRandomPos(), 1.f));
-	Wait(1.5f, std::bind(&SecondBoss::CircleReturnShot, this, 50, 1.f));
+	Wait(1.5f, std::bind(&SecondBoss::CircleReturnShot, this, 35, 1.f, 1));
 }
 
 void SecondBoss::CircleRotateShot(int baseAngle)
@@ -208,9 +221,10 @@ void SecondBoss::CircleRotateShot(int baseAngle)
 		float rad = angle * Deg2Rad;
 
 		Projectile* pProj = new Projectile;
+		pProj->SetTexture(m_RandomTex[0]);
 		pProj->SetPos({ m_vPos.x, m_vPos.y - m_vSize.y / 2.0f });
-		pProj->SetSize({ 10.f, 10.f });
-		pProj->SetSpeed(330);
+		pProj->SetSize({ 10.f, 18.f });
+		pProj->SetSpeed(350);
 		pProj->SetDir({ cos(rad) * (m_turn ? 1 : -1), sin(rad) });
 		pProj->SetLifeTime(5.0f);
 
@@ -229,9 +243,10 @@ void SecondBoss::FiveCircleRotateShot(int baseAngle)
 			float rad = angle * Deg2Rad;
 
 			Projectile* pProj = new Projectile;
+			pProj->SetTexture(m_RandomTex[j]);
 			pProj->SetPos({ m_vPos.x, m_vPos.y - m_vSize.y / 2.0f });
-			pProj->SetSize({ 8.f, 16.f });
-			pProj->SetSpeed(260);
+			pProj->SetSize({ 10.f, 18.f });
+			pProj->SetSpeed(280);
 			pProj->SetDir({ cos(rad) * (m_turn ? 1 : -1), sin(rad) });
 			pProj->SetLifeTime(5.0f);
 
@@ -252,6 +267,7 @@ void SecondBoss::CircleRandomShot(int count)
 		float rad = randomAngle * Deg2Rad;
 
 		Projectile* pProj = new Projectile;
+		pProj->SetTexture(m_RandomTex[0]);
 		pProj->SetPos({ m_vPos.x, m_vPos.y - m_vSize.y / 2.0f });
 		pProj->SetSize({ 15.0f, 15.0f });
 		pProj->SetSpeed(400);
@@ -273,7 +289,8 @@ void SecondBoss::DownShot(int count)
 		float rad = randomAngle * Deg2Rad;
 
 		DownProj* pProj = new DownProj;
-		pProj->SetChangeTime(1.f);
+		pProj->SetTexture(m_RandomTex[rand() % 6]);
+		pProj->SetChangeTime(1.7f);
 
 		pProj->SetPos({ m_vPos.x, m_vPos.y - m_vSize.y / 2.0f });
 		pProj->SetSize({ 15.0f, 15.0f });
@@ -284,7 +301,7 @@ void SecondBoss::DownShot(int count)
 	}
 }
 
-void SecondBoss::CircleReturnShot(int count, float exitTime)
+void SecondBoss::CircleReturnShot(int count, float exitTime, int k)
 {
 	int numBullets = count;
 	float angleStep = 360.0f / numBullets;
@@ -295,6 +312,7 @@ void SecondBoss::CircleReturnShot(int count, float exitTime)
 		for (int i = 0; i < 360; i += angleStep) {
 			float rad = i * Deg2Rad;
 			ReturnProj* pProj = new ReturnProj;
+			pProj->SetTexture(m_ShurikanTex[k]);
 			pProj->SetChangeTime(changeTime);
 			pProj->SetTarget(m_vPos);
 			pProj->SetChangeSpeed(300);

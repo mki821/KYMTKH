@@ -4,6 +4,7 @@
 #include "TestScene.h"
 #include "SceneManager.h"
 #include "Y_TestScene.h"
+#include "SecondBossScene.h"
 
 void SceneManager::Init() {
 	m_pCurrentScene = nullptr;
@@ -11,9 +12,11 @@ void SceneManager::Init() {
 	RegisterScene(L"SelectScene", std::make_shared<SelectScene>());
 	RegisterScene(L"TestScene", std::make_shared<TestScene>());
 	RegisterScene(L"Y_TestScene", std::make_shared<Y_TestScene>());
+	RegisterScene(L"SecondBossScene", std::make_shared<SecondBossScene>());
 
 	//LoadScene(L"SelectScene");
-	LoadScene(L"Y_TestScene");
+	//LoadScene(L"Y_TestScene");
+	LoadScene(L"SecondBossScene");
 	//LoadScene(L"TestScene");
 }
 

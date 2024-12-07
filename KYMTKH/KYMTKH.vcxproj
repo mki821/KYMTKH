@@ -168,6 +168,7 @@
     <ClInclude Include="Component.h" />
     <ClInclude Include="Core.h" />
     <ClInclude Include="Define.h" />
+    <ClInclude Include="DownProj.h" />
     <ClInclude Include="Enums.h" />
     <ClInclude Include="EventManager.h" />
     <ClInclude Include="FillImage.h" />
@@ -190,8 +191,11 @@
     <ClInclude Include="Resource.h" />
     <ClInclude Include="ResourceBase.h" />
     <ClInclude Include="ResourceManager.h" />
+    <ClInclude Include="ReturnProj.h" />
     <ClInclude Include="Scene.h" />
     <ClInclude Include="SceneManager.h" />
+    <ClInclude Include="SecondBoss.h" />
+    <ClInclude Include="SecondBossScene.h" />
     <ClInclude Include="SelectScene.h" />
     <ClInclude Include="StopAndChaseProj.h" />
     <ClInclude Include="StopAndRandomMoveProj.h" />
@@ -219,6 +223,7 @@
     <ClCompile Include="CollisionManager.cpp" />
     <ClCompile Include="Component.cpp" />
     <ClCompile Include="Core.cpp" />
+    <ClCompile Include="DownProj.cpp" />
     <ClCompile Include="EventManager.cpp" />
     <ClCompile Include="FillImage.cpp" />
     <ClCompile Include="FirstBoss.cpp" />
@@ -241,8 +246,11 @@
     <ClCompile Include="RenderManager.cpp" />
     <ClCompile Include="ResourceBase.cpp" />
     <ClCompile Include="ResourceManager.cpp" />
+    <ClCompile Include="ReturnProj.cpp" />
     <ClCompile Include="Scene.cpp" />
     <ClCompile Include="SceneManager.cpp" />
+    <ClCompile Include="SecondBoss.cpp" />
+    <ClCompile Include="SecondBossScene.cpp" />
     <ClCompile Include="SelectScene.cpp" />
     <ClCompile Include="StopAndChaseProj.cpp" />
     <ClCompile Include="StopAndRandomMoveProj.cpp" />
