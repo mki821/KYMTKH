@@ -1,4 +1,5 @@
 #include "pch.h"
+#include "SecondBossScene.h"
 #include "Player.h"
 #include "CollisionManager.h"
 #include "Collider.h"
@@ -6,21 +7,21 @@
 #include "Image.h"
 #include "FillImage.h"
 #include "FirstBoss.h"
-#include "Y_TestScene.h"
 #include "SecondBoss.h"
 #include "ResourceManager.h"
 #include "EventManager.h"
 
-void Y_TestScene::Init()
+void SecondBossScene::Init()
 {
 	LOAD_RES(L"BlueDiamond_10x18", L"Texture\\Projectile\\BlueDiamond_10x18.bmp");
-	LOAD_RES(L"BlueProjectile_20x20", L"Texture\\Projectile\\BlueProjectile_20x20.bmp");
-	LOAD_RES(L"BlueProjectile1_25x25", L"Texture\\Projectile\\BlueProjectile1_25x25.bmp");
-	LOAD_RES(L"BlueProjectile2_25x25", L"Texture\\Projectile\\BlueProjectile2_25x25.bmp");
-	LOAD_RES(L"GreenProjectile_20x20", L"Texture\\Projectile\\GreenProjectile_20x20.bmp");
-	LOAD_RES(L"RedProjectile_20x20", L"Texture\\Projectile\\RedProjectile_20x20.bmp");
+	LOAD_RES(L"BluepleDia_10x18", L"Texture\\Projectile\\BluepleDia_10x18.bmp");
+	LOAD_RES(L"BlueShuriken_10x18", L"Texture\\Projectile\\BlueShuriken_10x18.bmp");
+	LOAD_RES(L"GreenDia_10x18", L"Texture\\Projectile\\GreenDia_10x18.bmp");
+	LOAD_RES(L"OrrangeDia_10x18", L"Texture\\Projectile\\OrrangeDia_10x18.bmp");
+	LOAD_RES(L"PurpleDia_10x18", L"Texture\\Projectile\\PurpleDia_10x18.bmp");
+	LOAD_RES(L"RedDia_10x18", L"Texture\\Projectile\\RedDia_10x18.bmp");
+	LOAD_RES(L"RedShuriken_10x18", L"Texture\\Projectile\\RedShuriken_10x18.bmp");
 	LOAD_RES(L"WhiteDiamod_10x18", L"Texture\\Projectile\\WhiteDiamod_10x18.bmp");
-	LOAD_RES(L"WhiteProjectile_20x20", L"Texture\\Projectile\\WhiteProjectile_20x20.bmp");
 	for (int i = 1; i <= 5; ++i) {
 		Image* heart = new Image;
 		heart->SetPos({ GAME_RIGHT + 70.0f, SCREEN_HEIGHT - 60.0f * i });
@@ -41,7 +42,7 @@ void Y_TestScene::Init()
 	AddObject(pPlayer, LAYER::PLAYER);
 	SetPlayer(pPlayer);
 
-	Object* pBoss = new FirstBoss;
+	Object* pBoss = new SecondBoss;
 	pBoss->SetPos({ SCREEN_WIDTH / 2.0f, 200.0f });
 	pBoss->SetSize({ 30.0f, 30.0f });
 	pBoss->GetComponent<Collider>()->SetSize(pBoss->GetSize());
@@ -51,7 +52,7 @@ void Y_TestScene::Init()
 	GET_SINGLE(CollisionManager)->CheckLayer(LAYER::ENEMY, LAYER::PLAYER_PROJECTILE);
 }
 
-void Y_TestScene::Release()
+void SecondBossScene::Release()
 {
 	Scene::Release();
 	GET_SINGLE(UIManager)->Clear();
