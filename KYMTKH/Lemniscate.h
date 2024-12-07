@@ -28,4 +28,5 @@ private:
 	float m_turnSpeed = 100.0f;
 	float m_currentScale = 0.0f;
 	Vector2 m_createdPos;
+	Vector2 m_prevPos = { 0.0f, 0.0f };
 };

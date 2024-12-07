@@ -2,6 +2,8 @@
 
 #include "Object.h"
 
+class Projectile;
+
 class Scene {
 public:
 	Scene() { }
@@ -17,6 +19,7 @@ public:
 		obj->Init();
 		m_vecObj[(UINT)layer].push_back(obj);
 	}
+	void DeleteEnemyProjectiles();
 public:
 	const vector<Object*>& GetLayerObjects(LAYER _type) const { return m_vecObj[(UINT)_type]; }
 private:
