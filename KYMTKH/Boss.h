@@ -3,6 +3,7 @@
 #include "Object.h"
 
 class Player;
+class Texture;
 
 class Boss : public Object {
 public:
@@ -26,4 +27,8 @@ private:
 	float m_moveTime = 0.0f;
 	float m_moveTimer = 0.0f;
 	bool m_isMove = false;
+public:
+	void SetTexture(Texture* texture) { m_pTex = texture; }
+protected:
+	Texture* m_pTex = nullptr;
 };

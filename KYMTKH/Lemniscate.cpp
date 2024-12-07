@@ -43,6 +43,9 @@ void Lemniscate::Update() {
 	float tempX = offset.x * cosf(delta3) - offset.y * sinf(delta3);
 	float tempY = offset.x * sinf(delta3) + offset.y * cosf(delta3);
 	m_vPos = ownerPos + Vector2{ tempX * (m_turnSpeed < 0 ? -1 : 1), tempY};
+
+	SetDir(m_vPos - m_prevPos);
+	m_prevPos = m_vPos;
 }
 
 void Lemniscate::SizeUp() {

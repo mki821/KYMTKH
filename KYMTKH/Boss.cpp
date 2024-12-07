@@ -3,6 +3,7 @@
 #include "TImeManager.h"
 #include "UIManager.h"
 #include "FillImage.h"
+#include "Texture.h"
 #include "Boss.h"
 
 Boss::Boss() {
@@ -33,8 +34,15 @@ void Boss::Update() {
 
 void Boss::Render(HDC hdc) {
 	if (!m_isDie) {
-		RECT_RENDER(hdc, m_vPos.x, m_vPos.y, m_vSize.x, m_vSize.y);
-		ELLIPSE_RENDER(hdc, m_vPos.x, SCREEN_HEIGHT, 7.0f, 7.0f);
+		if (m_pTex != nullptr) {
+			int width = m_pTex->GetWidth();
+			int height = m_pTex->GetHeight();
+			TransparentBlt(hdc, m_vPos.x - width / 2, m_vPos.y - height, width, height, m_pTex->GetDC(), 0, 0, width, height, RGB(255, 0, 255));
+		}
+		else {
+			RECT_RENDER(hdc, m_vPos.x, m_vPos.y, m_vSize.x, m_vSize.y);
+			ELLIPSE_RENDER(hdc, m_vPos.x, SCREEN_HEIGHT, 7.0f, 7.0f);
+		}
 	}
 }
 

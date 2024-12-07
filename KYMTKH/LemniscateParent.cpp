@@ -8,15 +8,15 @@
 #include "LemniscateParent.h"
 
 void LemniscateParent::Init() {
-	Texture* m_pProjectile20 = GET_RES(L"Projectile_20x20");
+	Texture* m_pProjectile20 = GET_RES(L"Projectile_20x35");
 
 	m_createdPos = m_vPos;
 
-	for (int i = 0; i < 1440; i += 5) {
+	for (int i = 0; i < 1440; i += 12) {
 		Lemniscate* pProj = new Lemniscate(i);
 		pProj->SetPos({ m_vPos.x, m_vPos.y - m_vSize.y / 2.0f });
-		pProj->SetSize({ 20.0f, 20.0f });
-		pProj->SetSpeed(200.0f);
+		pProj->SetSize({ 20.0f, 35.0f });
+		pProj->SetSpeed(180.0f);
 		pProj->SetRotationSpeed(2.0f);
 		pProj->SetTurnSpeed(10.0f * m_turnDirection);
 		pProj->SetOwner(this);
