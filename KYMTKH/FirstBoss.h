@@ -67,7 +67,13 @@ private:
 	bool m_stop = false;
 	float m_waitTime = 0;
 private:
-	Texture* m_blueTexture = nullptr;
+	Texture* BlueDiamond_10x18 = nullptr;
+	Texture* BlueProjectile1_25x25 = nullptr;
+	Texture* BlueProjectile2_25x25 = nullptr;
+	Texture* WhiteDiamod_10x18 = nullptr;
+	Texture* WhiteProjectile_20x20 = nullptr;
+	
+	Texture* RandomProjTexture_20x20[3] = {};
 };
 
 
