@@ -16,7 +16,7 @@ void SceneManager::Init() {
 
 	//LoadScene(L"SelectScene");
 	//LoadScene(L"Y_TestScene");
-	LoadScene(L"SecondBossScene");
+	//LoadScene(L"SecondBossScene");
 	//LoadScene(L"TestScene");
 }
 

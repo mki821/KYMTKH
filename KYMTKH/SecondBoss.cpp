@@ -63,9 +63,9 @@ void SecondBoss::Update()
 		ChangePattern();
 	}
 
-	if (GET_KEY_DOWN(KEY_TYPE::Q)) {
+	/*if (GET_KEY_DOWN(KEY_TYPE::Q)) {
 		ChangePattern();
-	}
+	}*/
 
 	if (m_waitTime <= 0) {
 		switch (m_curPattern) {
