@@ -1,7 +1,7 @@
 #pragma once
 #include "Boss.h"
 
-
+class Texture;
 class SecondBoss :
     public Boss
 {
@@ -37,7 +37,7 @@ private:
 	void FiveCircleRotateShot(int baseAngle);
 	void CircleRandomShot(int count);
 	void DownShot(int count);
-	void CircleReturnShot(int count, float exitTime);
+	void CircleReturnShot(int count, float exitTime, int k);
 	void RandomMoveShot(int count);
 public:
 	const Object* GetPlayer() const { return m_player; }
@@ -58,5 +58,8 @@ private:
 	bool m_firstPattern = true;
 	bool m_startPattern = false;
 	float m_waitTime = 0;
+private:
+	Texture* m_RandomTex[6] = {};
+	Texture* m_ShurikanTex[2] = {};
 };
 

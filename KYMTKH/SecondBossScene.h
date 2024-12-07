@@ -1,7 +1,6 @@
 #pragma once
 #include "Scene.h"
-class Object;
-class Y_TestScene :
+class SecondBossScene :
     public Scene
 {
 public:
