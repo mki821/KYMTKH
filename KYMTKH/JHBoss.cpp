@@ -8,10 +8,12 @@
 #include "LemniscateParent.h"
 #include "InputManager.h"
 #include "ResourceManager.h"
+#include "Button.h"
+#include "UIManager.h"
 #include "JHBoss.h"
 
 JHBoss::JHBoss() {  
-	m_hp = 800; 
+	m_hp = 800;
 
 	m_pProjectile15 = GET_RES(L"Projectile_15x15");
 	m_pProjectile10 = GET_RES(L"Projectile_10x10");
@@ -60,6 +62,12 @@ void JHBoss::Update() {
 
 void JHBoss::Render(HDC hdc) {
 	Boss::Render(hdc);
+}
+
+void JHBoss::SetDead() {
+	Object::SetDead();
+
+	GET_SINGLE(SceneManager)->GetCurScene()->DeleteEnemyProjectiles();
 }
 
 #pragma region FirstPattern

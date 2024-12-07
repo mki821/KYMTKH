@@ -41,8 +41,8 @@ void Boss::Render(HDC hdc) {
 		}
 		else {
 			RECT_RENDER(hdc, m_vPos.x, m_vPos.y, m_vSize.x, m_vSize.y);
-			ELLIPSE_RENDER(hdc, m_vPos.x, SCREEN_HEIGHT, 7.0f, 7.0f);
 		}
+		ELLIPSE_RENDER(hdc, m_vPos.x, SCREEN_HEIGHT, 7.0f, 7.0f);
 	}
 }
 

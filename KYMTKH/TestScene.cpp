@@ -11,13 +11,12 @@
 #include "TestScene.h"
 
 void TestScene::Init() {
-	LOAD_RES(L"Heart", L"Texture\\UI\\Heart.bmp");
-	LOAD_RES(L"BossHealthBar", L"Texture\\UI\\BossHealthBar.bmp");
 	LOAD_RES(L"Projectile_20x35", L"Texture\\Projectile\\Projectile_20x35.bmp");
-	LOAD_RES(L"Projectile_15x15", L"Texture\\Projectile\\Projectile_15x15.bmp");
 	LOAD_RES(L"Projectile_10x10", L"Texture\\Projectile\\Projectile_10x10.bmp");
 	LOAD_RES(L"JHBoss", L"Texture\\Boss\\JHBoss.bmp");
 	LOAD_RES(L"JHBackground", L"Texture\\Background\\JHBackground.bmp");
+
+	GET_SINGLE(ResourceManager)->Play(L"SecondBGM");
 
 	for (int i = 1; i <= 5; ++i) {
 		Image* heart = new Image;
@@ -56,7 +55,6 @@ void TestScene::Init() {
 }
 
 void TestScene::Release() {
-	Scene::Release();
-
 	GET_SINGLE(UIManager)->Clear();
+	Scene::Release();
 }

@@ -26,9 +26,13 @@ void Y_TestScene::Init()
 
 	LOAD_RES(L"FirstBoss", L"Texture\\Boss\\FirstBoss.bmp");
 	LOAD_RES(L"FirstBossBackGround", L"Texture\\Background\\FirstBossBackGround.bmp");
+
+	GET_SINGLE(ResourceManager)->Play(L"FirstBGM");
+
 	for (int i = 1; i <= 5; ++i) {
 		Image* heart = new Image;
 		heart->SetPos({ GAME_RIGHT + 70.0f, SCREEN_HEIGHT - 60.0f * i });
+		heart->SetTexture(GET_RES(L"Heart"), RENDER_TYPE::TransparentBlt);
 
 		wstring name = std::format(L"Heart_{0}", i);
 		GET_SINGLE(UIManager)->AddUI(name, heart);
@@ -37,6 +41,7 @@ void Y_TestScene::Init()
 	FillImage* bossHealth = new FillImage;
 	bossHealth->SetPos({ 1082.0f, 100.0f });
 	bossHealth->SetSize({ 500.0f, 30.0f });
+	bossHealth->SetTexture(GET_RES(L"BossHealthBar"), RENDER_TYPE::TransparentBlt);
 
 	GET_SINGLE(UIManager)->AddUI(L"BossHealth", bossHealth);
 
@@ -53,7 +58,7 @@ void Y_TestScene::Init()
 	Boss* pBoss = new FirstBoss;
 	pBoss->SetPos({ GAME_CENTER, 200.0f });
 	pBoss->SetSize({ 45.0f, 45.0f });
-	pBoss->GetComponent<Collider>()->SetSize(pBoss->GetSize());
+	pBoss->GetComponent<Collider>()->SetSize({ 20.0f, 20.0f });
 	pBoss->SetTexture(GET_RES(L"FirstBoss"));
 	AddObject(pBoss, LAYER::ENEMY);
 

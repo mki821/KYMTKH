@@ -1,6 +1,8 @@
 #pragma once
 
-class UI {
+#include "Object.h"
+
+class UI : public Object {
 public:
 	virtual void Init() abstract;
 	virtual void Update() abstract;
