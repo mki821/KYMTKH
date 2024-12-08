@@ -12,6 +12,7 @@ public:
 	void Init() override;
 	void Update() override;
 	void Render(HDC hdc) override;
+	void SetDead() override;
 public:
 	virtual void EnterCollision(Collider* other) override;
 private:

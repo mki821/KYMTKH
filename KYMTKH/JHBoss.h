@@ -17,6 +17,7 @@ public:
 	void Init() override;
 	virtual void Update() override;
 	virtual void Render(HDC hdc) override;
+	void SetDead() override;
 private:
 	void FirstPatternUpdate();
 	void SecondPattern();

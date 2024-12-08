@@ -34,7 +34,7 @@ void EventManager::Excute(const tEvent& _eve) {
         m_vecDead.push_back(pDeadObj);
     }
     break;
-    case EVENT_TYPE::CREATE_OBJECT:
+    case EVENT_TYPE::DELETE_UI:
         break;
     case EVENT_TYPE::SCENE_CHANGE:
         break;

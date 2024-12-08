@@ -1,5 +1,7 @@
 #include "pch.h"
 #include "GDISelector.h"
+#include "UI.h"
+#include "EventManager.h"
 #include "UIManager.h"
 
 void UIManager::Update() {
@@ -20,7 +22,7 @@ void UIManager::Render(HDC hdc) {
 
 void UIManager::Clear() {
 	for (auto ui : m_mapUI) {
-		delete ui.second;
+		GET_SINGLE(EventManager)->DeleteObject(ui.second);
 	}
 	m_mapUI.clear();
 }

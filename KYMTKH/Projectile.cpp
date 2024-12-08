@@ -4,6 +4,7 @@
 #include "EventManager.h"
 #include "Texture.h"
 #include "RenderManager.h"
+#include "ResourceManager.h"
 #include "Projectile.h"
 
 Projectile::Projectile() : m_speed(500.0f) {
@@ -19,7 +20,8 @@ Projectile::~Projectile() {
 }
 
 void Projectile::Init() {
-	GetComponent<CircleCollider>()->SetSize(m_vSize);
+    GetComponent<CircleCollider>()->SetSize(m_vSize);
+    GET_SINGLE(ResourceManager)->Play(L"Fire");
 }
 
 void Projectile::Update() {

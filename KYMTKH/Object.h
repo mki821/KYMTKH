@@ -48,7 +48,7 @@ public:
 	virtual void StayCollision(Collider* other);
 	virtual void ExitCollision(Collider* other);
 	const bool& GetIsDead() const { return m_isDie; }
-	void SetDead() { m_isDie = true; }
+	virtual void SetDead() { m_isDie = true; }
 protected:
 	bool m_isDie = false;
 };

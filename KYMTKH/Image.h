@@ -2,10 +2,6 @@
 
 #include "UI.h"
 
-enum class RENDER_TYPE {
-	BitBlt, TransparentBlt
-};
-
 class Texture;
 
 class Image : public UI {
