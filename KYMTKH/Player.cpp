@@ -7,6 +7,8 @@
 #include "Projectile.h"
 #include "UIManager.h"
 #include "ResourceManager.h"
+#include "Texture.h"
+#include "GDISelector.h"
 #include "Player.h"
 
 Player::Player() : m_hp(5), m_speed(300.0f) {
@@ -18,6 +20,7 @@ Player::~Player() { }
 void Player::Init() {
 	GetComponent<CircleCollider>()->SetSize(m_vSize);
 
+	m_pTex = GET_RES(L"Player");
 	m_pProjectile = GET_RES(L"Projectile_15x15");
 }
 
@@ -45,7 +48,13 @@ void Player::Update() {
 }
 
 void Player::Render(HDC hdc) {
-	RECT_RENDER(hdc, m_vPos.x, m_vPos.y, m_vSize.x, m_vSize.y);
+	int width = m_pTex->GetWidth();
+	int height = m_pTex->GetHeight();
+	Vector2 renderPos = { m_vPos.x - width, m_vPos.y - height };
+	TransparentBlt(hdc, renderPos.x, renderPos.y, width * 2.0f, height * 2.0f, m_pTex->GetDC(), 0, 0, width, height, RGB(255, 0, 255));
+
+	GDISelector a(hdc, PEN_TYPE::BLACK_THICK);
+	ELLIPSE_RENDER(hdc, m_vPos.x, m_vPos.y, m_vSize.x * 1.3f, m_vSize.y * 1.3f);
 }
 
 void Player::SetDead() {
@@ -90,7 +99,7 @@ void Player::ClampPos() {
 void Player::CreateProjectile() {
 	{
 		Projectile* pProj = new Projectile;
-		pProj->SetPos({ m_vPos.x - m_vSize.x - 2.0f, m_vPos.y - m_vSize.y / 2.0f });
+		pProj->SetPos({ m_vPos.x - m_vSize.x - 1.5f, m_vPos.y - m_vSize.y / 2.0f });
 		pProj->SetSize({ 15.0f, 15.0f });
 		pProj->SetDir({ 0.0f, -1.0f });
 		pProj->SetSpeed(1300.0f);
@@ -100,7 +109,7 @@ void Player::CreateProjectile() {
 	}
 	{
 		Projectile* pProj = new Projectile;
-		pProj->SetPos({ m_vPos.x + m_vSize.x + 2.0f, m_vPos.y - m_vSize.y / 2.0f });
+		pProj->SetPos({ m_vPos.x + m_vSize.x + 1.5f, m_vPos.y - m_vSize.y / 2.0f });
 		pProj->SetSize({ 15.0f, 15.0f });
 		pProj->SetDir({ 0.0f, -1.0f });
 		pProj->SetSpeed(1300.0f);
@@ -108,6 +117,27 @@ void Player::CreateProjectile() {
 
 		GET_SINGLE(SceneManager)->GetCurScene()->AddObject(pProj, LAYER::PLAYER_PROJECTILE);
 	}
+	{
+		Projectile* pProj = new Projectile;
+		pProj->SetPos({ m_vPos.x + m_vSize.x + 3.5f, m_vPos.y - m_vSize.y / 2.0f });
+		pProj->SetSize({ 15.0f, 15.0f });
+		pProj->SetDir({ 1.0f, -5.0f });
+		pProj->SetSpeed(1300.0f);
+		pProj->SetTexture(m_pProjectile);
+
+		GET_SINGLE(SceneManager)->GetCurScene()->AddObject(pProj, LAYER::PLAYER_PROJECTILE);
+	}
+	{
+		Projectile* pProj = new Projectile;
+		pProj->SetPos({ m_vPos.x - m_vSize.x - 3.5f, m_vPos.y - m_vSize.y / 2.0f });
+		pProj->SetSize({ 15.0f, 15.0f });
+		pProj->SetDir({ -1.0f, -5.0f });
+		pProj->SetSpeed(1300.0f);
+		pProj->SetTexture(m_pProjectile);
+
+		GET_SINGLE(SceneManager)->GetCurScene()->AddObject(pProj, LAYER::PLAYER_PROJECTILE);
+	}
+	GET_SINGLE(ResourceManager)->Play(L"Fire");
 }
 
 void Player::EnterCollision(Collider* other) {
@@ -115,6 +145,8 @@ void Player::EnterCollision(Collider* other) {
 
 	wstring heartName = std::format(L"Heart_{0}", m_hp--);
 	GET_SINGLE(UIManager)->RemoveUI(heartName);
+
+	GET_SINGLE(ResourceManager)->Play(L"Hit");
 
 	m_invincibilityTimer = 1.5f;
 	GetComponent<CircleCollider>()->SetEnable(false);

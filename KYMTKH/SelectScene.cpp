@@ -21,6 +21,7 @@ void SelectScene::Init() {
 	LOAD_RES(L"SecondBossScene", L"Texture\\Background\\SecondBossBackGround.bmp");
 	LOAD_RES(L"Projectile_15x15", L"Texture\\Projectile\\Projectile_15x15.bmp");
 	LOAD_RES(L"SelectBackground", L"Texture\\Background\\SelectBackground.bmp");
+	LOAD_RES(L"Player", L"Texture\\Player\\Player.bmp");
 
 	GET_SINGLE(ResourceManager)->LoadSound(L"FirstBGM", L"Sound\\First.mp3", true);
 	GET_SINGLE(ResourceManager)->LoadSound(L"SecondBGM", L"Sound\\Second.mp3", true);
@@ -29,7 +30,7 @@ void SelectScene::Init() {
 	GET_SINGLE(ResourceManager)->LoadSound(L"Blip", L"Sound\\Blip.mp3", false);
 	GET_SINGLE(ResourceManager)->LoadSound(L"Hit", L"Sound\\Hit.mp3", false);
 	GET_SINGLE(ResourceManager)->LoadSound(L"Fire", L"Sound\\Fire.mp3", false);
-	GET_SINGLE(ResourceManager)->LoadSound(L"GameOver", L"GameOver\\Blip.mp3", false);
+	GET_SINGLE(ResourceManager)->LoadSound(L"GameOver", L"Sound\\GameOver.mp3", false);
 
 	Image* input = new Image;
 	input->SetTexture(LOAD_RES(L"Input", L"Texture\\UI\\Input.bmp"), RENDER_TYPE::TransparentBlt);
@@ -96,6 +97,6 @@ void SelectScene::Render(HDC hdc) {
 }
 
 void SelectScene::Release() {
-	Scene::Release();
 	m_vecSceneImages.clear();
+	Scene::Release();
 }

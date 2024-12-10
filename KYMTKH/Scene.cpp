@@ -2,11 +2,10 @@
 #include "Object.h"
 #include "CollisionManager.h"
 #include "EventManager.h"
+#include "UIManager.h"
 #include "Scene.h"
 
-Scene::~Scene() {
-	Release();
-}
+Scene::~Scene() { }
 
 void Scene::Update() {
 	for (int i = 0; i < (UINT)LAYER::END; ++i) {
@@ -49,6 +48,7 @@ void Scene::Release() {
 		m_vecObj[i].clear();
 	}
 	GET_SINGLE(CollisionManager)->CheckReset();
+	GET_SINGLE(UIManager)->Clear();
 }
 
 void Scene::DeleteEnemyProjectiles() {
