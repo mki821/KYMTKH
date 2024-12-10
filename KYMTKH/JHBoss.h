@@ -21,6 +21,7 @@ public:
 private:
 	void FirstPatternUpdate();
 	void SecondPattern();
+	void SecondPatternUpdate();
 	void ThirdPattern();
 	void ThirdPatternUpdate();
 private:

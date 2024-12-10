@@ -13,7 +13,7 @@
 #include "JHBoss.h"
 
 JHBoss::JHBoss() {  
-	m_hp = 800;
+	m_hp = 500;
 
 	m_pProjectile15 = GET_RES(L"Projectile_15x15");
 	m_pProjectile10 = GET_RES(L"Projectile_10x10");
@@ -28,35 +28,38 @@ void JHBoss::Init() {
 
 void JHBoss::Update() {
 	Boss::Update();
+	/*if (GET_KEY_DOWN(KEY_TYPE::Q)) {
+		m_hp -= 100;
+	}*/
 
-
-	if (m_eCurPattern == Pattern::First && m_hp <= 500) {
+	if (m_eCurPattern == Pattern::First && m_hp <= 335) {
 		GET_SINGLE(SceneManager)->GetCurScene()->DeleteEnemyProjectiles();
 
 		m_eCurPattern = Pattern::Second;
+		SecondPattern();
 
-		Wait(1.0f, [this]() {
+		/*Wait(1.0f, [this]() {
 			float delay = 5.0f;
 			for (int i = 0; i < 3; ++i) {
 				Wait(delay * i, [this]() {
 					SecondPattern();
 				});
 			}
-		});
+		});*/
 	}
-	else if (m_eCurPattern == Pattern::Second && m_hp <= 150) {
+	else if (m_eCurPattern == Pattern::Second && m_hp <= 170) {
 		GET_SINGLE(SceneManager)->GetCurScene()->DeleteEnemyProjectiles();
 
 		m_eCurPattern = Pattern::Third;
 		ThirdPattern();
-
-		Wait(20.0f, [this]() {
-			m_eCurPattern = Pattern::Second;
-		});
+		///*Wait(20.0f, [this]() {
+		//	m_eCurPattern = Pattern::Second;
+		//});*/
 	}
 
 	switch (m_eCurPattern) {
 		case Pattern::First: FirstPatternUpdate(); break;
+		case Pattern::Second: SecondPatternUpdate(); break;
 		case Pattern::Third: ThirdPatternUpdate(); break;
 	}
 }
@@ -75,20 +78,20 @@ void JHBoss::SetDead() {
 
 void JHBoss::FirstPatternUpdate() {
 	m_timer += fDT;
-	if (m_timer >= 0.03f) {
+	if (m_timer >= 0.08f) {
 		m_timer = 0.0f;
 		One();
 	}
 
 	m_timer2 += fDT;
-	if (m_timer2 >= 7.5) {
+	if (m_timer2 >= 8.8) {
 		m_timer2 = 0.0f;
 
 		Two();
 	}
 
 	m_timer3 += fDT;
-	if (m_timer3 >= 0.48f) {
+	if (m_timer3 >= 0.9f) {
 		m_timer3 = 0.0f;
 
 		Three();
@@ -103,7 +106,7 @@ void JHBoss::One() {
 		Projectile* pProj = new Projectile;
 		pProj->SetPos({ m_vPos.x, m_vPos.y - m_vSize.y / 2.0f });
 		pProj->SetSize({ 10.0f, 10.0f });
-		pProj->SetSpeed(200.0f);
+		pProj->SetSpeed(180);
 		pProj->SetDir(i + tempModifier);
 		pProj->SetLifeTime(5.0f);
 		pProj->SetTexture(m_pProjectile10);
@@ -132,7 +135,7 @@ void JHBoss::Three() {
 		Projectile* pProj = new Projectile;
 		pProj->SetPos({ m_vPos.x, m_vPos.y - m_vSize.y / 2.0f });
 		pProj->SetSize({ 15.0f, 15.0f });
-		pProj->SetSpeed(100.0f);
+		pProj->SetSpeed(70.0f);
 		pProj->SetDir(i);
 		pProj->SetLifeTime(15.0f);
 		pProj->SetTexture(m_pProjectile15);
@@ -317,6 +320,16 @@ void JHBoss::SecondPattern() {
 	});
 }
 
+void JHBoss::SecondPatternUpdate()
+{
+	m_timer += fDT;
+	if (m_timer >= 4.f) {
+		m_timer = 0.0f;
+
+		SecondPattern();
+	}
+}
+
 #pragma endregion
 #pragma region ThirdPattern
 
@@ -332,7 +345,7 @@ void JHBoss::ThirdPattern() {
 
 void JHBoss::ThirdPatternUpdate() {
 	m_timer += fDT;
-	if (m_timer >= 0.08f) {
+	if (m_timer >= 0.1f) {
 		m_timer = 0.0f;
 
 		Four();

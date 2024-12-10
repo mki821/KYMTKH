@@ -49,14 +49,14 @@ void SecondBossScene::Init()
 	GET_SINGLE(UIManager)->AddUI(L"BossHealth", bossHealth);
 
 	Object* pPlayer = new Player;
-	pPlayer->SetPos({ GAME_CENTER, 850.0f });
+	pPlayer->SetPos({ GAME_CENTER, 650.0f });
 	pPlayer->SetSize({ 8.0f, 8.0f });
 	AddObject(pPlayer, LAYER::PLAYER);
 	SetPlayer(pPlayer);
 
 	Boss* pBoss = new SecondBoss;
 	pBoss->SetPos({ GAME_CENTER, 200.0f });
-	pBoss->SetSize({ 45.0f, 45.0f });
+	pBoss->SetSize({ 80.0f, 80.0f });
 	pBoss->GetComponent<Collider>()->SetSize(pBoss->GetSize());
 	pBoss->SetTexture(GET_RES(L"SecondBoss"));
 	AddObject(pBoss, LAYER::ENEMY);
