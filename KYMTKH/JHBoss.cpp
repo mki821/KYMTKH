@@ -29,6 +29,7 @@ void JHBoss::Init() {
 void JHBoss::Update() {
 	Boss::Update();
 
+
 	if (m_eCurPattern == Pattern::First && m_hp <= 500) {
 		GET_SINGLE(SceneManager)->GetCurScene()->DeleteEnemyProjectiles();
 
