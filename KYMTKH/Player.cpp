@@ -108,6 +108,7 @@ void Player::CreateProjectile() {
 
 		GET_SINGLE(SceneManager)->GetCurScene()->AddObject(pProj, LAYER::PLAYER_PROJECTILE);
 	}
+	GET_SINGLE(ResourceManager)->Play(L"Fire");
 }
 
 void Player::EnterCollision(Collider* other) {

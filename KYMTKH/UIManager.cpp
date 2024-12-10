@@ -6,7 +6,8 @@
 
 void UIManager::Update() {
 	for (auto ui : m_mapUI) {
-		ui.second->Update();
+		if(!ui.second->GetIsDead())
+			ui.second->Update();
 	}
 }
 
@@ -16,7 +17,8 @@ void UIManager::Render(HDC hdc) {
 	PatBlt(hdc, GAME_RIGHT, 0, SCREEN_WIDTH, SCREEN_HEIGHT, BLACKNESS);
 
 	for (auto ui : m_mapUI) {
-		ui.second->Render(hdc);
+		if (!ui.second->GetIsDead())
+			ui.second->Render(hdc);
 	}
 }
 

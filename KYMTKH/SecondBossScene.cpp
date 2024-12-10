@@ -68,5 +68,4 @@ void SecondBossScene::Init()
 void SecondBossScene::Release()
 {
 	Scene::Release();
-	GET_SINGLE(UIManager)->Clear();
 }

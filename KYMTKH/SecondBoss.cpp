@@ -63,19 +63,16 @@ void SecondBoss::Update()
 		ChangePattern();
 	}
 
-	/*if (GET_KEY_DOWN(KEY_TYPE::Q)) {
+	if (GET_KEY_DOWN(KEY_TYPE::Q)) {
 		ChangePattern();
-	}*/
+	}
 
 	if (m_waitTime <= 0) {
 		switch (m_curPattern) {
-		case Pattern::First: FirstPatternUpdate(); break;
-		case Pattern::Second: SecondPatternUpdate();
-			break;
-		case Pattern::Third: ThirdPatternUpdate();
-			break;
-		case Pattern::Fourth: FourthPatternUpdate();
-			break;
+			case Pattern::First: FirstPatternUpdate(); break;
+			case Pattern::Second: SecondPatternUpdate(); break;
+			case Pattern::Third: ThirdPatternUpdate(); break;
+			case Pattern::Fourth: FourthPatternUpdate(); break;
 		}
 	}
 	else {

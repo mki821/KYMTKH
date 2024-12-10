@@ -96,6 +96,6 @@ void SelectScene::Render(HDC hdc) {
 }
 
 void SelectScene::Release() {
-	Scene::Release();
 	m_vecSceneImages.clear();
+	Scene::Release();
 }
