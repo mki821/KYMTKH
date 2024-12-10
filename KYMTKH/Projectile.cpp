@@ -21,7 +21,6 @@ Projectile::~Projectile() {
 
 void Projectile::Init() {
     GetComponent<CircleCollider>()->SetSize(m_vSize);
-    GET_SINGLE(ResourceManager)->Play(L"Fire");
 }
 
 void Projectile::Update() {
@@ -70,7 +69,6 @@ void Projectile::Render(HDC hdc) {
         vertices[2].y += renderPos.y;
 
         PlgBlt(GET_SINGLE(RenderManager)->GetDC(), vertices, m_pTex->GetDC(), 0, 0, bm.bmWidth, bm.bmHeight, NULL, 0, 0);
-        //TransparentBlt(GET_SINGLE(RenderManager)->GetDC(), renderPos.x, renderPos.y, m_vSize.x, m_vSize.y, m_rotateDC, 0, 0, bm.bmWidth, bm.bmHeight, RGB(255, 0, 255));
 	}
 	else ELLIPSE_RENDER(hdc, m_vPos.x, m_vPos.y, m_vSize.x, m_vSize.y);
 }

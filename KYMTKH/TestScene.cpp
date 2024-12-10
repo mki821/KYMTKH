@@ -55,6 +55,5 @@ void TestScene::Init() {
 }
 
 void TestScene::Release() {
-	GET_SINGLE(UIManager)->Clear();
 	Scene::Release();
 }

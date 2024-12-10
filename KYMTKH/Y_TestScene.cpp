@@ -69,5 +69,4 @@ void Y_TestScene::Init()
 void Y_TestScene::Release()
 {
 	Scene::Release();
-	GET_SINGLE(UIManager)->Clear();
 }
