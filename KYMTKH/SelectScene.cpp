@@ -21,6 +21,7 @@ void SelectScene::Init() {
 	LOAD_RES(L"SecondBossScene", L"Texture\\Background\\SecondBossBackGround.bmp");
 	LOAD_RES(L"Projectile_15x15", L"Texture\\Projectile\\Projectile_15x15.bmp");
 	LOAD_RES(L"SelectBackground", L"Texture\\Background\\SelectBackground.bmp");
+	LOAD_RES(L"Player", L"Texture\\Player\\Player.bmp");
 
 	GET_SINGLE(ResourceManager)->LoadSound(L"FirstBGM", L"Sound\\First.mp3", true);
 	GET_SINGLE(ResourceManager)->LoadSound(L"SecondBGM", L"Sound\\Second.mp3", true);

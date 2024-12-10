@@ -7,6 +7,8 @@
 #include "Projectile.h"
 #include "UIManager.h"
 #include "ResourceManager.h"
+#include "Texture.h"
+#include "GDISelector.h"
 #include "Player.h"
 
 Player::Player() : m_hp(5), m_speed(300.0f) {
@@ -18,6 +20,7 @@ Player::~Player() { }
 void Player::Init() {
 	GetComponent<CircleCollider>()->SetSize(m_vSize);
 
+	m_pTex = GET_RES(L"Player");
 	m_pProjectile = GET_RES(L"Projectile_15x15");
 }
 
@@ -45,7 +48,13 @@ void Player::Update() {
 }
 
 void Player::Render(HDC hdc) {
-	RECT_RENDER(hdc, m_vPos.x, m_vPos.y, m_vSize.x, m_vSize.y);
+	int width = m_pTex->GetWidth();
+	int height = m_pTex->GetHeight();
+	Vector2 renderPos = { m_vPos.x - width, m_vPos.y - height };
+	TransparentBlt(hdc, renderPos.x, renderPos.y, width * 2.0f, height * 2.0f, m_pTex->GetDC(), 0, 0, width, height, RGB(255, 0, 255));
+
+	GDISelector a(hdc, PEN_TYPE::BLACK_THICK);
+	ELLIPSE_RENDER(hdc, m_vPos.x, m_vPos.y, m_vSize.x * 1.3f, m_vSize.y * 1.3f);
 }
 
 void Player::SetDead() {
@@ -134,12 +143,12 @@ void Player::CreateProjectile() {
 void Player::EnterCollision(Collider* other) {
 	if (m_invincibilityTimer > 0.0f) return;
 
-	/*wstring heartName = std::format(L"Heart_{0}", m_hp--);
+	wstring heartName = std::format(L"Heart_{0}", m_hp--);
 	GET_SINGLE(UIManager)->RemoveUI(heartName);
 
 	m_invincibilityTimer = 1.5f;
-	GetComponent<CircleCollider>()->SetEnable(false);*/
+	GetComponent<CircleCollider>()->SetEnable(false);
 
-	/*if (m_hp <= 0)
-		SetDead();*///테스트 떄문에 잠깐
+	if (m_hp <= 0)
+		SetDead();
 }
