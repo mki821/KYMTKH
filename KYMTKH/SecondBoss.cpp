@@ -39,33 +39,33 @@ SecondBoss::SecondBoss()
 SecondBoss::~SecondBoss()
 {
 }
-
+	
 void SecondBoss::Init()
 {
 	m_originPos = GetPos();
 	m_curPattern = Pattern::First;
-	m_hp = 800;
+	m_hp = 500;
 }
 
 void SecondBoss::Update()
 {
 	Boss::Update();
-	if (m_curPattern == Pattern::First && m_hp <= 600) {
+	if (m_curPattern == Pattern::First && m_hp <= 370) {
 		ChangePattern();
 	}
-	else if (m_curPattern == Pattern::Second && m_hp <= 400) {
+	else if (m_curPattern == Pattern::Second && m_hp <= 250) {
 		ChangePattern();
 	}
-	else if (m_curPattern == Pattern::Third && m_hp <= 200) {
+	else if (m_curPattern == Pattern::Third && m_hp <= 150) {
 		ChangePattern();
 	}
 	else if (m_curPattern == Pattern::Fourth && m_hp <= 0) {
 		ChangePattern();
 	}
 
-	/*if (GET_KEY_DOWN(KEY_TYPE::Q)) {
+	if (GET_KEY_DOWN(KEY_TYPE::Q)) {
 		ChangePattern();
-	}*/
+	}
 
 	if (m_waitTime <= 0) {
 		switch (m_curPattern) {
@@ -114,7 +114,7 @@ void SecondBoss::FirstPatternUpdate()
 	m_timer += fDT;
 	if (!m_stop) {
 		if (m_firstPattenAngle <= 240) {
-			if (m_timer >= 0.075f) {
+			if (m_timer >= 0.09f) {
 				m_timer = 0.0f;
 				CircleRotateShot(m_firstPattenAngle += 3);
 			}
@@ -140,7 +140,7 @@ void SecondBoss::FirstPatternUpdate()
 void SecondBoss::SecondPatternUpdate()
 {
 	m_timer += fDT;
-	if (m_timer >= 0.1f) {
+	if (m_timer >= 0.16f) {
 		m_timer = 0.0f;
 		FiveCircleRotateShot((m_firstPattenAngle += 3) % 360);
 		if (m_firstPattenAngle >= 360) {
@@ -157,7 +157,7 @@ void SecondBoss::ThirdPatternUpdate()
 		Two();
 		m_startPattern = true;
 	}
-	if (m_timer >= 4.3f) {
+	if (m_timer >= 5.f) {
 		m_timer = 0.0f;
 		Two();
 	}

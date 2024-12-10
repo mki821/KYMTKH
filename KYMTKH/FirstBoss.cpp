@@ -40,7 +40,7 @@ FirstBoss::~FirstBoss()
 void FirstBoss::Init()
 {
 	m_originPos = GetPos();
-	m_hp = 800;
+	m_hp = 500;
 	m_curPattern = Pattern::First;
 	//FirstPattern();
 }
@@ -51,25 +51,25 @@ void FirstBoss::Update()
 {
 	Boss::Update();
 
-	if (m_curPattern == Pattern::First && m_hp <= 640) {
+	if (m_curPattern == Pattern::First && m_hp <= 400) {
 		ChangePattern();
 	}
-	else if (m_curPattern == Pattern::Second && m_hp <= 480) {
+	else if (m_curPattern == Pattern::Second && m_hp <= 300) {
 		ChangePattern();
 	}
-	else if (m_curPattern == Pattern::Third && m_hp <= 320) {
+	else if (m_curPattern == Pattern::Third && m_hp <= 200) {
 		ChangePattern();
 	}
-	else if (m_curPattern == Pattern::Fourth && m_hp <= 160) {
+	else if (m_curPattern == Pattern::Fourth && m_hp <= 100) {
 		ChangePattern();
 	}
 	else if (m_curPattern == Pattern::Fifth && m_hp <= 0) {
 		ChangePattern();
 	}
 
-	/*if (GET_KEY_DOWN(KEY_TYPE::Q)) {
+	if (GET_KEY_DOWN(KEY_TYPE::Q)) {
 		ChangePattern();
-	}*/
+	}
 
 	if (m_waitTime <= 0) {
 		switch (m_curPattern) {
@@ -108,7 +108,7 @@ void FirstBoss::ChangePattern()
 
 Vector2 FirstBoss::GetRandomPos()
 {
-	int y = rand() % 190 + 10;
+	int y = rand() % 190 + 35;
 	int min = GAME_RIGHT - GAME_LEFT;
 	int x = rand() % min + GAME_LEFT;
 	return {x, y};
@@ -130,14 +130,14 @@ void FirstBoss::FirstPatternUpdate()
 	if (!m_stop) {
 		m_timer += fDT;
 		if (m_changePatternCount < 3) {
-			if (m_timer >= 1.6f) {
+			if (m_timer >= 1.7f) {
 				m_timer = 0.0f;
 				One();
 				m_changePatternCount++;
 			}
 		}
 		else {
-			if (m_timer >= 2.f) {
+			if (m_timer >= 2.5f) {
 				m_timer = 0.0f;
 				Two();
 				m_changePatternCount++;
@@ -177,20 +177,20 @@ void FirstBoss::ThirdPatternUpdate()
 {
 	m_timer += fDT;
 	if (m_changePatternCount < 20) {
-		if (m_timer >= 0.2f) {
+		if (m_timer >= 0.25f) {
 			m_timer = 0;
-			Move(GetRandomPos(), 1.3f);
+			Move(GetRandomPos(), 2.f);
 			m_changePatternCount++;
-			CircleShot(11, 380);
+			CircleShot(12, 360);
 		}
 	}
 	else {
-		if (m_timer >= 0.8f) {
+		if (m_timer >= 1.2f) {
 			m_timer = 0.0f;
 			Four();
 			Move(GetRandomPos(), 1.8f);
 			m_changePatternCount++;
-			if (m_changePatternCount >= 24) {
+			if (m_changePatternCount >= 23) {
 				m_timer = 0;
 				m_changePatternCount = 0;
 			}
@@ -204,7 +204,7 @@ void FirstBoss::FourthPatternUpdate()
 		FourthPattern();
 	}
 	m_timer += fDT;
-	if (m_timer >= 14.f) {
+	if (m_timer >= 15.f) {
 		m_timer = 0;
 		Five();
 	}
@@ -216,10 +216,10 @@ void FirstBoss::FourthPattern()
 void FirstBoss::FifthPatternUpdate()
 {
 	m_timer += fDT;
-	if (m_timer >= 0.2f) {
+	if (m_timer >= 0.25f) {
 		m_timer = 0;
 		CircleRandomShot(30, GetBossRoundPos(30));
-		Move(GetRandomPos(), 2.f);
+		Move(GetRandomPos(), 2.5f);
 	}
 }
 void FirstBoss::One()
@@ -237,34 +237,34 @@ void FirstBoss::One()
 }
 void FirstBoss::Two()
 {
-	CircleShot(10, 200);
-	CircleShot(11, 180);
+	CircleShot(11, 200);
+	CircleShot(12, 180);
 	Move(GetRandomPos(), 1.f);
-	Wait(0.1f, std::bind(&FirstBoss::StopAndChaseShot, this, 4));
-	Wait(1.f, std::bind(&FirstBoss::CircleShot, this, 10, 200)); 
-	Wait(1.1f, std::bind(&FirstBoss::CircleShot, this, 11, 180));
+	Wait(0.2f, std::bind(&FirstBoss::StopAndChaseShot, this, 4));
+	Wait(1.f, std::bind(&FirstBoss::CircleShot, this, 11, 200)); 
+	Wait(1.1f, std::bind(&FirstBoss::CircleShot, this, 12, 180));
 }
 void FirstBoss::Three()
 {
 	StopAndRandomMoveShot(1.5, 280);
-	Wait(0.4f, std::bind(&FirstBoss::StopAndRandomMoveShot, this, 1.5, 260));
-	Wait(0.8f, std::bind(&FirstBoss::StopAndRandomMoveShot, this, 1.5, 260));
-	Wait(1.2f, std::bind(&FirstBoss::StopAndRandomMoveShot, this, 1.5, 260));
-	Wait(1.6f, std::bind(&FirstBoss::StopAndRandomMoveShot, this, 1.5, 260));
-	Wait(2.f, std::bind(&FirstBoss::StopAndRandomMoveShot, this, 1.5, 260));
-	Wait(2.4f, std::bind(&FirstBoss::StopAndRandomMoveShot, this, 1.5, 260));
+	Wait(0.4f, std::bind(&FirstBoss::StopAndRandomMoveShot, this, 1.5, 240));
+	Wait(0.8f, std::bind(&FirstBoss::StopAndRandomMoveShot, this, 1.5, 240));
+	Wait(1.2f, std::bind(&FirstBoss::StopAndRandomMoveShot, this, 1.5, 240));
+	Wait(1.6f, std::bind(&FirstBoss::StopAndRandomMoveShot, this, 1.5, 240));
+	Wait(2.f, std::bind(&FirstBoss::StopAndRandomMoveShot, this, 1.5, 240));
+	Wait(2.4f, std::bind(&FirstBoss::StopAndRandomMoveShot, this, 1.5, 240));
 	Wait(2.5f, std::bind(&FirstBoss::Move, this, GetRandomPos(), 5.f));
 }
 void FirstBoss::Four()
 {
-	CircleShot(12, 260);
-	CircleShot(8, 290);
+	CircleShot(12, 300);
+	CircleShot(8, 320);
 }
 void FirstBoss::Five()
 {
-	RandomMoveShot(350);
+	RandomMoveShot(370);
 	Wait(3.5f, std::bind(&FirstBoss::Move, this, GetRandomPos(), 1.f));
-	Wait(4.1f, std::bind(&FirstBoss::FiveShot, this));
+	Wait(3.75f, std::bind(&FirstBoss::FiveShot, this));
 }
 void FirstBoss::Six()
 {
