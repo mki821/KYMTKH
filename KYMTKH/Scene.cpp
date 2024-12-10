@@ -5,9 +5,7 @@
 #include "UIManager.h"
 #include "Scene.h"
 
-Scene::~Scene() {
-	Release();
-}
+Scene::~Scene() { }
 
 void Scene::Update() {
 	for (int i = 0; i < (UINT)LAYER::END; ++i) {
