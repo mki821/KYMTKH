@@ -63,9 +63,9 @@ void SecondBoss::Update()
 		ChangePattern();
 	}
 
-	if (GET_KEY_DOWN(KEY_TYPE::Q)) {
+	/*if (GET_KEY_DOWN(KEY_TYPE::Q)) {
 		ChangePattern();
-	}
+	}*/
 
 	if (m_waitTime <= 0) {
 		switch (m_curPattern) {
@@ -103,9 +103,9 @@ void SecondBoss::ChangePattern()
 
 Vector2 SecondBoss::GetRandomPos()
 {
-	int y = rand() % 190 + 30;
-	int min = GAME_RIGHT - GAME_LEFT - 10;
-	int x = rand() % min + GAME_LEFT + 10;
+	int y = rand() % 120 + 80;
+	int min = GAME_RIGHT - GAME_LEFT + 35;
+	int x = rand() % min + GAME_LEFT;
 	return { x, y };
 }
 

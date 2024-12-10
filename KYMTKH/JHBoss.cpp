@@ -28,33 +28,38 @@ void JHBoss::Init() {
 
 void JHBoss::Update() {
 	Boss::Update();
+	/*if (GET_KEY_DOWN(KEY_TYPE::Q)) {
+		m_hp -= 100;
+	}*/
 
 	if (m_eCurPattern == Pattern::First && m_hp <= 335) {
 		GET_SINGLE(SceneManager)->GetCurScene()->DeleteEnemyProjectiles();
 
 		m_eCurPattern = Pattern::Second;
+		SecondPattern();
 
-		Wait(1.0f, [this]() {
+		/*Wait(1.0f, [this]() {
 			float delay = 5.0f;
 			for (int i = 0; i < 3; ++i) {
 				Wait(delay * i, [this]() {
 					SecondPattern();
 				});
 			}
-		});
+		});*/
 	}
 	else if (m_eCurPattern == Pattern::Second && m_hp <= 170) {
 		GET_SINGLE(SceneManager)->GetCurScene()->DeleteEnemyProjectiles();
 
 		m_eCurPattern = Pattern::Third;
 		ThirdPattern();
-		/*Wait(20.0f, [this]() {
-			m_eCurPattern = Pattern::Second;
-		});*/
+		///*Wait(20.0f, [this]() {
+		//	m_eCurPattern = Pattern::Second;
+		//});*/
 	}
 
 	switch (m_eCurPattern) {
 		case Pattern::First: FirstPatternUpdate(); break;
+		case Pattern::Second: SecondPatternUpdate(); break;
 		case Pattern::Third: ThirdPatternUpdate(); break;
 	}
 }
@@ -315,6 +320,16 @@ void JHBoss::SecondPattern() {
 	});
 }
 
+void JHBoss::SecondPatternUpdate()
+{
+	m_timer += fDT;
+	if (m_timer >= 4.f) {
+		m_timer = 0.0f;
+
+		SecondPattern();
+	}
+}
+
 #pragma endregion
 #pragma region ThirdPattern
 
@@ -330,7 +345,7 @@ void JHBoss::ThirdPattern() {
 
 void JHBoss::ThirdPatternUpdate() {
 	m_timer += fDT;
-	if (m_timer >= 0.08f) {
+	if (m_timer >= 0.1f) {
 		m_timer = 0.0f;
 
 		Four();
