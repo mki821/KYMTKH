@@ -30,7 +30,7 @@ void SelectScene::Init() {
 	GET_SINGLE(ResourceManager)->LoadSound(L"Blip", L"Sound\\Blip.mp3", false);
 	GET_SINGLE(ResourceManager)->LoadSound(L"Hit", L"Sound\\Hit.mp3", false);
 	GET_SINGLE(ResourceManager)->LoadSound(L"Fire", L"Sound\\Fire.mp3", false);
-	GET_SINGLE(ResourceManager)->LoadSound(L"GameOver", L"GameOver\\Blip.mp3", false);
+	GET_SINGLE(ResourceManager)->LoadSound(L"GameOver", L"Sound\\GameOver.mp3", false);
 
 	Image* input = new Image;
 	input->SetTexture(LOAD_RES(L"Input", L"Texture\\UI\\Input.bmp"), RENDER_TYPE::TransparentBlt);

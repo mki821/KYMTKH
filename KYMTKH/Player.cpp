@@ -146,6 +146,8 @@ void Player::EnterCollision(Collider* other) {
 	wstring heartName = std::format(L"Heart_{0}", m_hp--);
 	GET_SINGLE(UIManager)->RemoveUI(heartName);
 
+	GET_SINGLE(ResourceManager)->Play(L"Hit");
+
 	m_invincibilityTimer = 1.5f;
 	GetComponent<CircleCollider>()->SetEnable(false);
 
