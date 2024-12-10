@@ -113,12 +113,12 @@ void Player::CreateProjectile() {
 void Player::EnterCollision(Collider* other) {
 	if (m_invincibilityTimer > 0.0f) return;
 
-	/*wstring heartName = std::format(L"Heart_{0}", m_hp--);
+	wstring heartName = std::format(L"Heart_{0}", m_hp--);
 	GET_SINGLE(UIManager)->RemoveUI(heartName);
 
 	m_invincibilityTimer = 1.5f;
-	GetComponent<CircleCollider>()->SetEnable(false);*/
+	GetComponent<CircleCollider>()->SetEnable(false);
 
-	/*if (m_hp <= 0)
-		SetDead();*///테스트 떄문에 잠깐
+	if (m_hp <= 0)
+		SetDead();
 }
