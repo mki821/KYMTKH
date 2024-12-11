@@ -19,5 +19,6 @@ private:
 	bool m_isChangingIndex = false;
 	float m_timer = 0.0f;
 	vector<wstring> m_vecSceneNames;
+	vector<bool> m_vecIsHard;
 	vector<Image*> m_vecSceneImages;
 };

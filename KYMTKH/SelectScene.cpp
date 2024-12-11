@@ -6,10 +6,12 @@
 #include "Image.h"
 #include "Background.h"
 #include "UIManager.h"
+#include "Scene.h"
 #include "SelectScene.h"
 
 SelectScene::SelectScene() {
-	m_vecSceneNames = { L"Y_TestScene", L"TestScene", L"SecondBossScene" };
+	m_vecSceneNames = { L"Y_TestScene", L"TestScene", L"SecondBossScene", L"TestScene" };
+	m_vecIsHard = { false, false, false, true };
 }
 
 void SelectScene::Init() {
@@ -80,6 +82,7 @@ void SelectScene::Update() {
 
 		if (GET_KEY_DOWN(KEY_TYPE::SPACE)) {
 			GET_SINGLE(ResourceManager)->Play(L"Select");
+			GET_SINGLE(SceneManager)->GetScene(m_vecSceneNames[m_currentSceneIndex])->SetIsHard(m_vecIsHard[m_currentSceneIndex]);
 			GET_SINGLE(SceneManager)->LoadScene(m_vecSceneNames[m_currentSceneIndex]);
 		}
 	}

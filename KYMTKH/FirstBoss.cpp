@@ -96,7 +96,7 @@ void FirstBoss::Render(HDC hdc)
 
 void FirstBoss::ChangePattern()
 {
-	GET_SINGLE(SceneManager)->GetCurScene()->DeleteEnemyProjectiles();
+	//GET_SINGLE(SceneManager)->GetCurScene()->DeleteEnemyProjectiles();
 	m_waitTime = 3;
 	Move(m_originPos, 1.f);
 	m_changePatternCount = 0;

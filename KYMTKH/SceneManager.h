@@ -15,6 +15,9 @@ public:
 	const std::shared_ptr<Scene>& GetCurScene() const {
 		return m_pCurrentScene;
 	}
+	const std::shared_ptr<Scene>& GetScene(const wstring& sceneName) const {
+		return m_mapScenes.at(sceneName);
+	}
 private:
 	map<wstring, std::shared_ptr<Scene>> m_mapScenes;
 	std::shared_ptr<Scene> m_pCurrentScene;

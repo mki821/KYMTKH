@@ -17,7 +17,6 @@ JHBoss::JHBoss() {
 
 	m_pProjectile15 = GET_RES(L"Projectile_15x15");
 	m_pProjectile10 = GET_RES(L"Projectile_10x10");
-	cout << m_pProjectile10;
 }
 JHBoss::~JHBoss() { }
 
@@ -69,9 +68,7 @@ void JHBoss::Render(HDC hdc) {
 }
 
 void JHBoss::SetDead() {
-	Object::SetDead();
-
-	GET_SINGLE(SceneManager)->GetCurScene()->DeleteEnemyProjectiles();
+	Boss::SetDead();
 }
 
 #pragma region FirstPattern

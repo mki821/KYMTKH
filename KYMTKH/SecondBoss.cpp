@@ -87,7 +87,7 @@ void SecondBoss::Render(HDC hdc)
 
 void SecondBoss::ChangePattern()
 {
-	GET_SINGLE(SceneManager)->GetCurScene()->DeleteEnemyProjectiles();
+	//GET_SINGLE(SceneManager)->GetCurScene()->DeleteEnemyProjectiles();
 	Move(m_originPos, 1.f);
 	m_changePatternCount = 0;
 	m_firstPattern = true;

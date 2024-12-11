@@ -4,6 +4,8 @@
 #include "UIManager.h"
 #include "FillImage.h"
 #include "Texture.h"
+#include "EndImage.h"
+#include "ResourceManager.h"
 #include "Boss.h"
 
 Boss::Boss() {
@@ -46,12 +48,21 @@ void Boss::Render(HDC hdc) {
 	}
 }
 
+void Boss::SetDead() {
+	Object::SetDead();
+
+	EndImage* btn = new EndImage;
+	btn->SetPos({ SCREEN_WIDTH / 2.0f - 100.0f, SCREEN_HEIGHT / 2.0f });
+	btn->SetTexture(GET_RES(L"GameClear"));
+	GET_SINGLE(UIManager)->AddUI(L"Button", btn);
+}
+
 void Boss::EnterCollision(Collider* other) {
 	--m_hp;
 
 	FillImage* healthbar = dynamic_cast<FillImage*>(GET_SINGLE(UIManager)->GetUI(L"BossHealth"));
 	if(healthbar != nullptr)
-		healthbar->SetFillAmount(m_hp / 500.0f);
+		healthbar->SetFillAmount(m_hp / 600.0f);
 
 	if (m_hp <= 0)
 		SetDead();
