@@ -28,7 +28,7 @@ void TestScene::Init() {
 	}
 
 	FillImage* bossHealth = new FillImage;
-	bossHealth->SetPos({ 1082.0f, 100.0f });
+	bossHealth->SetPos({ 1050.0f, 100.0f });
 	bossHealth->SetSize({ 500.0f, 30.0f });
 	bossHealth->SetTexture(GET_RES(L"BossHealthBar"), RENDER_TYPE::TransparentBlt);
 
@@ -47,6 +47,7 @@ void TestScene::Init() {
 	pBoss->SetPos({ GAME_CENTER, 200.0f });
 	pBoss->SetSize({ 80.0f, 80.0f });
 	pBoss->GetComponent<Collider>()->SetSize(pBoss->GetSize());
+	pBoss->GetComponent<Collider>()->SetOffSetPos({ 0,-55 });
 	pBoss->SetTexture(GET_RES(L"JHBoss"));
 	AddObject(pBoss, LAYER::ENEMY);
 

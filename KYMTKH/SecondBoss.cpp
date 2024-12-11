@@ -44,16 +44,16 @@ void SecondBoss::Init()
 {
 	m_originPos = GetPos();
 	m_curPattern = Pattern::First;
-	m_hp = 500;
+	m_hp = 600;
 }
 
 void SecondBoss::Update()
 {
 	Boss::Update();
-	if (m_curPattern == Pattern::First && m_hp <= 370) {
+	if (m_curPattern == Pattern::First && m_hp <= 450) {
 		ChangePattern();
 	}
-	else if (m_curPattern == Pattern::Second && m_hp <= 250) {
+	else if (m_curPattern == Pattern::Second && m_hp <= 300) {
 		ChangePattern();
 	}
 	else if (m_curPattern == Pattern::Third && m_hp <= 150) {
@@ -87,6 +87,7 @@ void SecondBoss::Render(HDC hdc)
 
 void SecondBoss::ChangePattern()
 {
+	GET_SINGLE(SceneManager)->GetCurScene()->DeleteEnemyProjectiles();
 	Move(m_originPos, 1.f);
 	m_changePatternCount = 0;
 	m_firstPattern = true;
