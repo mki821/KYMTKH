@@ -51,7 +51,7 @@ void Boss::EnterCollision(Collider* other) {
 
 	FillImage* healthbar = dynamic_cast<FillImage*>(GET_SINGLE(UIManager)->GetUI(L"BossHealth"));
 	if(healthbar != nullptr)
-		healthbar->SetFillAmount(m_hp / 500.0f);
+		healthbar->SetFillAmount(m_hp / 600.0f);
 
 	if (m_hp <= 0)
 		SetDead();

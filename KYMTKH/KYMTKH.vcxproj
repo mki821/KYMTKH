@@ -180,6 +180,7 @@
     <ClInclude Include="Image.h" />
     <ClInclude Include="InputManager.h" />
     <ClInclude Include="JHBoss.h" />
+    <ClInclude Include="JHBossH.h" />
     <ClInclude Include="KYMTKH.h" />
     <ClInclude Include="Lemniscate.h" />
     <ClInclude Include="LemniscateParent.h" />
@@ -235,6 +236,7 @@
     <ClCompile Include="Image.cpp" />
     <ClCompile Include="InputManager.cpp" />
     <ClCompile Include="JHBoss.cpp" />
+    <ClCompile Include="JHBossH.cpp" />
     <ClCompile Include="Lemniscate.cpp" />
     <ClCompile Include="LemniscateParent.cpp" />
     <ClCompile Include="main.cpp" />

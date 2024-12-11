@@ -24,4 +24,8 @@ public:
 	const vector<Object*>& GetLayerObjects(LAYER _type) const { return m_vecObj[(UINT)_type]; }
 private:
 	vector<Object*> m_vecObj[(UINT)LAYER::END];
+public:
+	void SetIsHard(bool isHard) { m_isHard = isHard; }
+protected:
+	bool m_isHard = false;
 };

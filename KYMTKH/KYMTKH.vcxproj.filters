@@ -199,6 +199,15 @@
     <ClInclude Include="ReturnProj.h">
       <Filter>Engine\YTH\Object\Projectile</Filter>
     </ClInclude>
+    <ClInclude Include="JHBossH.h">
+      <Filter>Engine\0C_Objects\mki_Boss\JH</Filter>
+    </ClInclude>
+    <ClInclude Include="Button.h">
+      <Filter>Engine\0G_UI</Filter>
+    </ClInclude>
+    <ClInclude Include="Background.h">
+      <Filter>Engine\0G_UI</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="KYMTKH.rc">
@@ -336,6 +345,15 @@
     </ClCompile>
     <ClCompile Include="ReturnProj.cpp">
       <Filter>Engine\YTH\Object\Projectile</Filter>
+    </ClCompile>
+    <ClCompile Include="JHBossH.cpp">
+      <Filter>Engine\0C_Objects\mki_Boss\JH</Filter>
+    </ClCompile>
+    <ClCompile Include="Button.cpp">
+      <Filter>Engine\0G_UI</Filter>
+    </ClCompile>
+    <ClCompile Include="Background.cpp">
+      <Filter>Engine\0G_UI</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
