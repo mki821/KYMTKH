@@ -9,6 +9,7 @@
 #include "ResourceManager.h"
 #include "Texture.h"
 #include "GDISelector.h"
+#include "EndImage.h"
 #include "Player.h"
 
 Player::Player() : m_hp(5), m_speed(300.0f) {
@@ -42,9 +43,6 @@ void Player::Update() {
 			GetComponent<CircleCollider>()->SetEnable(true);
 		}
 	}
-
-	if(GET_KEY_DOWN(KEY_TYPE::ESC))
-		GET_SINGLE(SceneManager)->LoadScene(L"SelectScene");
 }
 
 void Player::Render(HDC hdc) {
@@ -61,6 +59,11 @@ void Player::SetDead() {
 	Object::SetDead();
 
 	GET_SINGLE(ResourceManager)->Play(L"GameOver");
+
+	EndImage* btn = new EndImage;
+	btn->SetPos({ SCREEN_WIDTH / 2.0f, SCREEN_HEIGHT / 2.0f });
+	btn->SetTexture(GET_RES(L"GameOver"));
+	GET_SINGLE(UIManager)->AddUI(L"Button", btn);
 }
 
 void Player::Move() {

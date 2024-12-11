@@ -4,6 +4,8 @@
 #include "UIManager.h"
 #include "FillImage.h"
 #include "Texture.h"
+#include "EndImage.h"
+#include "ResourceManager.h"
 #include "Boss.h"
 
 Boss::Boss() {
@@ -44,6 +46,15 @@ void Boss::Render(HDC hdc) {
 		}
 		ELLIPSE_RENDER(hdc, m_vPos.x, SCREEN_HEIGHT, 7.0f, 7.0f);
 	}
+}
+
+void Boss::SetDead() {
+	Object::SetDead();
+
+	EndImage* btn = new EndImage;
+	btn->SetPos({ SCREEN_WIDTH / 2.0f, SCREEN_HEIGHT / 2.0f });
+	btn->SetTexture(GET_RES(L"GameClear"));
+	GET_SINGLE(UIManager)->AddUI(L"Button", btn);
 }
 
 void Boss::EnterCollision(Collider* other) {
