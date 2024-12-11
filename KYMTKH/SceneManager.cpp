@@ -4,6 +4,7 @@
 #include "TestScene.h"
 #include "SceneManager.h"
 #include "Y_TestScene.h"
+#include "UIManager.h"
 #include "SecondBossScene.h"
 
 void SceneManager::Init() {

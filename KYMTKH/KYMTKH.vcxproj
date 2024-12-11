@@ -171,6 +171,7 @@
     <ClInclude Include="Core.h" />
     <ClInclude Include="Define.h" />
     <ClInclude Include="DownProj.h" />
+    <ClInclude Include="EndImage.h" />
     <ClInclude Include="Enums.h" />
     <ClInclude Include="EventManager.h" />
     <ClInclude Include="FillImage.h" />
@@ -229,6 +230,7 @@
     <ClCompile Include="Component.cpp" />
     <ClCompile Include="Core.cpp" />
     <ClCompile Include="DownProj.cpp" />
+    <ClCompile Include="EndImage.cpp" />
     <ClCompile Include="EventManager.cpp" />
     <ClCompile Include="FillImage.cpp" />
     <ClCompile Include="FirstBoss.cpp" />

@@ -61,7 +61,7 @@ void Player::SetDead() {
 	GET_SINGLE(ResourceManager)->Play(L"GameOver");
 
 	EndImage* btn = new EndImage;
-	btn->SetPos({ SCREEN_WIDTH / 2.0f, SCREEN_HEIGHT / 2.0f });
+	btn->SetPos({ SCREEN_WIDTH / 2.0f - 80.0f, SCREEN_HEIGHT / 2.0f });
 	btn->SetTexture(GET_RES(L"GameOver"));
 	GET_SINGLE(UIManager)->AddUI(L"Button", btn);
 }
@@ -102,7 +102,7 @@ void Player::ClampPos() {
 void Player::CreateProjectile() {
 	{
 		Projectile* pProj = new Projectile;
-		pProj->SetPos({ m_vPos.x - m_vSize.x - 1.5f, m_vPos.y - m_vSize.y / 2.0f });
+		pProj->SetPos({ m_vPos.x , m_vPos.y - m_vSize.y / 2.0f });
 		pProj->SetSize({ 15.0f, 15.0f });
 		pProj->SetDir({ 0.0f, -1.0f });
 		pProj->SetSpeed(1300.0f);
@@ -112,17 +112,7 @@ void Player::CreateProjectile() {
 	}
 	{
 		Projectile* pProj = new Projectile;
-		pProj->SetPos({ m_vPos.x + m_vSize.x + 1.5f, m_vPos.y - m_vSize.y / 2.0f });
-		pProj->SetSize({ 15.0f, 15.0f });
-		pProj->SetDir({ 0.0f, -1.0f });
-		pProj->SetSpeed(1300.0f);
-		pProj->SetTexture(m_pProjectile);
-
-		GET_SINGLE(SceneManager)->GetCurScene()->AddObject(pProj, LAYER::PLAYER_PROJECTILE);
-	}
-	{
-		Projectile* pProj = new Projectile;
-		pProj->SetPos({ m_vPos.x + m_vSize.x + 3.5f, m_vPos.y - m_vSize.y / 2.0f });
+		pProj->SetPos({ m_vPos.x + m_vSize.x + 2.5f, m_vPos.y - m_vSize.y / 2.0f });
 		pProj->SetSize({ 15.0f, 15.0f });
 		pProj->SetDir({ 1.0f, -5.0f });
 		pProj->SetSpeed(1300.0f);
@@ -132,7 +122,7 @@ void Player::CreateProjectile() {
 	}
 	{
 		Projectile* pProj = new Projectile;
-		pProj->SetPos({ m_vPos.x - m_vSize.x - 3.5f, m_vPos.y - m_vSize.y / 2.0f });
+		pProj->SetPos({ m_vPos.x - m_vSize.x - 2.5f, m_vPos.y - m_vSize.y / 2.0f });
 		pProj->SetSize({ 15.0f, 15.0f });
 		pProj->SetDir({ -1.0f, -5.0f });
 		pProj->SetSpeed(1300.0f);

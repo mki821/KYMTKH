@@ -68,9 +68,7 @@ void JHBoss::Render(HDC hdc) {
 }
 
 void JHBoss::SetDead() {
-	Object::SetDead();
-
-	GET_SINGLE(SceneManager)->GetCurScene()->DeleteEnemyProjectiles();
+	Boss::SetDead();
 }
 
 #pragma region FirstPattern

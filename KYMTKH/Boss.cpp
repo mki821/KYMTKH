@@ -52,7 +52,7 @@ void Boss::SetDead() {
 	Object::SetDead();
 
 	EndImage* btn = new EndImage;
-	btn->SetPos({ SCREEN_WIDTH / 2.0f, SCREEN_HEIGHT / 2.0f });
+	btn->SetPos({ SCREEN_WIDTH / 2.0f - 100.0f, SCREEN_HEIGHT / 2.0f });
 	btn->SetTexture(GET_RES(L"GameClear"));
 	GET_SINGLE(UIManager)->AddUI(L"Button", btn);
 }

@@ -59,7 +59,6 @@ void Core::MainUpdate() {
 	GET_SINGLE(InputManager)->Update();
 	GET_SINGLE(SceneManager)->Update();
 	GET_SINGLE(CollisionManager)->Update();
-	GET_SINGLE(UIManager)->Update();
 }
 
 void Core::MainRender() {
