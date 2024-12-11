@@ -13,7 +13,7 @@
 #include "JHBoss.h"
 
 JHBoss::JHBoss() {  
-	m_hp = 500;
+	m_hp = 600;
 
 	m_pProjectile15 = GET_RES(L"Projectile_15x15");
 	m_pProjectile10 = GET_RES(L"Projectile_10x10");
@@ -32,7 +32,7 @@ void JHBoss::Update() {
 		m_hp -= 100;
 	}*/
 
-	if (m_eCurPattern == Pattern::First && m_hp <= 335) {
+	if (m_eCurPattern == Pattern::First && m_hp <= 400) {
 		GET_SINGLE(SceneManager)->GetCurScene()->DeleteEnemyProjectiles();
 
 		m_eCurPattern = Pattern::Second;
@@ -47,7 +47,7 @@ void JHBoss::Update() {
 			}
 		});*/
 	}
-	else if (m_eCurPattern == Pattern::Second && m_hp <= 170) {
+	else if (m_eCurPattern == Pattern::Second && m_hp <= 200) {
 		GET_SINGLE(SceneManager)->GetCurScene()->DeleteEnemyProjectiles();
 
 		m_eCurPattern = Pattern::Third;

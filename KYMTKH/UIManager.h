@@ -1,6 +1,7 @@
 #pragma once
 
 #include "UI.h"
+#include "EventManager.h"
 
 class Texture;
 
@@ -16,11 +17,11 @@ public:
 		m_mapUI[name] = ui;
 	}
 	void RemoveUI(const wstring& name) {
-		delete m_mapUI.at(name);
+		GET_SINGLE(EventManager)->DeleteObject(m_mapUI.at(name));
 		m_mapUI.erase(name);
 	}
 	UI* GetUI(const wstring& name) const { return m_mapUI.find(name) != m_mapUI.end() ? m_mapUI.at(name) : nullptr; }
-private:
+public:
 	std::map<wstring, UI*> m_mapUI;
 	Texture* m_input = nullptr;
 };

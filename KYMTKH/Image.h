@@ -6,6 +6,9 @@ class Texture;
 
 class Image : public UI {
 public:
+	Image() { }
+	~Image() { }
+public:
 	void Init() override;
 	void Update() override;
 	void Render(HDC hdc) override;

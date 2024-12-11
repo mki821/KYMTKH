@@ -4,6 +4,9 @@
 
 class FillImage : public Image {
 public:
+	FillImage() {}
+	~FillImage() {}
+public:
 	void Render(HDC hdc) override;
 public:
 	const float GetFillAmount() const { return m_fillAmount; }

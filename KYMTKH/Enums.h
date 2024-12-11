@@ -12,7 +12,7 @@ enum class LAYER {
 
 enum class PEN_TYPE {
 	HOLLOW, RED, GREEN,
-	BLUE, YELLOW, END
+	BLUE, YELLOW, BLACK_THICK, END
 };
 
 enum class BRUSH_TYPE {
