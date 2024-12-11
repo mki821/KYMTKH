@@ -5,6 +5,7 @@
 #include "Background.h"
 #include "Player.h"
 #include "JHBoss.h"
+#include "JHBossH.h"
 #include "CollisionManager.h"
 #include "Collider.h"
 #include "ResourceManager.h"
@@ -43,13 +44,24 @@ void TestScene::Init() {
 	pPlayer->SetSize({ 8.0f, 8.0f });
 	AddObject(pPlayer, LAYER::PLAYER);
 
-	Boss* pBoss = new JHBoss;
-	pBoss->SetPos({ GAME_CENTER, 200.0f });
-	pBoss->SetSize({ 80.0f, 80.0f });
-	pBoss->GetComponent<Collider>()->SetSize(pBoss->GetSize());
-	pBoss->GetComponent<Collider>()->SetOffSetPos({ 0,-55 });
-	pBoss->SetTexture(GET_RES(L"JHBoss"));
-	AddObject(pBoss, LAYER::ENEMY);
+	if (m_isHard) {
+		Boss* pBoss = new JHBossH;
+		pBoss->SetPos({ GAME_CENTER, 200.0f });
+		pBoss->SetSize({ 80.0f, 80.0f });
+		pBoss->GetComponent<Collider>()->SetSize(pBoss->GetSize());
+		pBoss->GetComponent<Collider>()->SetOffSetPos({ 0,-55 });
+		pBoss->SetTexture(GET_RES(L"JHBoss"));
+		AddObject(pBoss, LAYER::ENEMY);
+	}
+	else {
+		Boss* pBoss = new JHBoss;
+		pBoss->SetPos({ GAME_CENTER, 200.0f });
+		pBoss->SetSize({ 80.0f, 80.0f });
+		pBoss->GetComponent<Collider>()->SetSize(pBoss->GetSize());
+		pBoss->GetComponent<Collider>()->SetOffSetPos({ 0,-55 });
+		pBoss->SetTexture(GET_RES(L"JHBoss"));
+		AddObject(pBoss, LAYER::ENEMY);
+	}
 
 	GET_SINGLE(CollisionManager)->CheckLayer(LAYER::PLAYER, LAYER::ENEMY_PROJECTILE);
 	GET_SINGLE(CollisionManager)->CheckLayer(LAYER::ENEMY, LAYER::PLAYER_PROJECTILE);

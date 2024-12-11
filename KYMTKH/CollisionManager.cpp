@@ -42,7 +42,6 @@ void CollisionManager::CheckLayer(LAYER _left, LAYER _right) {
 
 void CollisionManager::CheckReset() {
 	// 메모리 초기화
-	cout << "Reset" << endl;
 	memset(m_arrLayer, 0, sizeof(UINT) * (UINT)LAYER::END);
 }
 

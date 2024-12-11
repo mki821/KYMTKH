@@ -13,6 +13,7 @@ public:
 	virtual void Init() override { }
 	virtual void Update() override;
 	virtual void Render(HDC hdc) override;
+	virtual void SetDead() override;
 public:
 	virtual void EnterCollision(Collider* other) override;
 protected:

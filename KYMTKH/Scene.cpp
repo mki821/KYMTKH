@@ -14,6 +14,7 @@ void Scene::Update() {
 				m_vecObj[i][j]->Update();
 		}
 	}
+	GET_SINGLE(UIManager)->Update();
 }
 
 void Scene::LateUpdate() {
