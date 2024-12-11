@@ -22,6 +22,8 @@ void SelectScene::Init() {
 	LOAD_RES(L"Projectile_15x15", L"Texture\\Projectile\\Projectile_15x15.bmp");
 	LOAD_RES(L"SelectBackground", L"Texture\\Background\\SelectBackground.bmp");
 	LOAD_RES(L"Player", L"Texture\\Player\\Player.bmp");
+	LOAD_RES(L"GameOver", L"Texture\\UI\\GameOver.bmp");
+	LOAD_RES(L"GameClear", L"Texture\\UI\\GameClear.bmp");
 
 	GET_SINGLE(ResourceManager)->LoadSound(L"FirstBGM", L"Sound\\First.mp3", true);
 	GET_SINGLE(ResourceManager)->LoadSound(L"SecondBGM", L"Sound\\Second.mp3", true);
