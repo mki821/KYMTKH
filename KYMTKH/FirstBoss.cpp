@@ -40,7 +40,7 @@ FirstBoss::~FirstBoss()
 void FirstBoss::Init()
 {
 	m_originPos = GetPos();
-	m_hp = 500;
+	m_hp = 600;
 	m_curPattern = Pattern::First;
 	//FirstPattern();
 }
@@ -51,16 +51,16 @@ void FirstBoss::Update()
 {
 	Boss::Update();
 
-	if (m_curPattern == Pattern::First && m_hp <= 400) {
+	if (m_curPattern == Pattern::First && m_hp <= 480) {
 		ChangePattern();
 	}
-	else if (m_curPattern == Pattern::Second && m_hp <= 300) {
+	else if (m_curPattern == Pattern::Second && m_hp <= 360) {
 		ChangePattern();
 	}
-	else if (m_curPattern == Pattern::Third && m_hp <= 200) {
+	else if (m_curPattern == Pattern::Third && m_hp <= 240) {
 		ChangePattern();
 	}
-	else if (m_curPattern == Pattern::Fourth && m_hp <= 100) {
+	else if (m_curPattern == Pattern::Fourth && m_hp <= 120) {
 		ChangePattern();
 	}
 	else if (m_curPattern == Pattern::Fifth && m_hp <= 0) {
@@ -96,6 +96,7 @@ void FirstBoss::Render(HDC hdc)
 
 void FirstBoss::ChangePattern()
 {
+	GET_SINGLE(SceneManager)->GetCurScene()->DeleteEnemyProjectiles();
 	m_waitTime = 3;
 	Move(m_originPos, 1.f);
 	m_changePatternCount = 0;
